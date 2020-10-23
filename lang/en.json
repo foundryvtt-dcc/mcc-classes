@@ -1,0 +1,17 @@
+{
+  "Sentinel.Artifacts": "Artifacts",
+  "Sentinel.ArtifactsDesc": "Natural affinity for understanding artifacts",
+  "Sentinel.ArtifactWeaponsAnArmor": "Bonus die to using artifact weapons and armor",
+  "Sentinel.Luck": "Luck",
+  "Sentinel.DarwinianLuck": "The sentinel recovers luck automatically.",
+  "Sentinel.AI": "AI",
+  "Sentinel.AIRecognition": "Bonus to AI Recognition",
+  "mcc-Sentinel.ActorSheetSentinel": "Sentinel",
+  "Sentinel.SentinelAbilities": "Sentinel Abilities",
+  "Sentinel.artifactDie": "Artifact Die",
+  "Sentinel.aiRecognition": "AI Recognition bonus",
+  "Sentinel.Sentinel": "Sentinel",
+  "mcc-sentinel.ActorSheetSentinel": "Sentinel",
+  "Sentinel.archaicAlignment": "Archaic Alignment",
+  "Sentinel.artifactCheck": "Artifact Check"
+}
