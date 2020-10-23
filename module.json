@@ -7,7 +7,7 @@
   "compatibleCoreVersion": "0.7.5",
   "author": "Steve Barnes & Christian Ovsenik",
   "system": "dcc",
-  "esmodules": ["module/mcc-sentinel.js", "module/mcc-healer.js", "module/mcc-shaman.js", "module/mcc-rover.js", "module/mcc-mutant.js"],
+  "esmodules": ["module/mcc-classes.js"],
   "styles": [],
   "languages": [
     {
