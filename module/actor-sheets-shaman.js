@@ -48,6 +48,14 @@ class ActorSheetShaman extends DCCActorSheet {
 		  }
 	  })
 	}
+		if (!data.data.class.spellCheck) {
+	  this.actor.update({
+		  'data.class.spellCheck': {
+			label: 'shaman.programCheck',
+			value: '+0'
+		  }
+	  })
+	}
     return data
   }
 }

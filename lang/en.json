@@ -45,5 +45,22 @@
   "mutant.mutantAbilities": "Mutant Abilities",
   "mutant.mutantHorror": "Mutant Horror",
   "mutant.mutantHorrorDesc": "Mutants add to their initiative because of their bizarre appearance",
-  "mcc.mutations": "Mutations"
+  "mcc.mutations": "Mutations",
+  "mcc.mutationName": "Mutation Name",
+  "mcc.programCheck": "Wetware Program Check",
+  "mcc.mutationCheck": "Mutation Check",
+  "manimal.manimalAbilities": "Manimal Abilities",
+  "manimal.naturalAttackDesc": "The manimal possesses natural weapons like claws or bite.",
+  "manimal.packMentality": "Pack Mentality",
+  "manimal.packMentalityDesc": "Manimals gain bonuses to attack in melee for each manimal attacking a single opponent.",
+  "mcc-manimal.ActorSheetManimal": "Manimal",
+  "mcc.manimal": "Manimal",
+  "mcc-plantient.ActorSheetPlantient": "Plantient",
+  "plantient.plantientAbilities": "Plantient Abilities",
+  "mcc.naturalAttack": "Natural Attack",
+  "plantient.naturalAttackDesc": "Plantients have a natural attack with thorn or spines.",
+  "mcc.plantient": "Plantient",
+  "plantient.fragrancePheromones": "Plantients may give luck to others through their pheromones.",
+  "plantient.cantSeeTheForestForTheTrees": "Can't See the Forest for the Trees",
+  "plantient.cantSeeTheForestForTheTreesDesc": "Chance to hide by standing still in outdoor settings."
 }

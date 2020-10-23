@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
  
     {{!-- Hidden inputs to reflect the sheet class and force standard crit range --}}
-    <input type="hidden" id="data.details.sheetClass" name="data.details.sheetClass" value="Shaman" data-dtype="String"/>
+    <input type="hidden" id="data.details.sheetClass" name="data.details.sheetClass" value="Plantient" data-dtype="String"/>
     <input type="hidden" id="data.details.critRange" name="data.details.critRange" value="20" data-dtype="Number"/>
 
     {{!-- Sheet Header --}}
@@ -11,8 +11,8 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="character">{{localize "DCC.Character"}}</a>
         <a class="item" data-tab="equipment">{{localize "DCC.Equipment"}}</a>
-        <a class="item" data-tab="class">{{localize "mcc.shaman"}}</a>
-        <a class="item" data-tab="spells">{{localize "shaman.programs"}}</a>
+        <a class="item" data-tab="class">{{localize "mcc.plantient"}}</a>
+        <a class="item" data-tab="spells">{{localize "mcc.mutations"}}</a>
         {{#if data.config.showSkills}}
         <a class="item" data-tab="skills">{{localize "DCC.Skills"}}</a>
         {{/if}}
@@ -29,7 +29,7 @@
         {{> systems/dcc/templates/actor-partial-pc-equipment.html }}
 
         {{!-- Spells Tab --}}
-        {{> modules/mcc-classes/templates/actor-partial-shaman-programs.html }}
+        {{> modules/mcc-classes/templates/actor-partial-mutations.html }}
 
         {{!-- Skills Tab --}}
         {{> systems/dcc/templates/actor-partial-skills.html }}
@@ -39,7 +39,7 @@
 
         {{!-- Class Tab --}}
         <div class="tab" data-group="primary" data-tab="class">
-            <h4 class="class-label">{{localize "shaman.shamanAbilities"}}</h4>
+            <h4 class="class-label">{{localize "plantient.plantientAbilities"}}</h4>
             <div class="class">
                 <div class="skills-container">
                     <div class="flexrow" data-skill="aiRecognition">
@@ -50,33 +50,34 @@
                       <label class="skill-check rollable" for="data.skills.artifactCheck.value">{{localize "mcc.artifactCheck"}}</label>
                       <input type="text" id="data.skills.artifactCheck.value" name="data.skills.artifactCheck.value" value="{{data.skills.artifactCheck.value}}" data-dtype="String"/>
                     </div>
-					<input type="hidden" id="data.class.spellCheckAbility" name="data.class.spellCheckAbility" value="int">
-                    <div class="wide flexrow" data-ability="int">
-                        <label class="spell-check rollable" for="data.class.spellCheck">{{localize "mcc.programCheck"}}</label>
+					<input type="hidden" id="data.class.spellCheckAbility" name="data.class.spellCheckAbility" value="Int">
+                    <div class="wide flexrow" data-ability="Int">
+                        <label class="spell-check rollable" for="data.class.spellCheck">{{localize "mcc.mutationCheck"}}</label>
                         <input type="text" id="data.class.spellCheck" name="data.class.spellCheck" value="{{numberFormat data.class.spellCheck decimals=0 sign=true}}" data-dtype="String"/>
                     </div>
                 </div>
-                </div>
-				<div class="deity flexrow">
+				 <div class="deity flexrow">
                     <label class="flex1" for="data.class.archaicAlignment">{{localize "mcc.archaicAlignment"}}</label>
                    <input class="flex2" type="text" id="data.class.archaicAlignment.value" name="data.class.archaicAlignment.value" value="{{data.class.archaicAlignment.value}}" data-dtype="String"/>
-                </div>
-				 <div class="deity flexrow">
-                    <label class="flex1" for="data.class.aiPatron">{{localize "shaman.aiPatron"}}</label>
-                   <input class="flex2" type="text" id="data.class.aiPatron.value" name="data.class.aiPatron.value" value="{{data.class.aiPatron.value}}" data-dtype="String"/>
                 </div>
                 <ul class="class-note flexcol">
 				
                   <li>
-                    {{localize "mcc.artifacts"}}
+                    {{localize "mcc.naturalAttack"}}
                     <ul>
-                      <li>{{localize "shaman.artifactsDesc"}}</li>
+                      <li>{{localize "plantient.naturalAttackDesc"}}</li>
                     </ul>
                   </li>
-                  <li>
-                    {{localize "mcc.luck"}}
+				  <li>
+                    {{localize "plantient.fragrancePheromones"}}</li>
                     <ul>
-                      <li>{{localize "shaman.darwinianLuck"}}</li>
+                      <li>{{localize "plantient.fragrancePheromonesDesc"}}</li>
+                    </ul>
+                  </li>
+				  <li>
+                    {{localize "plantient.cantSeeTheForestForTheTrees"}}</li>
+                    <ul>
+                      <li>{{localize "plantient.cantSeeTheForestForTheTreesDesc"}}</li>
                     </ul>
                   </li>
                   <li>
