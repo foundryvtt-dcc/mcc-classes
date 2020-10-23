@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
  
     {{!-- Hidden inputs to reflect the sheet class and force standard crit range --}}
-    <input type="hidden" id="data.details.sheetClass" name="data.details.sheetClass" value="Sentinel" data-dtype="String"/>
+    <input type="hidden" id="data.details.sheetClass" name="data.details.sheetClass" value="Rover" data-dtype="String"/>
     <input type="hidden" id="data.details.critRange" name="data.details.critRange" value="20" data-dtype="Number"/>
 
     {{!-- Sheet Header --}}
@@ -11,7 +11,7 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="character">{{localize "DCC.Character"}}</a>
         <a class="item" data-tab="equipment">{{localize "DCC.Equipment"}}</a>
-        <a class="item" data-tab="class">{{localize "mcc.sentinel"}}</a>
+        <a class="item" data-tab="class">{{localize "mcc.rover"}}</a>
         {{#if data.config.showSpells}}
         <a class="item" data-tab="spells">{{localize "DCC.Spells"}}</a>
         {{/if}}
@@ -41,12 +41,12 @@
 
         {{!-- Class Tab --}}
         <div class="tab" data-group="primary" data-tab="class">
-            <h4 class="class-label">{{localize "Sentinel.sentinelAbilities"}}</h4>
+            <h4 class="class-label">{{localize "rover.roverAbilities"}}</h4>
             <div class="class">
                 <div class="skills-container">
-                    <div class="flexrow" data-skill="artifactDie">
-                      <label class="skill-check rollable" for="data.skills.artifactDie.value">{{localize "Sentinel.artifactDie"}}</label>
-                      <input type="text" id="data.skills.artifactDie.value" name="data.skills.artifactDie.value" value="{{data.skills.artifactDie.value}}" data-dtype="String"/>
+                    <div class="flexrow" data-skill="doorsAndSecurity">
+                      <label class="flex1" for="data.skills.doorsAndSecurity.value">{{localize "rover.doorsAndSecurity"}}</label>
+                      <input type="text" id="data.skills.doorsAndSecurity.value" name="data.skills.doorsAndSecurity.value" value="{{data.skills.doorsAndSecurity.value}}" data-dtype="String"/>
                     </div>
                     <div class="flexrow" data-skill="aiRecognition">
                       <label class="skill-check rollable" for="data.skills.aiRecognition.value">{{localize "mcc.aiRecognition"}}</label>
@@ -55,6 +55,10 @@
 					<div class="flexrow" data-skill="artifactCheck">
                       <label class="skill-check rollable" for="data.skills.artifactCheck.value">{{localize "mcc.artifactCheck"}}</label>
                       <input type="text" id="data.skills.artifactCheck.value" name="data.skills.artifactCheck.value" value="{{data.skills.artifactCheck.value}}" data-dtype="String"/>
+                    </div>
+					<div class="flexrow" data-skill="roverMissileAttack">
+                      <label class="skill-check rollable" for="data.skills.roverMissileAttack.value">{{localize "rover.roverMissileAttack"}}</label>
+                      <input type="text" id="data.skills.roverMissileAttack.value" name="data.skills.roverMissileAttack.value" value="{{data.skills.roverMissileAttack.value}}" data-dtype="String"/>
                     </div>
                 </div>
 				 <div class="deity flexrow">
@@ -66,20 +70,25 @@
                   <li>
                     {{localize "mcc.artifacts"}}
                     <ul>
-                      <li>{{localize "Sentinel.artifactsDesc"}}</li>
-					  <li>{{localize "Sentinel.artifactWeaponsAnArmor"}}</li>
+                      <li>{{localize "rover.artifactsDesc"}}</li>
                     </ul>
                   </li>
                   <li>
                     {{localize "mcc.luck"}}
                     <ul>
-                      <li>{{localize "Sentinel.darwinianLuck"}}</li>
+                      <li>{{localize "rover.darwinianLuck"}}</li>
                     </ul>
                   </li>
                   <li>
                     {{localize "mcc.ai"}}</li>
                     <ul>
                       <li>{{localize "human.aiRecognition"}}</li>
+                    </ul>
+                  </li>
+				                    <li>
+                    {{localize "rover.doorsAndSecurity"}}</li>
+                    <ul>
+                      <li>{{localize "rover.doorsAndSecurityDesc"}}</li>
                     </ul>
                   </li>
                 </div>
