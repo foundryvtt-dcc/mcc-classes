@@ -60,7 +60,8 @@
   "mcc.naturalAttack": "Natural Attack",
   "plantient.naturalAttackDesc": "Plantients have a natural attack with thorn or spines.",
   "mcc.plantient": "Plantient",
-  "plantient.fragrancePheromones": "Plantients may give luck to others through their pheromones.",
+  "plantient.fragrancePheromones": "Fragrance Pheromones",
+  "plantient.fragrancePheromonesDesc": "Plantients may give luck to others through their pheromones.",
   "plantient.cantSeeTheForestForTheTrees": "Can't See the Forest for the Trees",
   "plantient.cantSeeTheForestForTheTreesDesc": "Chance to hide by standing still in outdoor settings."
 }
