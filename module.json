@@ -17,7 +17,7 @@
     }
   ],
   "url": "https://github.com/algnc/mcc-classes",
-  "manifest": "https://github.com/algnc/mcc-classes/raw/master/module.json",
+  "manifest": "https://raw.githubusercontent.com/algnc/mcc-classes/main/module.json",
   "download": "https://github.com/algnc/mcc-classes/archive/0.0.2.zip",
   "license": "LICENSE.txt"
 }
