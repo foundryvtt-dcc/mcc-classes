@@ -2,7 +2,7 @@
   "name": "mcc-classes",
   "title": "MCC Sheets",
   "description": "Sheets for Mutant Crawl Classics in FoundryVTT!",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "minimumCoreVersion": "0.6.5",
   "compatibleCoreVersion": "0.7.5",
   "author": "Steve Barnes & Christian Ovsenik",
@@ -18,6 +18,6 @@
   ],
   "url": "https://github.com/algnc/mcc-classes",
   "manifest": "https://raw.githubusercontent.com/algnc/mcc-classes/main/module.json",
-  "download": "https://github.com/algnc/mcc-classes/archive/0.0.2.zip",
+  "download": "https://github.com/algnc/mcc-classes/archive/v.0.0.1.zip",
   "license": "LICENSE.txt"
 }
