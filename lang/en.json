@@ -63,5 +63,6 @@
   "plantient.fragrancePheromones": "Fragrance Pheromones",
   "plantient.fragrancePheromonesDesc": "Plantients may give luck to others through their pheromones.",
   "plantient.cantSeeTheForestForTheTrees": "Can't See the Forest for the Trees",
-  "plantient.cantSeeTheForestForTheTreesDesc": "Chance to hide by standing still in outdoor settings."
+  "plantient.cantSeeTheForestForTheTreesDesc": "Chance to hide by standing still in outdoor settings.",
+  "sentinel.initiative": "Sentinels get a bonus to their initiative equal to their class level."
 }
