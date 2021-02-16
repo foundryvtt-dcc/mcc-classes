@@ -27,7 +27,7 @@ class ActorSheetHealer extends DCCActorSheet {
     if (!data.data.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
-          label: 'Healer.aiRecognition',
+          label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
@@ -35,7 +35,7 @@ class ActorSheetHealer extends DCCActorSheet {
 	if (!data.data.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
-			label: 'Healer.archaicAlignment',
+			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
@@ -43,7 +43,7 @@ class ActorSheetHealer extends DCCActorSheet {
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
-			label: 'Healer.artifactCheck',
+			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })

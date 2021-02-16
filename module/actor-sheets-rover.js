@@ -20,14 +20,14 @@ class ActorSheetRover extends DCCActorSheet {
       this.actor.update({
         'data.skills.doorsAndSecurity': {
           label: 'rover.doorsAndSecurity',
-          value: '1d3 x2'
+          value: '+1'
         }
       })
     }
     if (!data.data.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
-          label: 'rover.aiRecognition',
+          label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
@@ -35,7 +35,7 @@ class ActorSheetRover extends DCCActorSheet {
 	if (!data.data.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
-			label: 'rover.archaicAlignment',
+			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
@@ -43,7 +43,7 @@ class ActorSheetRover extends DCCActorSheet {
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
-			label: 'rover.artifactCheck',
+			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
