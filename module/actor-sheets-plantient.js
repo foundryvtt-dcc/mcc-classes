@@ -27,11 +27,20 @@ class ActorSheetPlantient extends DCCActorSheet {
 	if (!data.data.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
-			label: 'Plantient.archaicAlignment',
+			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
 	}
+	if (!data.data.class.plantientSubType) {
+          this.actor.update({
+                  'data.class.plantientSubType': {
+                        label: 'mcc.plantientSubType',
+                        value: ''
+                  }
+          })
+        }
+
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {

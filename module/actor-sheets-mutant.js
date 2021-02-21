@@ -40,6 +40,14 @@ class ActorSheetMutant extends DCCActorSheet {
 		  }
 	  })
 	}
+	if (!data.data.class.mutantAppearance) {
+          this.actor.update({
+                  'data.class.mutantAppearance': {
+                        label: 'mcc.mutantAppearance',
+                        value: ''
+                  }
+          })
+        }
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {

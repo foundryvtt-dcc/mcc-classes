@@ -40,6 +40,14 @@ class ActorSheetManimal extends DCCActorSheet {
 		  }
 	  })
 	}
+	if (!data.data.class.manimalSubType) {
+          this.actor.update({
+                  'data.class.manimalSubType': {
+                        label: 'mcc.manimalSubType',
+                        value: ''
+                  }
+          })
+        }
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {

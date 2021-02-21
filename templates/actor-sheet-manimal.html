@@ -46,7 +46,6 @@
                       <label class="flex1" for="data.skills.maxTechLevel.value">{{localize "mcc.maxTechLevel"}}</label>
                       <input type="text" id="data.skills.maxTechLevel.value" name="data.skills.maxTechLevel.value" value="{{data.skills.maxTechLevel.value}}" data-dtype="String"/>
                     </div>
-
                     <div class="flexrow" data-skill="aiRecognition">
                       <label class="skill-check rollable" for="data.skills.aiRecognition.value">{{localize "mcc.aiRecognition"}}</label>
                       <input type="text" id="data.skills.aiRecognition.value" name="data.skills.aiRecognition.value" value="{{data.skills.aiRecognition.value}}" data-dtype="String"/>
@@ -56,7 +55,7 @@
                       <input type="text" id="data.skills.artifactCheck.value" name="data.skills.artifactCheck.value" value="{{data.skills.artifactCheck.value}}" data-dtype="String"/>
                     </div>
 					<input type="hidden" id="data.class.spellCheckAbility" name="data.class.spellCheckAbility" value="">
-                    <div class="wide flexrow" data-ability="">
+                    <div class="flexrow" data-ability="">
                         <label class="spell-check rollable" for="data.class.spellCheck">{{localize "mcc.mutationCheck"}}</label>
                         <input type="text" id="data.class.spellCheck" name="data.class.spellCheck" value="{{numberFormat data.class.spellCheck decimals=0 sign=true}}" data-dtype="String"/>
                     </div>
@@ -65,6 +64,11 @@
                     <label class="flex1" for="data.class.archaicAlignment">{{localize "mcc.archaicAlignment"}}</label>
                    <input class="flex2" type="text" id="data.class.archaicAlignment.value" name="data.class.archaicAlignment.value" value="{{data.class.archaicAlignment.value}}" data-dtype="String"/>
                 </div>
+<div class="deity flexrow">
+                    <label class="flex1" for="data.class.manimalSubType">{{localize "mcc.manimalSubType"}}</label>
+                   <input class="flex2" type="text" id="data.class.manimalSubType.value" name="data.class.manimalSubType.value" value="{{data.class.manimalSubType.value}}" data-dtype="String"/>
+                </div>
+
                 <ul class="class-note flexcol">
 				
                   <li>
