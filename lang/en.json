@@ -68,7 +68,7 @@
   "mcc.maxTechLevel": "Max Tech level",
   "plantient.aiRecognition": "Plantients are not recognized by AIs.",
   "mutant.aiRecognition": "Mutants normally receive no inherent bonuses to AI recognition. Should a mutant have no visible or discernible mutations (judge’s discretion), the mutant’s AI recognition bonus may become a +1.",
-  "manimal.aiRecognition": "Because of their animalistic appearance, manimals have a natural -2 to AI recognition rolls.",
+  "manimal.aiRecognition": "Because of their animalistic appearance, manimals have a natural -4 to AI recognition rolls.",
   "mcc.manimalSubType": "Manimal Sub Type",
   "mcc.mutantAppearance": "Mutant Appearance",
   "mcc.plantientSubType": "Plantient Subtype"
