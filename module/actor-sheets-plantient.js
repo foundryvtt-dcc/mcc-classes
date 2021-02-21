@@ -24,14 +24,6 @@ class ActorSheetPlantient extends DCCActorSheet {
         }
       })
     }
-    if (!data.data.skills.aiRecognition) {
-      this.actor.update({
-        'data.skills.aiRecognition': {
-          label: 'Plantient.aiRecognition',
-          value: '+2'
-        }
-      })
-    }
 	if (!data.data.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
@@ -48,6 +40,14 @@ class ActorSheetPlantient extends DCCActorSheet {
 		  }
 	  })
 	}
+	if (!data.data.skills.maxTechLevel) {
+          this.actor.update({
+                  'data.skills.maxTechLevel': {
+                        label: 'mcc.maxTechLevel',
+                        value: '0'
+                  }
+          })
+        }
     return data
   }
 }

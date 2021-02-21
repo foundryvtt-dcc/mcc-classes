@@ -28,7 +28,7 @@ class ActorSheetMutant extends DCCActorSheet {
       this.actor.update({
         'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
-          value: '+2'
+          value: '0'
         }
       })
     }
@@ -48,6 +48,14 @@ class ActorSheetMutant extends DCCActorSheet {
 		  }
 	  })
 	}
+	if (!data.data.skills.maxTechLevel) {
+          this.actor.update({
+                  'data.skills.maxTechLevel': {
+                        label: 'mcc.maxTechLevel',
+                        value: '0'
+                  }
+          })
+        }
     return data
   }
 }

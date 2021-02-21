@@ -48,6 +48,14 @@ class ActorSheetSentinel extends DCCActorSheet {
 		  }
 	  })
 	}
+if (!data.data.skills.maxTechLevel) {
+          this.actor.update({
+                  'data.skills.maxTechLevel': {
+                        label: 'mcc.maxTechLevel',
+                        value: '0'
+                  }
+          })
+        }
     return data
   }
 }
