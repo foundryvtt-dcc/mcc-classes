@@ -64,5 +64,13 @@
   "plantient.fragrancePheromonesDesc": "Plantients may give luck to others through their pheromones.",
   "plantient.cantSeeTheForestForTheTrees": "Can't See the Forest for the Trees",
   "plantient.cantSeeTheForestForTheTreesDesc": "Chance to hide by standing still in outdoor settings.",
-  "sentinel.initiative": "Sentinels get a bonus to their initiative equal to their class level."
+  "sentinel.initiative": "Sentinels get a bonus to their initiative equal to their class level.",
+  "mcc.maxTechLevel": "Max Tech level",
+  "plantient.aiRecognition": "Plantients are not recognized by AIs.",
+  "mutant.aiRecognition": "Mutants normally receive no inherent bonuses to AI recognition. Should a mutant have no visible or discernible mutations (judge’s discretion), the mutant’s AI recognition bonus may become a +1.",
+  "manimal.aiRecognition": "Because of their animalistic appearance, manimals have a natural -4 to AI recognition rolls.",
+  "mcc.manimalSubType": "Manimal Sub Type",
+  "mcc.mutantAppearance": "Mutant Appearance",
+  "mcc.plantientSubType": "Plantient Subtype"
+
 }

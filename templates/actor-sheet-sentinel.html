@@ -44,6 +44,11 @@
             <h4 class="class-label">{{localize "Sentinel.sentinelAbilities"}}</h4>
             <div class="class">
                 <div class="skills-container">
+		<div class="flexrow" data-skill="Max Tech Level">
+                      <label class="flex1" for="data.skills.maxTechLevel.value">{{localize "mcc.maxTechLevel"}}</label>
+                      <input type="text" id="data.skills.maxTechLevel.value" name="data.skills.maxTechLevel.value" value="{{data.skills.maxTechLevel.value}}" data-dtype="String"/>
+                    </div>
+
                     <div class="flexrow" data-skill="artifactDie">
                       <label class="skill-check rollable" for="data.skills.artifactDie.value">{{localize "Sentinel.artifactDie"}}</label>
                       <input type="text" id="data.skills.artifactDie.value" name="data.skills.artifactDie.value" value="{{data.skills.artifactDie.value}}" data-dtype="String"/>

@@ -27,7 +27,7 @@ class ActorSheetShaman extends DCCActorSheet {
     if (!data.data.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
-          label: 'shaman.aiRecognition',
+          label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
@@ -35,7 +35,7 @@ class ActorSheetShaman extends DCCActorSheet {
 	if (!data.data.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
-			label: 'shaman.archaicAlignment',
+			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
@@ -43,7 +43,7 @@ class ActorSheetShaman extends DCCActorSheet {
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
-			label: 'shaman.artifactCheck',
+			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
@@ -51,11 +51,19 @@ class ActorSheetShaman extends DCCActorSheet {
 		if (!data.data.class.spellCheck) {
 	  this.actor.update({
 		  'data.class.spellCheck': {
-			label: 'shaman.programCheck',
+			label: 'mcc.programCheck',
 			value: '+0'
 		  }
 	  })
 	}
+if (!data.data.skills.maxTechLevel) {
+          this.actor.update({
+                  'data.skills.maxTechLevel': {
+                        label: 'mcc.maxTechLevel',
+                        value: '0'
+                  }
+          })
+        }
     return data
   }
 }

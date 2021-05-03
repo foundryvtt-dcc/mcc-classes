@@ -27,7 +27,7 @@ class ActorSheetSentinel extends DCCActorSheet {
     if (!data.data.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
-          label: 'Sentinel.aiRecognition',
+          label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
@@ -35,7 +35,7 @@ class ActorSheetSentinel extends DCCActorSheet {
 	if (!data.data.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
-			label: 'Sentinel.archaicAlignment',
+			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
@@ -43,11 +43,19 @@ class ActorSheetSentinel extends DCCActorSheet {
 	if (!data.data.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
-			label: 'Sentinel.artifactCheck',
+			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
 	}
+if (!data.data.skills.maxTechLevel) {
+          this.actor.update({
+                  'data.skills.maxTechLevel': {
+                        label: 'mcc.maxTechLevel',
+                        value: '0'
+                  }
+          })
+        }
     return data
   }
 }
