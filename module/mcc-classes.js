@@ -16,13 +16,13 @@ Hooks.once('init', async function () {
   console.log(`DCC | Initializing Dungeon Crawl Classics System`)
 
   // Register sheet application classes
-  Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer)
-  Actors.registerSheet('mcc-mutant', MutantSheets.ActorSheetMutant)
-  Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover)
-  Actors.registerSheet('mcc-sentinel', SentinelSheets.ActorSheetSentinel)
-  Actors.registerSheet('mcc-shaman', ShamanSheets.ActorSheetShaman)
-  Actors.registerSheet('mcc-manimal', ManimalSheets.ActorSheetManimal)    
-  Actors.registerSheet('mcc-plantient', PlantientSheets.ActorSheetPlantient)  
+  Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, { types: ['Player'] })
+  Actors.registerSheet('mcc-mutant', MutantSheets.ActorSheetMutant, { types: ['Player'] })
+  Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover, { types: ['Player'] })
+  Actors.registerSheet('mcc-sentinel', SentinelSheets.ActorSheetSentinel, { types: ['Player'] })
+  Actors.registerSheet('mcc-shaman', ShamanSheets.ActorSheetShaman, { types: ['Player'] })
+  Actors.registerSheet('mcc-manimal', ManimalSheets.ActorSheetManimal, { types: ['Player'] })    
+  Actors.registerSheet('mcc-plantient', PlantientSheets.ActorSheetPlantient, { types: ['Player'] })  
    
   // Register shared template for MCC characters
   const templatePaths = [
