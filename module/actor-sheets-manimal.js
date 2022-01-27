@@ -16,7 +16,7 @@ class ActorSheetManimal extends DCCActorSheet {
 
 if (data.data.details.sheetClass !== 'Manimal') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('Manimal.Manimal')
+        'data.class.className': game.i18n.localize('mcc.Manimal')
       })
     }
 

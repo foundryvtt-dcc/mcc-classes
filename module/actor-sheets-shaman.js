@@ -15,7 +15,7 @@ class ActorSheetShaman extends DCCActorSheet {
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-shaman.html'
     if (data.data.details.sheetClass !== 'Shaman') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('Shaman.Shaman')
+        'data.class.className': game.i18n.localize('mcc.Shaman')
       })
     }
 

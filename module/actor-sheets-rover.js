@@ -15,7 +15,7 @@ class ActorSheetRover extends DCCActorSheet {
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-rover.html'
 if (data.data.details.sheetClass !== 'Rover') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('Rover.Rover')
+        'data.class.className': game.i18n.localize('mcc.Rover')
       })
     }
 
