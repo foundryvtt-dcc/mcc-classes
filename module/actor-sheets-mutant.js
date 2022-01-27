@@ -13,7 +13,11 @@ class ActorSheetMutant extends DCCActorSheet {
   getData () {
     const data = super.getData()
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-mutant.html'
-    data.data.class.className = 'Mutant'
+if (data.data.details.sheetClass !== 'Mutant') {
+      this.actor.update({
+        'data.class.className': game.i18n.localize('mcc.Mutant')
+      })
+    }
 
     // Add in Mutant specific data if missing
     if (!data.data.skills.mutantHorror) {

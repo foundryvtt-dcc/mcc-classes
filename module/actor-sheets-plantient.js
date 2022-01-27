@@ -15,7 +15,7 @@ class ActorSheetPlantient extends DCCActorSheet {
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-plantient.html'
     if (data.data.details.sheetClass !== 'Plantient') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('Plantient.Plantient')
+        'data.class.className': game.i18n.localize('mcc.Plantient')
       })
     }
 

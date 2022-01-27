@@ -15,7 +15,7 @@ class ActorSheetHealer extends DCCActorSheet {
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-healer.html'
     if (data.data.details.sheetClass !== 'Healer') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('Healer.Healer')
+        'data.class.className': game.i18n.localize('mcc.Healer')
       })
     }
 
