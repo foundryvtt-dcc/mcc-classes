@@ -13,7 +13,11 @@ class ActorSheetSentinel extends DCCActorSheet {
   getData () {
     const data = super.getData()
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-sentinel.html'
-    data.data.class.className = 'Sentinel'
+    if (data.data.details.sheetClass !== 'Sentinel') {
+      this.actor.update({
+        'data.class.className': game.i18n.localize('Sentinel.Sentinel')
+      })
+    }
 
     // Add in Sentinel specific data if missing
     if (!data.data.skills.artifactDie) {

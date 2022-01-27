@@ -13,7 +13,11 @@ class ActorSheetHealer extends DCCActorSheet {
   getData () {
     const data = super.getData()
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-healer.html'
-    data.data.class.className = 'Healer'
+    if (data.data.details.sheetClass !== 'Healer') {
+      this.actor.update({
+        'data.class.className': game.i18n.localize('Healer.Healer')
+      })
+    }
 
     // Add in Healer specific data if missing
     if (!data.data.skills.naturopathy) {

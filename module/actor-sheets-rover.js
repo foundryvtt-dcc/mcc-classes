@@ -13,7 +13,12 @@ class ActorSheetRover extends DCCActorSheet {
   getData () {
     const data = super.getData()
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-rover.html'
-    data.data.class.className = 'Rover'
+if (data.data.details.sheetClass !== 'Rover') {
+      this.actor.update({
+        'data.class.className': game.i18n.localize('Rover.Rover')
+      })
+    }
+
 
     // Add in Rover specific data if missing
     if (!data.data.skills.doorsAndSecurity) {
