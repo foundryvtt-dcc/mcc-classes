@@ -13,7 +13,12 @@ class ActorSheetManimal extends DCCActorSheet {
   getData () {
     const data = super.getData()
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-manimal.html'
-    data.data.class.className = 'Manimal'
+
+if (data.data.details.sheetClass !== 'Manimal') {
+      this.actor.update({
+        'data.class.className': game.i18n.localize('Manimal.Manimal')
+      })
+    }
 
     // Add in Manimal specific data if missing
 	    if (!data.data.class.spellCheckAbility) {

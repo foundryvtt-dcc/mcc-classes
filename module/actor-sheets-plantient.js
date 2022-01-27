@@ -13,7 +13,12 @@ class ActorSheetPlantient extends DCCActorSheet {
   getData () {
     const data = super.getData()
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-plantient.html'
-    data.data.class.className = 'Plantient'
+    if (data.data.details.sheetClass !== 'Plantient') {
+      this.actor.update({
+        'data.class.className': game.i18n.localize('Plantient.Plantient')
+      })
+    }
+
 
     // Add in Plantient specific data if missing
 	    if (!data.data.class.spellCheckAbility) {
