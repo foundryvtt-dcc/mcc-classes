@@ -8,7 +8,7 @@
   "sentinel.ActorSheetSentinel": "Sentinel",
   "Sentinel.sentinelAbilities": "Sentinel Abilities",
   "Sentinel.artifactDie": "Artifact Die",
-  "mcc.sentinel": "Sentinel",
+  "mcc.Sentinel": "Sentinel",
   "mcc.artifactCheck": "Artifact Check",
   "mcc.Healer": "Healer",
   "Healer.healerAbilities": "Healer Abilities",
