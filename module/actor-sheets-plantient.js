@@ -10,10 +10,10 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
  */
 class ActorSheetPlantient extends DCCActorSheet {
   /** @override */
-  getData () {
-    const data = super.getData()
+/**  getData () {
+    const data = super.getData() **/
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-plantient.html'
-    if (data.data.details.sheetClass !== 'Plantient') {
+    if (data.system.details.sheetClass !== 'Plantient') {
       this.actor.update({
         'data.class.className': game.i18n.localize('mcc.Plantient')
       })
@@ -21,7 +21,7 @@ class ActorSheetPlantient extends DCCActorSheet {
 
 
     // Add in Plantient specific data if missing
-	    if (!data.data.class.spellCheckAbility) {
+	    if (!data.system.class.spellCheckAbility) {
       this.actor.update({
         'data.class.spellCheckAbility': {
           label: 'Plantient.spellCheckAbility',
@@ -29,7 +29,7 @@ class ActorSheetPlantient extends DCCActorSheet {
         }
       })
     }
-	if (!data.data.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
@@ -37,7 +37,7 @@ class ActorSheetPlantient extends DCCActorSheet {
 		  }
 	  })
 	}
-	if (!data.data.class.plantientSubType) {
+	if (!data.system.class.plantientSubType) {
           this.actor.update({
                   'data.class.plantientSubType': {
                         label: 'mcc.plantientSubType',
@@ -46,7 +46,7 @@ class ActorSheetPlantient extends DCCActorSheet {
           })
         }
 
-	if (!data.data.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
 			label: 'Plantient.artifactCheck',
@@ -54,7 +54,7 @@ class ActorSheetPlantient extends DCCActorSheet {
 		  }
 	  })
 	}
-	if (!data.data.skills.maxTechLevel) {
+	if (!data.system.skills.maxTechLevel) {
           this.actor.update({
                   'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',

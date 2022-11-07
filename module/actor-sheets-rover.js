@@ -10,10 +10,10 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
  */
 class ActorSheetRover extends DCCActorSheet {
   /** @override */
-  getData () {
-    const data = super.getData()
+/**  getData () {
+    const data = super.getData() **/
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-rover.html'
-if (data.data.details.sheetClass !== 'Rover') {
+if (data.system.details.sheetClass !== 'Rover') {
       this.actor.update({
         'data.class.className': game.i18n.localize('mcc.Rover')
       })
@@ -21,7 +21,7 @@ if (data.data.details.sheetClass !== 'Rover') {
 
 
     // Add in Rover specific data if missing
-    if (!data.data.skills.doorsAndSecurity) {
+    if (!data.system.skills.doorsAndSecurity) {
       this.actor.update({
         'data.skills.doorsAndSecurity': {
           label: 'rover.doorsAndSecurity',
@@ -29,7 +29,7 @@ if (data.data.details.sheetClass !== 'Rover') {
         }
       })
     }
-    if (!data.data.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
@@ -37,7 +37,7 @@ if (data.data.details.sheetClass !== 'Rover') {
         }
       })
     }
-	if (!data.data.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
@@ -45,7 +45,7 @@ if (data.data.details.sheetClass !== 'Rover') {
 		  }
 	  })
 	}
-	if (!data.data.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
@@ -53,7 +53,7 @@ if (data.data.details.sheetClass !== 'Rover') {
 		  }
 	  })
 	}
-		if (!data.data.skills.roverMissleAttack) {
+		if (!data.system.skills.roverMissleAttack) {
 	  this.actor.update({
 		  'data.skills.roverMissileAttack': {
 			label: 'rover.roverMissileAttack',
@@ -61,7 +61,7 @@ if (data.data.details.sheetClass !== 'Rover') {
 		  }
 	  })
 	}
-if (!data.data.skills.maxTechLevel) {
+if (!data.system.skills.maxTechLevel) {
           this.actor.update({
                   'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',

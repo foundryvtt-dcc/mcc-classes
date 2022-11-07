@@ -10,17 +10,19 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
  */
 class ActorSheetHealer extends DCCActorSheet {
   /** @override */
-  getData () {
-    const data = super.getData()
+/**  getData () {
+    const data = super.getData() **/
+    async getData (options) {
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-healer.html'
-    if (data.data.details.sheetClass !== 'Healer') {
+    if (data.system.details.sheetClass !== 'Healer') {
       this.actor.update({
         'data.class.className': game.i18n.localize('mcc.Healer')
       })
     }
 
     // Add in Healer specific data if missing
-    if (!data.data.skills.naturopathy) {
+    if (!data.system.skills.naturopathy) {
       this.actor.update({
         'data.skills.naturopathy': {
           label: 'Healer.naturopathy',
@@ -28,7 +30,7 @@ class ActorSheetHealer extends DCCActorSheet {
         }
       })
     }
-    if (!data.data.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
@@ -36,7 +38,7 @@ class ActorSheetHealer extends DCCActorSheet {
         }
       })
     }
-	if (!data.data.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
@@ -44,7 +46,7 @@ class ActorSheetHealer extends DCCActorSheet {
 		  }
 	  })
 	}
-	if (!data.data.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
@@ -52,7 +54,7 @@ class ActorSheetHealer extends DCCActorSheet {
 		  }
 	  })
 	}
-if (!data.data.skills.maxTechLevel) {
+if (!data.system.skills.maxTechLevel) {
           this.actor.update({
                   'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
