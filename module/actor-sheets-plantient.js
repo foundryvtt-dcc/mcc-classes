@@ -12,6 +12,8 @@ class ActorSheetPlantient extends DCCActorSheet {
   /** @override */
 /**  getData () {
     const data = super.getData() **/
+async getData (options) {
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-plantient.html'
     if (data.system.details.sheetClass !== 'Plantient') {
       this.actor.update({
