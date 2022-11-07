@@ -10,18 +10,20 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
  */
 class ActorSheetManimal extends DCCActorSheet {
   /** @override */
-  getData () {
-    const data = super.getData()
+/**  getData () {
+    const data = super.getData() **/
+async getData (options) {
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-manimal.html'
 
-if (data.data.details.sheetClass !== 'Manimal') {
+if (data.system.details.sheetClass !== 'Manimal') {
       this.actor.update({
         'data.class.className': game.i18n.localize('mcc.Manimal')
       })
     }
 
     // Add in Manimal specific data if missing
-	    if (!data.data.class.spellCheckAbility) {
+	    if (!data.system.class.spellCheckAbility) {
       this.actor.update({
         'data.class.spellCheckAbility': {
           label: 'Manimal.spellCheckAbility',
@@ -29,7 +31,7 @@ if (data.data.details.sheetClass !== 'Manimal') {
         }
       })
     }
-    if (!data.data.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
         'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
@@ -37,7 +39,7 @@ if (data.data.details.sheetClass !== 'Manimal') {
         }
       })
     }
-	if (!data.data.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
 		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
@@ -45,7 +47,7 @@ if (data.data.details.sheetClass !== 'Manimal') {
 		  }
 	  })
 	}
-	if (!data.data.class.manimalSubType) {
+	if (!data.system.class.manimalSubType) {
           this.actor.update({
                   'data.class.manimalSubType': {
                         label: 'mcc.manimalSubType',
@@ -53,7 +55,7 @@ if (data.data.details.sheetClass !== 'Manimal') {
                   }
           })
         }
-	if (!data.data.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
 		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
@@ -61,7 +63,7 @@ if (data.data.details.sheetClass !== 'Manimal') {
 		  }
 	  })
 	}
-	if (!data.data.skills.maxTechLevel) {
+	if (!data.system.skills.maxTechLevel) {
           this.actor.update({
                   'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
