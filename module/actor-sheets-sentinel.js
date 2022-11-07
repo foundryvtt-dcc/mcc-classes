@@ -12,6 +12,8 @@ class ActorSheetSentinel extends DCCActorSheet {
   /** @override */
 /**  getData () {
     const data = super.getData() **/
+async getData (options) {
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-sentinel.html'
     if (data.system.details.sheetClass !== 'Sentinel') {
       this.actor.update({
