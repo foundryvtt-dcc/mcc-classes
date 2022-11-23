@@ -9,23 +9,23 @@
                        placeholder="{{localize 'DCC.CharacterName'}}"/>
             </h1>
             <div class="level">
-              <label for="data.details.level.value">{{data.class.className}} {{localize "DCC.Level"}}</label>
-                <input type="text" id="data.details.level.value" name="data.details.level.value"
-                       value="{{data.details.level.value}}" maxlength="6"
+              <label for="system.details.level.value">{{data.class.className}} {{localize "DCC.Level"}}</label>
+                <input type="text" id="system.details.level.value" name="system.details.level.value"
+                       value="{{system.details.level.value}}" maxlength="6"
                        data-dtype="Number"/>
             </div>
         </div>
 
 
         <div class="occupation flex1">
-            <label for="data.details.occupation.value">{{localize "DCC.Occupation"}}</label>
-            <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
-                   value="{{data.details.occupation.value}}" maxlength="40"/>
+            <label for="system.details.occupation.value">{{localize "DCC.Occupation"}}</label>
+            <input type="text" id="system.details.occupation.value" name="system.details.occupation.value"
+                   value="{{system.details.occupation.value}}" maxlength="40"/>
         </div>
         <div class="experience">
-            <label for="data.details.xp.value">{{localize "DCC.Experience"}}</label>
-            <input type="text" id="data.details.xp.value" name="data.details.xp.value"
-                   value="{{numberFormat data.details.xp.value decimals=0 sign=false}}"
+            <label for="system.details.xp.value">{{localize "DCC.Experience"}}</label>
+            <input type="text" id="system.details.xp.value" name="system.details.xp.value"
+                   value="{{numberFormat system.details.xp.value decimals=0 sign=false}}"
                    placeholder="0" maxlength="40" data-dtype="Number"/>
         </div>
     </div>
