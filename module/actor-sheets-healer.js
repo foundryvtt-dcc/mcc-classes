@@ -11,52 +11,52 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
 class ActorSheetHealer extends DCCActorSheet {
   /** @override */
 /**  getData () {
-    const system.= super.getData() **/
+    const data = super.getData() **/
     async getData (options) {
-    const system.= await super.getData(options)
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-healer.html'
-    if (system.system.details.sheetClass !== 'Healer') {
+    if (data.system.details.sheetClass !== 'Healer') {
       this.actor.update({
-        'system.class.className': game.i18n.localize('mcc.Healer')
+        'data.class.className': game.i18n.localize('mcc.Healer')
       })
     }
 
-    // Add in Healer specific system.if missing
-    if (!system.system.skills.naturopathy) {
+    // Add in Healer specific data if missing
+    if (!data.system.skills.naturopathy) {
       this.actor.update({
-        'system.skills.naturopathy': {
+        'data.skills.naturopathy': {
           label: 'Healer.naturopathy',
           value: '1d3 x2'
         }
       })
     }
-    if (!system.system.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
-        'system.skills.aiRecognition': {
+        'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
     }
-	if (!system.system.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'system.class.archaicAlignment': {
+		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
 	}
-	if (!system.system.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'system.skills.artifactCheck': {
+		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
 	}
-if (!system.system.skills.maxTechLevel) {
+if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'system.skills.maxTechLevel': {
+                  'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }

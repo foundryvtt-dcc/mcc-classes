@@ -11,61 +11,61 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
 class ActorSheetRover extends DCCActorSheet {
   /** @override */
 /**  getData () {
-    const system.= super.getData() **/
+    const data = super.getData() **/
 async getData (options) {
-    const system.= await super.getData(options)
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-rover.html'
-if (system.system.details.sheetClass !== 'Rover') {
+if (data.system.details.sheetClass !== 'Rover') {
       this.actor.update({
-        'system.class.className': game.i18n.localize('mcc.Rover')
+        'data.class.className': game.i18n.localize('mcc.Rover')
       })
     }
 
 
-    // Add in Rover specific system.if missing
-    if (!system.system.skills.doorsAndSecurity) {
+    // Add in Rover specific data if missing
+    if (!data.system.skills.doorsAndSecurity) {
       this.actor.update({
-        'system.skills.doorsAndSecurity': {
+        'data.skills.doorsAndSecurity': {
           label: 'rover.doorsAndSecurity',
           value: '+1'
         }
       })
     }
-    if (!system.system.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
-        'system.skills.aiRecognition': {
+        'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
     }
-	if (!system.system.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'system.class.archaicAlignment': {
+		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
 	}
-	if (!system.system.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'system.skills.artifactCheck': {
+		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
 	}
-		if (!system.system.skills.roverMissleAttack) {
+		if (!data.system.skills.roverMissleAttack) {
 	  this.actor.update({
-		  'system.skills.roverMissileAttack': {
+		  'data.skills.roverMissileAttack': {
 			label: 'rover.roverMissileAttack',
 			value: '+1'
 		  }
 	  })
 	}
-if (!system.system.skills.maxTechLevel) {
+if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'system.skills.maxTechLevel': {
+                  'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }
