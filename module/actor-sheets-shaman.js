@@ -11,60 +11,60 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
 class ActorSheetShaman extends DCCActorSheet {
   /** @override */
 /**  getData () {
-    const system.= super.getData() **/
+    const data = super.getData() **/
 async getData (options) {
-    const system.= await super.getData(options)
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-shaman.html'
-    if (system.system.details.sheetClass !== 'Shaman') {
+    if (data.system.details.sheetClass !== 'Shaman') {
       this.actor.update({
-        'system.class.className': game.i18n.localize('mcc.Shaman')
+        'data.class.className': game.i18n.localize('mcc.Shaman')
       })
     }
 
-    // Add in shaman specific system.if missing
-    if (!system.system.class.aiPatron) {
+    // Add in shaman specific data if missing
+    if (!data.system.class.aiPatron) {
       this.actor.update({
-        'system.class.aiPatron': {
+        'data.class.aiPatron': {
           label: 'shaman.aiPatron',
           value: ' '
         }
       })
     }
-    if (!system.system.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
-        'system.skills.aiRecognition': {
+        'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
           value: '+2'
         }
       })
     }
-	if (!system.system.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'system.class.archaicAlignment': {
+		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
 	}
-	if (!system.system.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'system.skills.artifactCheck': {
+		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
 	}
-		if (!system.system.class.spellCheck) {
+		if (!data.system.class.spellCheck) {
 	  this.actor.update({
-		  'system.class.spellCheck': {
+		  'data.class.spellCheck': {
 			label: 'mcc.programCheck',
 			value: '+0'
 		  }
 	  })
 	}
-if (!system.system.skills.maxTechLevel) {
+if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'system.skills.maxTechLevel': {
+                  'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }

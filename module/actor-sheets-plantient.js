@@ -11,54 +11,54 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
 class ActorSheetPlantient extends DCCActorSheet {
   /** @override */
 /**  getData () {
-    const system.= super.getData() **/
+    const data = super.getData() **/
 async getData (options) {
-    const system.= await super.getData(options)
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-plantient.html'
-    if (system.system.details.sheetClass !== 'Plantient') {
+    if (data.system.details.sheetClass !== 'Plantient') {
       this.actor.update({
-        'system.class.className': game.i18n.localize('mcc.Plantient')
+        'data.class.className': game.i18n.localize('mcc.Plantient')
       })
     }
 
 
-    // Add in Plantient specific system.if missing
-	    if (!system.system.class.spellCheckAbility) {
+    // Add in Plantient specific data if missing
+	    if (!data.system.class.spellCheckAbility) {
       this.actor.update({
-        'system.class.spellCheckAbility': {
+        'data.class.spellCheckAbility': {
           label: 'Plantient.spellCheckAbility',
           value: 'Int'
         }
       })
     }
-	if (!system.system.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'system.class.archaicAlignment': {
+		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
 	}
-	if (!system.system.class.plantientSubType) {
+	if (!data.system.class.plantientSubType) {
           this.actor.update({
-                  'system.class.plantientSubType': {
+                  'data.class.plantientSubType': {
                         label: 'mcc.plantientSubType',
                         value: ''
                   }
           })
         }
 
-	if (!system.system.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'system.skills.artifactCheck': {
+		  'data.skills.artifactCheck': {
 			label: 'Plantient.artifactCheck',
 			value: '+0'
 		  }
 	  })
 	}
-	if (!system.system.skills.maxTechLevel) {
+	if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'system.skills.maxTechLevel': {
+                  'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }

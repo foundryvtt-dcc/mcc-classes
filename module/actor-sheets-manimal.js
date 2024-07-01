@@ -11,61 +11,61 @@ import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
 class ActorSheetManimal extends DCCActorSheet {
   /** @override */
 /**  getData () {
-    const system.= super.getData() **/
+    const data = super.getData() **/
 async getData (options) {
-    const system.= await super.getData(options)
+    const data = await super.getData(options)
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-manimal.html'
 
-if (system.system.details.sheetClass !== 'Manimal') {
+if (data.system.details.sheetClass !== 'Manimal') {
       this.actor.update({
-        'system.class.className': game.i18n.localize('mcc.Manimal')
+        'data.class.className': game.i18n.localize('mcc.Manimal')
       })
     }
 
-    // Add in Manimal specific system.if missing
-	    if (!system.system.class.spellCheckAbility) {
+    // Add in Manimal specific data if missing
+	    if (!data.system.class.spellCheckAbility) {
       this.actor.update({
-        'system.class.spellCheckAbility': {
+        'data.class.spellCheckAbility': {
           label: 'Manimal.spellCheckAbility',
           value: 'Int'
         }
       })
     }
-    if (!system.system.skills.aiRecognition) {
+    if (!data.system.skills.aiRecognition) {
       this.actor.update({
-        'system.skills.aiRecognition': {
+        'data.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
           value: '-4'
         }
       })
     }
-	if (!system.system.class.archaicAlignment) {
+	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'system.class.archaicAlignment': {
+		  'data.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
 	  })
 	}
-	if (!system.system.class.manimalSubType) {
+	if (!data.system.class.manimalSubType) {
           this.actor.update({
-                  'system.class.manimalSubType': {
+                  'data.class.manimalSubType': {
                         label: 'mcc.manimalSubType',
                         value: ''
                   }
           })
         }
-	if (!system.system.skills.artifactCheck) {
+	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'system.skills.artifactCheck': {
+		  'data.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
 	  })
 	}
-	if (!system.system.skills.maxTechLevel) {
+	if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'system.skills.maxTechLevel': {
+                  'data.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }
