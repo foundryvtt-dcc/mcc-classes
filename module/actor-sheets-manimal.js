@@ -18,14 +18,14 @@ async getData (options) {
 
 if (data.system.details.sheetClass !== 'Manimal') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('mcc.Manimal')
+        'system.class.className': game.i18n.localize('mcc.Manimal')
       })
     }
 
     // Add in Manimal specific data if missing
 	    if (!data.system.class.spellCheckAbility) {
       this.actor.update({
-        'data.class.spellCheckAbility': {
+        'system.class.spellCheckAbility': {
           label: 'Manimal.spellCheckAbility',
           value: 'Int'
         }
@@ -33,7 +33,7 @@ if (data.system.details.sheetClass !== 'Manimal') {
     }
     if (!data.system.skills.aiRecognition) {
       this.actor.update({
-        'data.skills.aiRecognition': {
+        'system.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
           value: '-4'
         }
@@ -41,7 +41,7 @@ if (data.system.details.sheetClass !== 'Manimal') {
     }
 	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'data.class.archaicAlignment': {
+		  'system.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
@@ -49,7 +49,7 @@ if (data.system.details.sheetClass !== 'Manimal') {
 	}
 	if (!data.system.class.manimalSubType) {
           this.actor.update({
-                  'data.class.manimalSubType': {
+                  'system.class.manimalSubType': {
                         label: 'mcc.manimalSubType',
                         value: ''
                   }
@@ -57,7 +57,7 @@ if (data.system.details.sheetClass !== 'Manimal') {
         }
 	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'data.skills.artifactCheck': {
+		  'system.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
@@ -65,7 +65,7 @@ if (data.system.details.sheetClass !== 'Manimal') {
 	}
 	if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'data.skills.maxTechLevel': {
+                  'system.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }

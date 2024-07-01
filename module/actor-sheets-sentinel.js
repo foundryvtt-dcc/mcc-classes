@@ -17,14 +17,14 @@ async getData (options) {
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-sentinel.html'
     if (data.system.details.sheetClass !== 'Sentinel') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('mcc.Sentinel')
+        'system.class.className': game.i18n.localize('mcc.Sentinel')
       })
     }
 
     // Add in Sentinel specific data if missing
     if (!data.system.skills.artifactDie) {
       this.actor.update({
-        'data.skills.artifactDie': {
+        'system.skills.artifactDie': {
           label: 'Sentinel.artifactDie',
           value: '1d3'
         }
@@ -32,7 +32,7 @@ async getData (options) {
     }
     if (!data.system.skills.aiRecognition) {
       this.actor.update({
-        'data.skills.aiRecognition': {
+        'system.skills.aiRecognition': {
           label: 'mcc.aiRecognition',
           value: '+2'
         }
@@ -40,7 +40,7 @@ async getData (options) {
     }
 	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'data.class.archaicAlignment': {
+		  'system.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
@@ -48,7 +48,7 @@ async getData (options) {
 	}
 	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'data.skills.artifactCheck': {
+		  'system.skills.artifactCheck': {
 			label: 'mcc.artifactCheck',
 			value: '+0'
 		  }
@@ -56,7 +56,7 @@ async getData (options) {
 	}
 if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'data.skills.maxTechLevel': {
+                  'system.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }
