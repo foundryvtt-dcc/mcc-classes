@@ -17,7 +17,7 @@ async getData (options) {
     this.options.template = 'modules/mcc-classes/templates/actor-sheet-plantient.html'
     if (data.system.details.sheetClass !== 'Plantient') {
       this.actor.update({
-        'data.class.className': game.i18n.localize('mcc.Plantient')
+        'system.class.className': game.i18n.localize('mcc.Plantient')
       })
     }
 
@@ -25,7 +25,7 @@ async getData (options) {
     // Add in Plantient specific data if missing
 	    if (!data.system.class.spellCheckAbility) {
       this.actor.update({
-        'data.class.spellCheckAbility': {
+        'system.class.spellCheckAbility': {
           label: 'Plantient.spellCheckAbility',
           value: 'Int'
         }
@@ -33,7 +33,7 @@ async getData (options) {
     }
 	if (!data.system.class.archaicAlignment) {
 	  this.actor.update({
-		  'data.class.archaicAlignment': {
+		  'system.class.archaicAlignment': {
 			label: 'mcc.archaicAlignment',
 			value: 'Clan of Cog'
 		  }
@@ -41,7 +41,7 @@ async getData (options) {
 	}
 	if (!data.system.class.plantientSubType) {
           this.actor.update({
-                  'data.class.plantientSubType': {
+                  'system.class.plantientSubType': {
                         label: 'mcc.plantientSubType',
                         value: ''
                   }
@@ -50,7 +50,7 @@ async getData (options) {
 
 	if (!data.system.skills.artifactCheck) {
 	  this.actor.update({
-		  'data.skills.artifactCheck': {
+		  'system.skills.artifactCheck': {
 			label: 'Plantient.artifactCheck',
 			value: '+0'
 		  }
@@ -58,7 +58,7 @@ async getData (options) {
 	}
 	if (!data.system.skills.maxTechLevel) {
           this.actor.update({
-                  'data.skills.maxTechLevel': {
+                  'system.skills.maxTechLevel': {
                         label: 'mcc.maxTechLevel',
                         value: '0'
                   }
