@@ -1,4 +1,3 @@
-    /**#data.system.class.className = game.i18n.localize('Bard.Bard')**/
 <form class="{{cssClass}}" autocomplete="off">
  
     {{!-- Hidden inputs to reflect the sheet class and force standard crit range --}}
@@ -58,23 +57,23 @@
                       <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value" value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
                     </div>
 
-					<div class="flexrow" data-skill="artifactCheck">
+          <div class="flexrow" data-skill="artifactCheck">
                       <label class="skill-check rollable" for="system.skills.artifactCheck.value">{{localize "mcc.artifactCheck"}}</label>
                       <input type="text" id="system.skills.artifactCheck.value" name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}" data-dtype="String"/>
                     </div>
                 </div>
-				 <div class="deity flexrow">
+         <div class="deity flexrow">
                     <label class="flex1" for="system.class.archaicAlignment">{{localize "mcc.archaicAlignment"}}</label>
                    <input class="flex2" type="text" id="system.class.archaicAlignment.value" name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}" data-dtype="String"/>
                 </div>
 
                 <ul class="class-note flexcol">
-				
+        
                   <li>
                     {{localize "mcc.artifacts"}}
                     <ul>
                       <li>{{localize "Healer.artifactsDesc"}}</li>
-					  <li>{{localize "Healer.artifactMedical"}}</li>
+                      <li>{{localize "Healer.artifactMedical"}}</li>
                     </ul>
                   </li>
                   <li>
@@ -89,7 +88,7 @@
                       <li>{{localize "human.aiRecognition"}}</li>
                     </ul>
                   </li>
-				                    <li>
+                  <li>
                     {{localize "Healer.naturopathy"}}</li>
                     <ul>
                       <li>{{localize "Healer.naturopathyDesc"}}</li>
