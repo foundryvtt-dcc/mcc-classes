@@ -51,8 +51,9 @@
                                value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
                     </div>
                     <div class="flexrow" data-skill="artifactCheck">
-                        <label class="skill-check rollable" for="system.skills.artifactCheck.value">{{localize
-                            "mcc.artifactCheck"}}</label>
+                        <label class="skill-check rollable" for="system.skills.artifactCheck.value">
+                            {{localize "mcc.artifactCheck"}}
+                        </label>
                         <input type="text" id="system.skills.artifactCheck.value"
                                name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
                                data-dtype="String"/>
@@ -60,23 +61,26 @@
                     <input type="hidden" id="system.class.spellCheckAbility" name="system.class.spellCheckAbility"
                            value="">
                     <div class="flexrow" data-ability="">
-                        <label class="spell-check rollable" for="system.class.spellCheck">{{localize
-                            "mcc.mutationCheck"}}</label>
+                        <label class="spell-check rollable" for="system.class.spellCheck">
+                            {{localize "mcc.mutationCheck"}}
+                        </label>
                         <input type="text" id="system.class.spellCheck" name="system.class.spellCheck"
                                value="{{numberFormat system.class.spellCheck decimals=0 sign=true}}"
                                data-dtype="String"/>
                     </div>
                 </div>
-                <div class="deity flexrow">
+                <div class="deity flexrow" style="align-items: center;">
                     <label class="flex1" style="align-items: center;" for="system.class.archaicAlignment.value">
-                        {{localize "mcc.archaicAlignment"}}</label>
+                        {{localize "mcc.archaicAlignment"}}
+                    </label>
                     <input class="flex2" type="text" id="system.class.archaicAlignment.value"
                            name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
                            data-dtype="String"/>
                 </div>
-                <div class="deity flexrow">
-                    <label class="flex1" for="system.class.plantientSubType.value">{{localize
-                        "mcc.plantientSubType"}}</label>
+                <div class="deity flexrow" style="align-items: center;">
+                    <label class="flex1" for="system.class.plantientSubType.value">
+                        {{localize "mcc.plantientSubType"}}
+                    </label>
                     <input class="flex2" type="text" id="system.class.plantientSubType.value"
                            name="system.class.plantientSubType.value" value="{{system.class.plantientSubType.value}}"
                            data-dtype="String"/>
@@ -91,16 +95,12 @@
                     </li>
                     <li>
                         {{localize "plantient.fragrancePheromones"}}
-                    </li>
-                    <li>
                         <ul>
                             <li>{{localize "plantient.fragrancePheromonesDesc"}}</li>
                         </ul>
                     </li>
                     <li>
                         {{localize "plantient.cantSeeTheForestForTheTrees"}}
-                    </li>
-                    <li>
                         <ul>
                             <li>{{localize "plantient.cantSeeTheForestForTheTreesDesc"}}</li>
                         </ul>
