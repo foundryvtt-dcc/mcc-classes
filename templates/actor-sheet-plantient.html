@@ -1,7 +1,8 @@
 <form class="{{cssClass}}" autocomplete="off">
- 
+
     {{!-- Hidden inputs to reflect the sheet class and force standard crit range --}}
-    <input type="hidden" id="system.details.sheetClass" name="system.details.sheetClass" value="Plantient" data-dtype="String"/>
+    <input type="hidden" id="system.details.sheetClass" name="system.details.sheetClass" value="Plantient"
+           data-dtype="String"/>
     <input type="hidden" id="system.details.critRange" name="system.details.critRange" value="20" data-dtype="Number"/>
 
     {{!-- Sheet Header --}}
@@ -42,56 +43,75 @@
             <h4 class="class-label">{{localize "plantient.plantientAbilities"}}</h4>
             <div class="class">
                 <div class="skills-container">
-		<div class="flexrow" data-skill="Max Tech Level">
-                      <label class="flex1" for="system.skills.maxTechLevel.value">{{localize "mcc.maxTechLevel"}}</label>
-                      <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value" value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
+                    <div class="flexrow" data-skill="Max Tech Level">
+                        <label class="flex1" for="system.skills.maxTechLevel.value">
+                            {{localize "mcc.maxTechLevel"}}
+                        </label>
+                        <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
+                               value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
                     </div>
-					<div class="flexrow" data-skill="artifactCheck">
-                      <label class="skill-check rollable" for="system.skills.artifactCheck.value">{{localize "mcc.artifactCheck"}}</label>
-                      <input type="text" id="system.skills.artifactCheck.value" name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}" data-dtype="String"/>
+                    <div class="flexrow" data-skill="artifactCheck">
+                        <label class="skill-check rollable" for="system.skills.artifactCheck.value">
+                            {{localize "mcc.artifactCheck"}}
+                        </label>
+                        <input type="text" id="system.skills.artifactCheck.value"
+                               name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
+                               data-dtype="String"/>
                     </div>
-					<input type="hidden" id="system.class.spellCheckAbility" name="system.class.spellCheckAbility" value="">
+                    <input type="hidden" id="system.class.spellCheckAbility" name="system.class.spellCheckAbility"
+                           value="">
                     <div class="flexrow" data-ability="">
-                        <label class="spell-check rollable" for="system.class.spellCheck">{{localize "mcc.mutationCheck"}}</label>
-                        <input type="text" id="system.class.spellCheck" name="system.class.spellCheck" value="{{numberFormat system.class.spellCheck decimals=0 sign=true}}" data-dtype="String"/>
+                        <label class="spell-check rollable" for="system.class.spellCheck">
+                            {{localize "mcc.mutationCheck"}}
+                        </label>
+                        <input type="text" id="system.class.spellCheck" name="system.class.spellCheck"
+                               value="{{numberFormat system.class.spellCheck decimals=0 sign=true}}"
+                               data-dtype="String"/>
                     </div>
                 </div>
-				 <div class="deity flexrow">
-                    <label class="flex1" for="system.class.archaicAlignment">{{localize "mcc.archaicAlignment"}}</label>
-                   <input class="flex2" type="text" id="system.class.archaicAlignment.value" name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}" data-dtype="String"/>
+                <div class="deity flexrow" style="align-items: center;">
+                    <label class="flex1" style="align-items: center;" for="system.class.archaicAlignment.value">
+                        {{localize "mcc.archaicAlignment"}}
+                    </label>
+                    <input class="flex2" type="text" id="system.class.archaicAlignment.value"
+                           name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
+                           data-dtype="String"/>
                 </div>
-<div class="deity flexrow">
-                    <label class="flex1" for="system.class.plantientSubType">{{localize "mcc.plantientSubType"}}</label>
-                   <input class="flex2" type="text" id="system.class.plantientSubType.value" name="system.class.plantientSubType.value" value="{{system.class.plantientSubType.value}}" data-dtype="String"/>
+                <div class="deity flexrow" style="align-items: center;">
+                    <label class="flex1" for="system.class.plantientSubType.value">
+                        {{localize "mcc.plantientSubType"}}
+                    </label>
+                    <input class="flex2" type="text" id="system.class.plantientSubType.value"
+                           name="system.class.plantientSubType.value" value="{{system.class.plantientSubType.value}}"
+                           data-dtype="String"/>
                 </div>
 
                 <ul class="class-note flexcol">
-				
-                  <li>
-                    {{localize "mcc.naturalAttack"}}
-                    <ul>
-                      <li>{{localize "plantient.naturalAttackDesc"}}</li>
-                    </ul>
-                  </li>
-				  <li>
-                    {{localize "plantient.fragrancePheromones"}}</li>
-                    <ul>
-                      <li>{{localize "plantient.fragrancePheromonesDesc"}}</li>
-                    </ul>
-                  </li>
-				  <li>
-                    {{localize "plantient.cantSeeTheForestForTheTrees"}}</li>
-                    <ul>
-                      <li>{{localize "plantient.cantSeeTheForestForTheTreesDesc"}}</li>
-                    </ul>
-                  </li>
-                  <li>
-                    {{localize "mcc.ai"}}</li>
-                    <ul>
-                      <li>{{localize "plantient.aiRecognition"}}</li>
-                    </ul>
-                  </li>
-                </div>
+                    <li>
+                        {{localize "mcc.naturalAttack"}}
+                        <ul>
+                            <li>{{localize "plantient.naturalAttackDesc"}}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        {{localize "plantient.fragrancePheromones"}}
+                        <ul>
+                            <li>{{localize "plantient.fragrancePheromonesDesc"}}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        {{localize "plantient.cantSeeTheForestForTheTrees"}}
+                        <ul>
+                            <li>{{localize "plantient.cantSeeTheForestForTheTreesDesc"}}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        {{localize "mcc.ai"}}
+                        <ul>
+                            <li>{{localize "plantient.aiRecognition"}}</li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>

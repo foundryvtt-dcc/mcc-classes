@@ -1,5 +1,5 @@
 {{!-- Sheet Header --}}
-<header class="sheet-header flexrow" >
+<header class="sheet-header flexrow">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"
          alt="{{localize 'Character Portrait'}}'"/>
     <div class="upper-level flexrow">
@@ -9,13 +9,12 @@
                        placeholder="{{localize 'DCC.CharacterName'}}"/>
             </h1>
             <div class="level">
-              <label for="system.details.level.value">{{system.class.className}} {{localize "DCC.Level"}}</label>
+                <label for="system.details.level.value">{{system.class.className}} {{localize "DCC.Level"}}</label>
                 <input type="text" id="system.details.level.value" name="system.details.level.value"
                        value="{{system.details.level.value}}" maxlength="6"
                        data-dtype="Number"/>
             </div>
         </div>
-
 
         <div class="occupation flex1">
             <label for="system.details.occupation.value">{{localize "DCC.Occupation"}}</label>
