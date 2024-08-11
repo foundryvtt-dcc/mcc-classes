@@ -4,10 +4,33 @@
   "description": "Sheets for Mutant Crawl Classics in FoundryVTT!",
   "version": "0.1.14",
   "minimumCoreVersion": "12",
-  "compatibleCoreVersion": "12",
-  "author": "Steve Barnett & Christian Ovsenik",
-  "system": ["dcc"],
-  "esmodules": ["module/mcc-classes.js"],
+  "compatibility": {
+    "maximum": "12",
+    "minimum": "12",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "DCC Foundry Volunteer Team (https://discord.gg/2PR9YH9)"
+    },
+    {
+      "name": "Steve Barnett"
+    },
+    {
+      "name": "Christian Ovsenik"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dcc",
+        "type": "system"
+      }
+    ]
+  },
+  "esmodules": [
+    "module/mcc-classes.js"
+  ],
   "styles": [],
   "languages": [
     {
