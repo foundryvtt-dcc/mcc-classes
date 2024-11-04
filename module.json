@@ -31,7 +31,14 @@
   "esmodules": [
     "module/mcc-classes.js"
   ],
-  "styles": [],
+  "flags": {
+    "hotReload": {
+      "extensions": ["js", "css", "html", "json"]
+    }
+  },
+  "styles": [
+    "styles/mcc.css"
+  ],
   "languages": [
     {
       "lang": "en",

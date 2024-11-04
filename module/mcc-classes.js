@@ -13,23 +13,40 @@ import * as PlantientSheets from './actor-sheets-plantient.js';
 /* -------------------------------------------- */
 
 Hooks.once('init', async function () {
-  console.log(`DCC | Initializing Dungeon Crawl Classics System`)
+    console.log(`MCC | Initializing Mutant Crawl Classics System`)
 
-  // Register sheet application classes
-  Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, { types: ['Player'], label: 'healer.ActorSheetHealer' })
-  Actors.registerSheet('mcc-mutant', MutantSheets.ActorSheetMutant, { types: ['Player'], label: 'mutant.ActorSheetMutant' })
-  Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover, { types: ['Player'], label: 'rover.ActorSheetRover'})
-  Actors.registerSheet('mcc-sentinel', SentinelSheets.ActorSheetSentinel, { types: ['Player'], label: 'sentinel.ActorSheetSentinel' })
-  Actors.registerSheet('mcc-shaman', ShamanSheets.ActorSheetShaman, { types: ['Player'], label: 'shaman.ActorSheetShaman' })
-  Actors.registerSheet('mcc-manimal', ManimalSheets.ActorSheetManimal, { types: ['Player'], label: 'manimal.ActorSheetManimal' })    
-  Actors.registerSheet('mcc-plantient', PlantientSheets.ActorSheetPlantient, { types: ['Player'], label: 'plantient.ActorSheetPlantient' })  
-   
-  // Register shared template for MCC characters
-  const templatePaths = [
-	'modules/mcc-classes/templates/actor-partial-pc-mcc-header.html',
-	'modules/mcc-classes/templates/actor-partial-mutations.html',
-	'modules/mcc-classes/templates/actor-partial-shaman-programs.html'	
-	]
-	loadTemplates(templatePaths)
+    // Register sheet application classes
+    Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, {
+        types: ['Player'],
+        label: 'Healer.ActorSheetHealer'
+    })
+    Actors.registerSheet('mcc-mutant', MutantSheets.ActorSheetMutant, {
+        types: ['Player'],
+        label: 'Mutant.ActorSheetMutant'
+    })
+    Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover, {types: ['Player'], label: 'Rover.ActorSheetRover'})
+    Actors.registerSheet('mcc-sentinel', SentinelSheets.ActorSheetSentinel, {
+        types: ['Player'],
+        label: 'Sentinel.ActorSheetSentinel'
+    })
+    Actors.registerSheet('mcc-shaman', ShamanSheets.ActorSheetShaman, {
+        types: ['Player'],
+        label: 'Shaman.ActorSheetShaman'
+    })
+    Actors.registerSheet('mcc-manimal', ManimalSheets.ActorSheetManimal, {
+        types: ['Player'],
+        label: 'Manimal.ActorSheetManimal'
+    })
+    Actors.registerSheet('mcc-plantient', PlantientSheets.ActorSheetPlantient, {
+        types: ['Player'],
+        label: 'Plantient.ActorSheetPlantient'
+    })
+
+    // Register shared template for MCC characters
+    const templatePaths = [
+        'modules/mcc-classes/templates/actor-partial-mutations.html',
+        'modules/mcc-classes/templates/actor-partial-shaman-programs.html'
+    ]
+    loadTemplates(templatePaths)
 })
 
