@@ -15,6 +15,7 @@ class ActorSheetManimal extends DCCActorSheet {
     async getData(options) {
         const data = await super.getData(options)
         this.options.template = 'modules/mcc-classes/templates/actor-sheet-manimal.html'
+        this.options.classes = ['dcc', 'sheet', 'actor', 'pc']
 
         if (data.system.details.sheetClass !== 'Manimal') {
             this.actor.update({

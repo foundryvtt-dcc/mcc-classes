@@ -14,7 +14,9 @@ class ActorSheetMutant extends DCCActorSheet {
     /** @override */
     async getData(options) {
         const data = await super.getData(options)
-        this.options.template = 'modules/mcc-classes/templates/actor-sheet-Mutant.html'
+        this.options.template = 'modules/mcc-classes/templates/actor-sheet-mutant.html'
+        this.options.classes = ['dcc', 'sheet', 'actor', 'pc']
+
         if (data.system.details.sheetClass !== 'Mutant') {
             this.actor.update({
                 'system.class.className': game.i18n.localize('MCC.Mutant')
