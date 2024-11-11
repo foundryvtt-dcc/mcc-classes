@@ -5,19 +5,17 @@
            data-dtype="String"/>
     <input type="hidden" id="system.details.critRange" name="system.details.critRange" value="20" data-dtype="Number"/>
 
-    {{!-- Sheet Header --}}
-    {{> modules/mcc-classes/templates/actor-partial-pc-mcc-header.html }}
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="character">{{localize "DCC.Character"}}</a>
-        <a class="item" data-tab="equipment">{{localize "DCC.Equipment"}}</a>
-        <a class="item" data-tab="class">{{localize "mcc.Plantient"}}</a>
-        <a class="item" data-tab="spells">{{localize "mcc.mutations"}}</a>
+        <a data-tab="character">{{localize "DCC.Character"}}</a>
+        <a data-tab="equipment">{{localize "DCC.Equipment"}}</a>
+        <a data-tab="plantient">{{localize "MCC.Plantient"}}</a>
+        <a data-tab="spells">{{localize "MCC.Mutations"}}</a>
         {{#if system.config.showSkills}}
-        <a class="item" data-tab="skills">{{localize "DCC.Skills"}}</a>
+        <a data-tab="skills">{{localize "DCC.Skills"}}</a>
         {{/if}}
-        <a class="item" data-tab="notes">{{localize "DCC.Notes"}}</a>
+        <a data-tab="notes">{{localize "DCC.Notes"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -39,20 +37,21 @@
         {{> systems/dcc/templates/actor-partial-pc-notes.html }}
 
         {{!-- Class Tab --}}
-        <div class="tab" data-group="primary" data-tab="class">
-            <h4 class="class-label">{{localize "plantient.plantientAbilities"}}</h4>
-            <div class="class">
-                <div class="skills-container">
-                    <div class="flexrow" data-skill="Max Tech Level">
-                        <label class="flex1" for="system.skills.maxTechLevel.value">
-                            {{localize "mcc.maxTechLevel"}}
+        <div class="tab" data-group="primary" data-tab="plantient">
+            div class="grid-container">
+            <div class="grid-col-span-12 dark-border">
+                <div class="dark-title">{{localize "Plantient.PlantientAbilities"}}</div>
+                <div class="grid-tpl-two grid-row-gap-8 p-5">
+                    <div class="grid-tpl-max-25" data-skill="Max Tech Level">
+                        <label for="system.skills.maxTechLevel.value">
+                            {{localize "MCC.MaxTechLevel"}}
                         </label>
                         <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
                                value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
                     </div>
-                    <div class="flexrow" data-skill="artifactCheck">
+                    <div class="grid-tpl-max-25" data-skill="artifactCheck">
                         <label class="skill-check rollable" for="system.skills.artifactCheck.value">
-                            {{localize "mcc.artifactCheck"}}
+                            {{localize "MCC.ArtifactCheck"}}
                         </label>
                         <input type="text" id="system.skills.artifactCheck.value"
                                name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
@@ -60,58 +59,58 @@
                     </div>
                     <input type="hidden" id="system.class.spellCheckAbility" name="system.class.spellCheckAbility"
                            value="">
-                    <div class="flexrow" data-ability="">
+                    <div class="grid-tpl-max-25" data-ability="">
                         <label class="spell-check rollable" for="system.class.spellCheck">
-                            {{localize "mcc.mutationCheck"}}
+                            {{localize "MCC.MutationCheck"}}
                         </label>
                         <input type="text" id="system.class.spellCheck" name="system.class.spellCheck"
                                value="{{numberFormat system.class.spellCheck decimals=0 sign=true}}"
                                data-dtype="String"/>
                     </div>
-                </div>
-                <div class="deity flexrow" style="align-items: center;">
-                    <label class="flex1" style="align-items: center;" for="system.class.archaicAlignment.value">
-                        {{localize "mcc.archaicAlignment"}}
-                    </label>
-                    <input class="flex2" type="text" id="system.class.archaicAlignment.value"
-                           name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
-                           data-dtype="String"/>
-                </div>
-                <div class="deity flexrow" style="align-items: center;">
-                    <label class="flex1" for="system.class.plantientSubType.value">
-                        {{localize "mcc.plantientSubType"}}
-                    </label>
-                    <input class="flex2" type="text" id="system.class.plantientSubType.value"
-                           name="system.class.plantientSubType.value" value="{{system.class.plantientSubType.value}}"
-                           data-dtype="String"/>
-                </div>
+                    <div class="grid-tpl-max-auto grid-col-span-2" style="align-items: center;">
+                        <label style="align-items: center;" for="system.class.archaicAlignment.value">
+                            {{localize "MCC.ArchaicAlignment"}}
+                        </label>
+                        <input type="text" id="system.class.archaicAlignment.value"
+                               name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
+                               data-dtype="String"/>
+                    </div>
+                    <div class="grid-tpl-max-auto grid-col-span-2" style="align-items: center;">
+                        <label for="system.class.plantientSubType.value">
+                            {{localize "MCC.PlantientSubType"}}
+                        </label>
+                        <input type="text" id="system.class.plantientSubType.value"
+                               name="system.class.plantientSubType.value" value="{{system.class.plantientSubType.value}}"
+                               data-dtype="String"/>
+                    </div>
 
-                <ul class="class-note flexcol">
-                    <li>
-                        {{localize "mcc.naturalAttack"}}
-                        <ul>
-                            <li>{{localize "plantient.naturalAttackDesc"}}</li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{localize "plantient.fragrancePheromones"}}
-                        <ul>
-                            <li>{{localize "plantient.fragrancePheromonesDesc"}}</li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{localize "plantient.cantSeeTheForestForTheTrees"}}
-                        <ul>
-                            <li>{{localize "plantient.cantSeeTheForestForTheTreesDesc"}}</li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{localize "mcc.ai"}}
-                        <ul>
-                            <li>{{localize "plantient.aiRecognition"}}</li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="class-note flexcol">
+                        <li>
+                            {{localize "MCC.NaturalAttack"}}
+                            <ul>
+                                <li>{{localize "Plantient.NaturalAttackDesc"}}</li>
+                            </ul>
+                        </li>
+                        <li>
+                            {{localize "Plantient.FragrancePheromones"}}
+                            <ul>
+                                <li>{{localize "Plantient.FragrancePheromonesDesc"}}</li>
+                            </ul>
+                        </li>
+                        <li>
+                            {{localize "Plantient.CantSeeTheForestForTheTrees"}}
+                            <ul>
+                                <li>{{localize "Plantient.CantSeeTheForestForTheTreesDesc"}}</li>
+                            </ul>
+                        </li>
+                        <li>
+                            {{localize "MCC.AI"}}
+                            <ul>
+                                <li>{{localize "Plantient.AIRecognition"}}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>

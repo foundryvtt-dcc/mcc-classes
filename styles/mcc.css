@@ -1,0 +1,27 @@
+a[data-tab='healer']::before {
+    content: '\f3ed';
+}
+
+a[data-tab='manimal']::before {
+    content: '\f3ed';
+}
+
+a[data-tab='mutant']::before {
+    content: '\f3ed';
+}
+
+a[data-tab='plantient']::before {
+    content: '\f3ed';
+}
+
+a[data-tab='rover']::before {
+    content: '\f3ed';
+}
+
+a[data-tab='sentinel']::before {
+    content: '\f3ed';
+}
+
+a[data-tab='shaman']::before {
+    content: '\f3ed';
+}

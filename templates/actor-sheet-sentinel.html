@@ -5,21 +5,19 @@
            data-dtype="String"/>
     <input type="hidden" id="system.details.critRange" name="system.details.critRange" value="20" data-dtype="Number"/>
 
-    {{!-- Sheet Header --}}
-    {{> modules/mcc-classes/templates/actor-partial-pc-mcc-header.html }}
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="character">{{localize "DCC.Character"}}</a>
-        <a class="item" data-tab="equipment">{{localize "DCC.Equipment"}}</a>
-        <a class="item" data-tab="class">{{localize "mcc.Sentinel"}}</a>
+        <a data-tab="character">{{localize "DCC.Character"}}</a>
+        <a data-tab="equipment">{{localize "DCC.Equipment"}}</a>
+        <a data-tab="sentinel">{{localize "MCC.Sentinel"}}</a>
         {{#if system.config.showSpells}}
-        <a class="item" data-tab="spells">{{localize "DCC.Spells"}}</a>
+        <a data-tab="spells">{{localize "DCC.Spells"}}</a>
         {{/if}}
         {{#if system.config.showSkills}}
-        <a class="item" data-tab="skills">{{localize "DCC.Skills"}}</a>
+        <a data-tab="skills">{{localize "DCC.Skills"}}</a>
         {{/if}}
-        <a class="item" data-tab="notes">{{localize "DCC.Notes"}}</a>
+        <a data-tab="notes">{{localize "DCC.Notes"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -41,75 +39,77 @@
         {{> systems/dcc/templates/actor-partial-pc-notes.html }}
 
         {{!-- Class Tab --}}
-        <div class="tab" data-group="primary" data-tab="class">
-            <h4 class="class-label">{{localize "Sentinel.sentinelAbilities"}}</h4>
-            <div class="class">
-                <div class="skills-container">
-                    <div class="flexrow" data-skill="Max Tech Level">
-                        <label class="flex1" for="system.skills.maxTechLevel.value">
-                            {{localize "mcc.maxTechLevel"}}
-                        </label>
-                        <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
-                               value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
-                    </div>
+        <div class="tab" data-group="primary" data-tab="sentinel">
+            <div class="grid-container">
+                <div class="grid-col-span-12 dark-border">
+                    <div class="dark-title">{{localize "Sentinel.SentinelAbilities"}}</div>
+                    <div class="grid-tpl-two grid-row-gap-8 p-5">
+                        <div class="grid-tpl-max-25" data-skill="Max Tech Level">
+                            <label for="system.skills.maxTechLevel.value">
+                                {{localize "MCC.MaxTechLevel"}}
+                            </label>
+                            <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
+                                   value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
+                        </div>
 
-                    <div class="flexrow" data-skill="artifactDie">
-                        <label class="skill-check rollable" for="system.skills.artifactDie.value">
-                            {{localize "Sentinel.artifactDie"}}
-                        </label>
-                        <input type="text" id="system.skills.artifactDie.value" name="system.skills.artifactDie.value"
-                               value="{{system.skills.artifactDie.value}}" data-dtype="String"/>
-                    </div>
-                    <div class="flexrow" data-skill="aiRecognition">
-                        <label class="skill-check rollable" for="system.skills.aiRecognition.value">
-                            {{localize "mcc.aiRecognition"}}
-                        </label>
-                        <input type="text" id="system.skills.aiRecognition.value"
-                               name="system.skills.aiRecognition.value" value="{{system.skills.aiRecognition.value}}"
-                               data-dtype="String"/>
-                    </div>
-                    <div class="flexrow" data-skill="artifactCheck">
-                        <label class="skill-check rollable" for="system.skills.artifactCheck.value">
-                            {{localize "mcc.artifactCheck"}}</label>
-                        <input type="text" id="system.skills.artifactCheck.value"
-                               name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
-                               data-dtype="String"/>
+                        <div class="grid-tpl-max-25" data-skill="artifactDie">
+                            <label class="skill-check rollable" for="system.skills.artifactDie.value">
+                                {{localize "Sentinel.ArtifactDie"}}
+                            </label>
+                            <input type="text" id="system.skills.artifactDie.value" name="system.skills.artifactDie.value"
+                                   value="{{system.skills.artifactDie.value}}" data-dtype="String"/>
+                        </div>
+                        <div class="grid-tpl-max-25" data-skill="aiRecognition">
+                            <label class="skill-check rollable" for="system.skills.aiRecognition.value">
+                                {{localize "MCC.AIRecognition"}}
+                            </label>
+                            <input type="text" id="system.skills.aiRecognition.value"
+                                   name="system.skills.aiRecognition.value" value="{{system.skills.aiRecognition.value}}"
+                                   data-dtype="String"/>
+                        </div>
+                        <div class="grid-tpl-max-25" data-skill="artifactCheck">
+                            <label class="skill-check rollable" for="system.skills.artifactCheck.value">
+                                {{localize "MCC.ArtifactCheck"}}</label>
+                            <input type="text" id="system.skills.artifactCheck.value"
+                                   name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
+                                   data-dtype="String"/>
+                        </div>
+                        <div class="grid-tpl-max-auto grid-col-span-2" style="align-items: center;">
+                            <label for="system.class.archaicAlignment.value">
+                                {{localize "MCC.ArchaicAlignment"}}</label>
+                            <input type="text" id="system.class.archaicAlignment.value"
+                                   name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
+                                   data-dtype="String"/>
+                        </div>
+                        <ul class="data-font grid-col-span-2">
+                            <li>
+                                {{localize "MCC.Artifacts"}}
+                                <ul>
+                                    <li>{{localize "Sentinel.ArtifactsDesc"}}</li>
+                                    <li>{{localize "Sentinel.artifactWeaponsAnArmor"}}</li>
+                                </ul>
+                            </li>
+                            <li>
+                                {{localize "MCC.Luck"}}
+                                <ul>
+                                    <li>{{localize "Sentinel.DarwinianLuck"}}</li>
+                                </ul>
+                            </li>
+                            <li>
+                                {{localize "MCC.AI"}}
+                                <ul>
+                                    <li>{{localize "human.AIRecognition"}}</li>
+                                </ul>
+                            </li>
+                            <li>
+                                {{localize "DCC.Initiative"}}
+                                <ul>
+                                    <li>{{localize "Sentinel.Initiative"}}</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="deity flexrow" style="align-items: center;">
-                    <label class="flex1" for="system.class.archaicAlignment.value">
-                        {{localize "mcc.archaicAlignment"}}</label>
-                    <input class="flex2" type="text" id="system.class.archaicAlignment.value"
-                           name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
-                           data-dtype="String"/>
-                </div>
-                <ul class="class-note flexcol">
-                    <li>
-                        {{localize "mcc.artifacts"}}
-                        <ul>
-                            <li>{{localize "Sentinel.artifactsDesc"}}</li>
-                            <li>{{localize "Sentinel.artifactWeaponsAnArmor"}}</li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{localize "mcc.luck"}}
-                        <ul>
-                            <li>{{localize "Sentinel.darwinianLuck"}}</li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{localize "mcc.ai"}}
-                        <ul>
-                            <li>{{localize "human.aiRecognition"}}</li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{localize "DCC.Initiative"}}
-                        <ul>
-                            <li>{{localize "sentinel.initiative"}}</li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
         </div>
     </section>
