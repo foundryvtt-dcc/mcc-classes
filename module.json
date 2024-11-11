@@ -2,7 +2,7 @@
   "name": "mcc-classes",
   "title": "MCC Sheets",
   "description": "Sheets for Mutant Crawl Classics in FoundryVTT!",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "minimumCoreVersion": "12",
   "compatibility": {
     "maximum": "12",
