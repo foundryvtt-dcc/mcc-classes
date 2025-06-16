@@ -5,7 +5,8 @@
   "version": "0.1.18",
   "compatibility": {
     "maximum": "12",
-    "minimum": "12"
+    "minimum": "12",
+    "maximum": "12"
   },
   "authors": [
     {
