@@ -13,7 +13,8 @@ class ActorSheetShaman extends DCCActorSheet {
     static DEFAULT_OPTIONS = {
         classes: ['dcc', 'sheet', 'actor', 'pc', 'shaman'],
         position: {
-            height: 635
+            height: 635,
+            width: 583
         }
     }
 

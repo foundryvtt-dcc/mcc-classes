@@ -13,7 +13,8 @@ class ActorSheetPlantient extends DCCActorSheet {
     static DEFAULT_OPTIONS = {
         classes: ['dcc', 'sheet', 'actor', 'pc', 'plantient'],
         position: {
-            height: 635
+            height: 635,
+            width: 595,
         }
     }
 
@@ -96,7 +97,7 @@ class ActorSheetPlantient extends DCCActorSheet {
         if (!context.system.skills.artifactCheck) {
             this.actor.update({
                 'system.skills.artifactCheck': {
-                    label: 'Plantient.ArtifactCheck',
+                    label: 'MCC.ArtifactCheck',
                     value: '+0'
                 }
             })
