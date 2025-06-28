@@ -18,9 +18,42 @@ class ActorSheetShaman extends DCCActorSheet {
     }
 
     /** @inheritDoc */
+    static TABS = {
+        sheet: {
+            tabs: [
+                { id: 'character', group: 'sheet', label: 'DCC.Character' },
+                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
+                { id: 'shaman', group: 'sheet', label: 'MCC.Shaman' },
+                { id: 'spells', group: 'sheet', label: 'Shaman.Programs' },
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
+                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+            ],
+            initial: 'character'
+        }
+    }
+
+    /** @inheritDoc */
     static PARTS = {
-        form: {
-            template: 'modules/mcc-classes/templates/actor-sheet-shaman.html'
+        tabs: {
+            template: 'systems/dcc/templates/actor-partial-tabs.html'
+        },
+        character: {
+            template: 'systems/dcc/templates/actor-partial-pc-common.html'
+        },
+        equipment: {
+            template: 'systems/dcc/templates/actor-partial-pc-equipment.html'
+        },
+        shaman: {
+            template: 'modules/mcc-classes/templates/actor-partial-shaman.html'
+        },
+        spells: {
+            template: 'modules/mcc-classes/templates/actor-partial-shaman-programs.html'
+        },
+        skills: {
+            template: 'systems/dcc/templates/actor-partial-skills.html'
+        },
+        notes: {
+            template: 'systems/dcc/templates/actor-partial-pc-notes.html'
         }
     }
 

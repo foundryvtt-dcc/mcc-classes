@@ -18,9 +18,42 @@ class ActorSheetMutant extends DCCActorSheet {
     }
 
     /** @inheritDoc */
+    static TABS = {
+        sheet: {
+            tabs: [
+                { id: 'character', group: 'sheet', label: 'DCC.Character' },
+                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
+                { id: 'mutant', group: 'sheet', label: 'MCC.Mutant' },
+                { id: 'spells', group: 'sheet', label: 'MCC.Mutations' },
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
+                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+            ],
+            initial: 'character'
+        }
+    }
+
+    /** @inheritDoc */
     static PARTS = {
-        form: {
-            template: 'modules/mcc-classes/templates/actor-sheet-mutant.html'
+        tabs: {
+            template: 'systems/dcc/templates/actor-partial-tabs.html'
+        },
+        character: {
+            template: 'systems/dcc/templates/actor-partial-pc-common.html'
+        },
+        equipment: {
+            template: 'systems/dcc/templates/actor-partial-pc-equipment.html'
+        },
+        mutant: {
+            template: 'modules/mcc-classes/templates/actor-partial-mutant.html'
+        },
+        spells: {
+            template: 'modules/mcc-classes/templates/actor-partial-mutations.html'
+        },
+        skills: {
+            template: 'systems/dcc/templates/actor-partial-skills.html'
+        },
+        notes: {
+            template: 'systems/dcc/templates/actor-partial-pc-notes.html'
         }
     }
 

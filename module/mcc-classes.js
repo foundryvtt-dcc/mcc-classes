@@ -1,4 +1,4 @@
-/* global Actors */
+/* global foundry */
 
 import * as HealerSheets from './actor-sheets-healer.js';
 import * as MutantSheets from './actor-sheets-mutant.js';
@@ -7,6 +7,9 @@ import * as SentinelSheets from './actor-sheets-sentinel.js';
 import * as ShamanSheets from './actor-sheets-shaman.js';
 import * as ManimalSheets from './actor-sheets-manimal.js';
 import * as PlantientSheets from './actor-sheets-plantient.js';
+
+const { Actors } = foundry.documents.collections
+const { loadTemplates } = foundry.applications.handlebars
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
