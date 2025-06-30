@@ -46,7 +46,7 @@ class ActorSheetHealer extends DCCActorSheet {
         healer: {
             template: 'modules/mcc-classes/templates/actor-partial-healer.html'
         },
-        spells: {
+        wizardSpells: {
             template: 'systems/dcc/templates/actor-partial-wizard-spells.html'
         },
         skills: {

@@ -46,7 +46,7 @@ class ActorSheetRover extends DCCActorSheet {
         rover: {
             template: 'modules/mcc-classes/templates/actor-partial-rover.html'
         },
-        spells: {
+        wizardSpells: {
             template: 'systems/dcc/templates/actor-partial-wizard-spells.html'
         },
         skills: {

@@ -46,7 +46,7 @@ class ActorSheetSentinel extends DCCActorSheet {
         sentinel: {
             template: 'modules/mcc-classes/templates/actor-partial-sentinel.html'
         },
-        spells: {
+        wizardSpells: {
             template: 'systems/dcc/templates/actor-partial-wizard-spells.html'
         },
         skills: {
