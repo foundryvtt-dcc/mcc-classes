@@ -19,15 +19,12 @@ class ActorSheetPlantient extends DCCActorSheet {
     }
 
     /** @inheritDoc */
-    static TABS = {
+    static CLASS_TABS = {
         sheet: {
             tabs: [
-                { id: 'character', group: 'sheet', label: 'DCC.Character' },
-                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
                 { id: 'plantient', group: 'sheet', label: 'MCC.Plantient' },
                 { id: 'spells', group: 'sheet', label: 'MCC.Mutations' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
-                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
         }
@@ -63,7 +60,8 @@ class ActorSheetPlantient extends DCCActorSheet {
         const context = await super._prepareContext(options)
         if (context.system.details.sheetClass !== 'Plantient') {
             this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Plantient')
+                'system.class.className': game.i18n.localize('MCC.Plantient'),
+                'system.config.showSkills' : true
             })
         }
 

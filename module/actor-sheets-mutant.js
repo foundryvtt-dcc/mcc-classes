@@ -18,15 +18,12 @@ class ActorSheetMutant extends DCCActorSheet {
     }
 
     /** @inheritDoc */
-    static TABS = {
+    static CLASS_TABS = {
         sheet: {
             tabs: [
-                { id: 'character', group: 'sheet', label: 'DCC.Character' },
-                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
                 { id: 'mutant', group: 'sheet', label: 'MCC.Mutant' },
                 { id: 'spells', group: 'sheet', label: 'MCC.Mutations' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
-                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
         }
@@ -63,7 +60,8 @@ class ActorSheetMutant extends DCCActorSheet {
 
         if (context.system.details.sheetClass !== 'Mutant') {
             this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Mutant')
+                'system.class.className': game.i18n.localize('MCC.Mutant'),
+                'system.config.showSkills' : true
             })
         }
 

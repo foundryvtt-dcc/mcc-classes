@@ -18,15 +18,12 @@ class ActorSheetHealer extends DCCActorSheet {
     }
 
     /** @inheritDoc */
-    static TABS = {
+    static CLASS_TABS = {
         sheet: {
             tabs: [
-                { id: 'character', group: 'sheet', label: 'DCC.Character' },
-                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
                 { id: 'healer', group: 'sheet', label: 'MCC.Healer' },
                 { id: 'spells', group: 'sheet', label: 'DCC.Spells' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
-                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
         }
@@ -62,7 +59,8 @@ class ActorSheetHealer extends DCCActorSheet {
         const context = await super._prepareContext(options)
         if (context.system.details.sheetClass !== 'Healer') {
             this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Healer')
+                'system.class.className': game.i18n.localize('MCC.Healer'),
+                'system.config.showSkills' : true
             })
         }
 

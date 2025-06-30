@@ -19,15 +19,12 @@ class ActorSheetShaman extends DCCActorSheet {
     }
 
     /** @inheritDoc */
-    static TABS = {
+    static CLASS_TABS = {
         sheet: {
             tabs: [
-                { id: 'character', group: 'sheet', label: 'DCC.Character' },
-                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
                 { id: 'shaman', group: 'sheet', label: 'MCC.Shaman' },
                 { id: 'spells', group: 'sheet', label: 'Shaman.Programs' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
-                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
         }
@@ -63,7 +60,8 @@ class ActorSheetShaman extends DCCActorSheet {
         const context = await super._prepareContext(options)
         if (context.system.details.sheetClass !== 'Shaman') {
             this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Shaman')
+                'system.class.className': game.i18n.localize('MCC.Shaman'),
+                'system.config.showSkills' : true
             })
         }
 

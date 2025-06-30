@@ -18,15 +18,12 @@ class ActorSheetManimal extends DCCActorSheet {
     }
 
     /** @inheritDoc */
-    static TABS = {
+    static CLASS_TABS = {
         sheet: {
             tabs: [
-                { id: 'character', group: 'sheet', label: 'DCC.Character' },
-                { id: 'equipment', group: 'sheet', label: 'DCC.Equipment' },
                 { id: 'manimal', group: 'sheet', label: 'MCC.Manimal' },
                 { id: 'spells', group: 'sheet', label: 'MCC.Mutations' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' },
-                { id: 'notes', group: 'sheet', label: 'DCC.Notes' }
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
         }
@@ -63,7 +60,8 @@ class ActorSheetManimal extends DCCActorSheet {
 
         if (context.system.details.sheetClass !== 'Manimal') {
             this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Manimal')
+                'system.class.className': game.i18n.localize('MCC.Manimal'),
+                'system.config.showSkills' : true
             })
         }
 
