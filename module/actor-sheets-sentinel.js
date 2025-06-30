@@ -22,7 +22,7 @@ class ActorSheetSentinel extends DCCActorSheet {
         sheet: {
             tabs: [
                 { id: 'sentinel', group: 'sheet', label: 'MCC.Sentinel' },
-                { id: 'spells', group: 'sheet', label: 'DCC.Spells' },
+                { id: 'wizardSpells', group: 'sheet', label: 'DCC.Spells' },
                 { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
