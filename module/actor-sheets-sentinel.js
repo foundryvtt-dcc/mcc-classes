@@ -22,7 +22,6 @@ class ActorSheetSentinel extends DCCActorSheet {
         sheet: {
             tabs: [
                 { id: 'sentinel', group: 'sheet', label: 'MCC.Sentinel' },
-                { id: 'wizardSpells', group: 'sheet', label: 'DCC.Spells' },
                 { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
@@ -42,9 +41,6 @@ class ActorSheetSentinel extends DCCActorSheet {
         },
         sentinel: {
             template: 'modules/mcc-classes/templates/actor-partial-sentinel.html'
-        },
-        wizardSpells: {
-            template: 'systems/dcc/templates/actor-partial-wizard-spells.html'
         },
         skills: {
             template: 'systems/dcc/templates/actor-partial-skills.html'
