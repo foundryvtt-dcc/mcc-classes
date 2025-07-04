@@ -13,7 +13,8 @@ class ActorSheetMutant extends DCCActorSheet {
     static DEFAULT_OPTIONS = {
         classes: ['dcc', 'sheet', 'actor', 'pc', 'mutant'],
         position: {
-            height: 635
+            height: 635,
+            width: 575
         }
     }
 

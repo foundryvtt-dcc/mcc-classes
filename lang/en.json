@@ -28,6 +28,7 @@
   "MCC.MutationCheck": "Mutation Check",
   "MCC.MutationName": "Mutation Name",
   "MCC.Mutations": "Mutations",
+  "MCC.MutationsTabHelp": "Drag and drop mutation items into this list.",
   "MCC.NaturalAttack": "Natural Attack",
   "MCC.Plantient": "Plantient",
   "MCC.PlantientSubType": "Plantient Subtype",
