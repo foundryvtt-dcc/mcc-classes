@@ -1,0 +1,76 @@
+<section class="tab plantient {{tabs.plantient.cssClass}}" data-tab="{{tabs.plantient.id}}" data-group="{{tabs.plantient.group}}">
+    {{!-- Hidden inputs to reflect the sheet class and force standard crit range --}}
+    <input type="hidden" id="system.details.sheetClass" name="system.details.sheetClass" value="Plantient" data-dtype="String"/>
+    <input type="hidden" id="system.details.critRange" name="system.details.critRange" value="20" data-dtype="Number"/>
+    
+    <div class="grid-container">
+        <div class="grid-col-span-12 dark-border">
+            <div class="box-title">{{localize "Plantient.PlantientAbilities"}}</div>
+            <div class="grid-tpl-two grid-row-gap-8 p-5">
+                <div class="grid-tpl-max-25" data-skill="maxTechLevel">
+                    <label for="system.skills.maxTechLevel.value">
+                        {{localize "MCC.MaxTechLevel"}}
+                    </label>
+                    <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
+                           value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
+                </div>
+                <div class="grid-tpl-max-25" data-skill="artifactCheck">
+                    <label class="skill-check rollable" for="system.skills.artifactCheck.value"
+                           data-action="rollSkillCheck" data-drag="true" data-drag-action="skill">
+                        {{localize "MCC.ArtifactCheck"}}
+                    </label>
+                    <input type="text" id="system.skills.artifactCheck.value"
+                           name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
+                           data-dtype="String"/>
+                </div>
+                <input type="hidden" id="system.class.spellCheckAbility" name="system.class.spellCheckAbility" value="">
+                <div class="grid-tpl-max-25" data-ability="">
+                    <label class="spell-check rollable" for="system.class.spellCheck"
+                           data-action="rollSpellCheck" data-drag="true" data-drag-action="spellCheck">
+                        {{localize "MCC.MutationCheck"}}
+                    </label>
+                    <input type="text" id="system.class.spellCheck" name="system.class.spellCheck"
+                           value="{{numberFormat system.class.spellCheck decimals=0 sign=true}}"
+                           data-dtype="String"/>
+                </div>
+                <div class="grid-tpl-max-auto grid-col-span-2" style="align-items: center;">
+                    <label style="align-items: center;" for="system.class.archaicAlignment.value">
+                        {{localize "MCC.ArchaicAlignment"}}
+                    </label>
+                    <input type="text" id="system.class.archaicAlignment.value"
+                           name="system.class.archaicAlignment.value" value="{{system.class.archaicAlignment.value}}"
+                           data-dtype="String"/>
+                </div>
+                <div class="grid-tpl-max-auto grid-col-span-2" style="align-items: center;">
+                    <label for="system.class.plantientSubType.value">
+                        {{localize "MCC.PlantientSubType"}}
+                    </label>
+                    <input type="text" id="system.class.plantientSubType.value"
+                           name="system.class.plantientSubType.value" value="{{system.class.plantientSubType.value}}"
+                           data-dtype="String"/>
+                </div>
+
+                <ul class="class-note flexcol">
+                    <li>
+                        {{localize "MCC.NaturalAttack"}}
+                        <ul>
+                            <li>{{localize "Plantient.NaturalAttackDesc"}}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        {{localize "Plantient.FragrancePheromones"}}
+                        <ul>
+                            <li>{{localize "Plantient.FragrancePheromonesDesc"}}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        {{localize "Plantient.CantSeeTheForestForTheTrees"}}
+                        <ul>
+                            <li>{{localize "Plantient.CantSeeTheForestForTheTreesDesc"}}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

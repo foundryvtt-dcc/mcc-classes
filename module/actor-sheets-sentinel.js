@@ -5,25 +5,63 @@
 import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
 
 /**
- * Extend the zero-level/NPC sheet for MCC Sentinel
+ * Extend the DCC actor sheet for MCC Sentinel
  * @extends {DCCActorSheet}
  */
 class ActorSheetSentinel extends DCCActorSheet {
-    static height = 635
+    /** @inheritDoc */
+    static DEFAULT_OPTIONS = {
+        classes: ['dcc', 'sheet', 'actor', 'pc', 'sentinel'],
+        position: {
+            height: 635
+        }
+    }
+
+    /** @inheritDoc */
+    static CLASS_TABS = {
+        sheet: {
+            tabs: [
+                { id: 'sentinel', group: 'sheet', label: 'MCC.Sentinel' },
+                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
+            ],
+            initial: 'character'
+        }
+    }
+
+    /** @inheritDoc */
+    static PARTS = {
+        tabs: {
+            template: 'systems/dcc/templates/actor-partial-tabs.html'
+        },
+        character: {
+            template: 'systems/dcc/templates/actor-partial-pc-common.html'
+        },
+        equipment: {
+            template: 'systems/dcc/templates/actor-partial-pc-equipment.html'
+        },
+        sentinel: {
+            template: 'modules/mcc-classes/templates/actor-partial-sentinel.html'
+        },
+        skills: {
+            template: 'systems/dcc/templates/actor-partial-skills.html'
+        },
+        notes: {
+            template: 'systems/dcc/templates/actor-partial-pc-notes.html'
+        }
+    }
 
     /** @override */
-    async getData(options) {
-        const data = await super.getData(options)
-        this.options.template = 'modules/mcc-classes/templates/actor-sheet-sentinel.html'
-        this.options.classes = ['dcc', 'sheet', 'actor', 'pc']
-        if (data.system.details.sheetClass !== 'Sentinel') {
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options)
+        if (context.system.details.sheetClass !== 'Sentinel') {
             this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Sentinel')
+                'system.class.className': game.i18n.localize('MCC.Sentinel'),
+                'system.config.showSkills' : true
             })
         }
 
         // Add in Sentinel specific data if missing
-        if (!data.system.skills.artifactDie) {
+        if (!context.system.skills.artifactDie) {
             this.actor.update({
                 'system.skills.artifactDie': {
                     label: 'Sentinel.ArtifactDie',
@@ -31,7 +69,7 @@ class ActorSheetSentinel extends DCCActorSheet {
                 }
             })
         }
-        if (!data.system.skills.aiRecognition) {
+        if (!context.system.skills.aiRecognition) {
             this.actor.update({
                 'system.skills.aiRecognition': {
                     label: 'MCC.AIRecognition',
@@ -39,7 +77,7 @@ class ActorSheetSentinel extends DCCActorSheet {
                 }
             })
         }
-        if (!data.system.class.archaicAlignment) {
+        if (!context.system.class.archaicAlignment) {
             this.actor.update({
                 'system.class.archaicAlignment': {
                     label: 'MCC.ArchaicAlignment',
@@ -47,7 +85,7 @@ class ActorSheetSentinel extends DCCActorSheet {
                 }
             })
         }
-        if (!data.system.skills.artifactCheck) {
+        if (!context.system.skills.artifactCheck) {
             this.actor.update({
                 'system.skills.artifactCheck': {
                     label: 'MCC.ArtifactCheck',
@@ -55,7 +93,7 @@ class ActorSheetSentinel extends DCCActorSheet {
                 }
             })
         }
-        if (!data.system.skills.maxTechLevel) {
+        if (!context.system.skills.maxTechLevel) {
             this.actor.update({
                 'system.skills.maxTechLevel': {
                     label: 'MCC.MaxTechLevel',
@@ -63,7 +101,7 @@ class ActorSheetSentinel extends DCCActorSheet {
                 }
             })
         }
-        return data
+        return context
     }
 }
 

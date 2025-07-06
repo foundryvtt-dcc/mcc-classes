@@ -25,3 +25,7 @@ a[data-tab='sentinel']::before {
 a[data-tab='shaman']::before {
     content: '\f3ed';
 }
+
+#system\.class\.archaicAlignment\.value {
+    height: 25px;
+}
