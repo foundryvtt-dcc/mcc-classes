@@ -1,12 +1,13 @@
 /* global foundry */
 
-import * as HealerSheets from './actor-sheets-healer.js';
-import * as MutantSheets from './actor-sheets-mutant.js';
-import * as RoverSheets from './actor-sheets-rover.js';
-import * as SentinelSheets from './actor-sheets-sentinel.js';
-import * as ShamanSheets from './actor-sheets-shaman.js';
-import * as ManimalSheets from './actor-sheets-manimal.js';
-import * as PlantientSheets from './actor-sheets-plantient.js';
+import * as HealerSheets from './actor-sheets-healer.js'
+import * as MutantSheets from './actor-sheets-mutant.js'
+import * as RoverSheets from './actor-sheets-rover.js'
+import * as SentinelSheets from './actor-sheets-sentinel.js'
+import * as ShamanSheets from './actor-sheets-shaman.js'
+import * as ManimalSheets from './actor-sheets-manimal.js'
+import * as PlantientSheets from './actor-sheets-plantient.js'
+import { runMigrations } from './migrations.js'
 
 const { Actors } = foundry.documents.collections
 const { loadTemplates } = foundry.applications.handlebars
@@ -18,6 +19,15 @@ const { loadTemplates } = foundry.applications.handlebars
 Hooks.once('init', async function () {
     console.log(`MCC | Initializing Mutant Crawl Classics System`)
 
+    // Register module settings for migration tracking
+    game.settings.register('mcc-classes', 'lastMigrationVersion', {
+        name: 'Last Migration Version',
+        scope: 'world',
+        config: false,
+        type: String,
+        default: '0.0.0'
+    })
+
     // Register sheet application classes
     Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, {
         types: ['Player'],
@@ -27,7 +37,10 @@ Hooks.once('init', async function () {
         types: ['Player'],
         label: 'Mutant.ActorSheetMutant'
     })
-    Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover, {types: ['Player'], label: 'Rover.ActorSheetRover'})
+    Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover, {
+        types: ['Player'],
+        label: 'Rover.ActorSheetRover'
+    })
     Actors.registerSheet('mcc-sentinel', SentinelSheets.ActorSheetSentinel, {
         types: ['Player'],
         label: 'Sentinel.ActorSheetSentinel'
@@ -51,5 +64,14 @@ Hooks.once('init', async function () {
         'modules/mcc-classes/templates/actor-partial-shaman-programs.html'
     ]
     loadTemplates(templatePaths)
+})
+
+/* -------------------------------------------- */
+/*  Ready Hook - Run Migrations                 */
+/* -------------------------------------------- */
+
+Hooks.once('ready', async function () {
+    // Run any necessary data migrations
+    await runMigrations()
 })
 

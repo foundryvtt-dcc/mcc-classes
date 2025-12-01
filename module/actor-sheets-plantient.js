@@ -58,55 +58,55 @@ class ActorSheetPlantient extends DCCActorSheet {
     /** @override */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
-        if (context.system.details.sheetClass !== 'Plantient') {
-            this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Plantient'),
-                'system.config.showSkills' : true
-            })
-        }
+        const updates = {}
 
+        if (context.system.details.sheetClass !== 'Plantient') {
+            updates['system.class.className'] = game.i18n.localize('MCC.Plantient')
+            updates['system.config.showSkills'] = true
+            updates['system.details.sheetClass'] = 'Plantient'
+            updates['system.details.critRange'] = 20
+        }
 
         // Add in Plantient specific data if missing
         if (!context.system.class.spellCheckAbility) {
-            this.actor.update({
-                'system.class.spellCheckAbility': {
-                    label: 'Plantient.spellCheckAbility',
-                    value: 'Int'
-                }
-            })
+            updates['system.class.spellCheckAbility'] = {
+                label: 'Plantient.spellCheckAbility',
+                value: 'Int'
+            }
+        }
+        if (!context.system.skills.aiRecognition) {
+            updates['system.skills.aiRecognition'] = {
+                label: 'MCC.AIRecognition',
+                value: '-'
+            }
         }
         if (!context.system.class.archaicAlignment) {
-            this.actor.update({
-                'system.class.archaicAlignment': {
-                    label: 'MCC.ArchaicAlignment',
-                    value: 'Clan of Cog'
-                }
-            })
+            updates['system.class.archaicAlignment'] = {
+                label: 'MCC.ArchaicAlignment',
+                value: 'Clan of Cog'
+            }
         }
         if (!context.system.class.plantientSubType) {
-            this.actor.update({
-                'system.class.plantientSubType': {
-                    label: 'MCC.PlantientSubType',
-                    value: ''
-                }
-            })
+            updates['system.class.plantientSubType'] = {
+                label: 'MCC.PlantientSubType',
+                value: ''
+            }
         }
-
         if (!context.system.skills.artifactCheck) {
-            this.actor.update({
-                'system.skills.artifactCheck': {
-                    label: 'MCC.ArtifactCheck',
-                    value: '+0'
-                }
-            })
+            updates['system.skills.artifactCheck'] = {
+                label: 'MCC.ArtifactCheck',
+                value: '+0'
+            }
         }
         if (!context.system.skills.maxTechLevel) {
-            this.actor.update({
-                'system.skills.maxTechLevel': {
-                    label: 'MCC.MaxTechLevel',
-                    value: '0'
-                }
-            })
+            updates['system.skills.maxTechLevel'] = {
+                label: 'MCC.MaxTechLevel',
+                value: '0'
+            }
+        }
+
+        if (Object.keys(updates).length) {
+            this.actor.update(updates)
         }
         return context
     }

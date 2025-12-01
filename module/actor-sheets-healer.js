@@ -57,53 +57,50 @@ class ActorSheetHealer extends DCCActorSheet {
     /** @override */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
+        const updates = {}
+
         if (context.system.details.sheetClass !== 'Healer') {
-            this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Healer'),
-                'system.config.showSkills' : true
-            })
+            updates['system.class.className'] = game.i18n.localize('MCC.Healer')
+            updates['system.config.showSkills'] = true
+            updates['system.details.sheetClass'] = 'Healer'
+            updates['system.details.critRange'] = 20
+            updates['system.class.spellCheckAbility'] = 'per'
         }
 
         // Add in Healer specific data if missing
         if (!context.system.skills.naturopathy) {
-            this.actor.update({
-                'system.skills.naturopathy': {
-                    label: 'Healer.Naturopathy',
-                    value: '1d3 x2'
-                }
-            })
+            updates['system.skills.naturopathy'] = {
+                label: 'Healer.Naturopathy',
+                value: '1d3 x2'
+            }
         }
         if (!context.system.skills.aiRecognition) {
-            this.actor.update({
-                'system.skills.aiRecognition': {
-                    label: 'MCC.AIRecognition',
-                    value: '+2'
-                }
-            })
+            updates['system.skills.aiRecognition'] = {
+                label: 'MCC.AIRecognition',
+                value: '+2'
+            }
         }
         if (!context.system.class.archaicAlignment) {
-            this.actor.update({
-                'system.class.archaicAlignment': {
-                    label: 'MCC.ArchaicAlignment',
-                    value: 'Clan of Cog'
-                }
-            })
+            updates['system.class.archaicAlignment'] = {
+                label: 'MCC.ArchaicAlignment',
+                value: 'Clan of Cog'
+            }
         }
         if (!context.system.skills.artifactCheck) {
-            this.actor.update({
-                'system.skills.artifactCheck': {
-                    label: 'MCC.ArtifactCheck',
-                    value: '+0'
-                }
-            })
+            updates['system.skills.artifactCheck'] = {
+                label: 'MCC.ArtifactCheck',
+                value: '+0'
+            }
         }
         if (!context.system.skills.maxTechLevel) {
-            this.actor.update({
-                'system.skills.maxTechLevel': {
-                    label: 'MCC.MaxTechLevel',
-                    value: '0'
-                }
-            })
+            updates['system.skills.maxTechLevel'] = {
+                label: 'MCC.MaxTechLevel',
+                value: '0'
+            }
+        }
+
+        if (Object.keys(updates).length) {
+            this.actor.update(updates)
         }
         return context
     }

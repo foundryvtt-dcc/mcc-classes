@@ -57,62 +57,55 @@ class ActorSheetRover extends DCCActorSheet {
     /** @override */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
-        if (context.system.details.sheetClass !== 'Rover') {
-            this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Rover'),
-                'system.config.showSkills' : true
-            })
-        }
+        const updates = {}
 
+        if (context.system.details.sheetClass !== 'Rover') {
+            updates['system.class.className'] = game.i18n.localize('MCC.Rover')
+            updates['system.config.showSkills'] = true
+            updates['system.details.sheetClass'] = 'Rover'
+            updates['system.details.critRange'] = 20
+        }
 
         // Add in Rover specific data if missing
         if (!context.system.skills.doorsAndSecurity) {
-            this.actor.update({
-                'system.skills.doorsAndSecurity': {
-                    label: 'Rover.DoorsAndSecurity',
-                    value: '+1'
-                }
-            })
+            updates['system.skills.doorsAndSecurity'] = {
+                label: 'Rover.DoorsAndSecurity',
+                value: '+1'
+            }
         }
         if (!context.system.skills.aiRecognition) {
-            this.actor.update({
-                'system.skills.aiRecognition': {
-                    label: 'MCC.AIRecognition',
-                    value: '+2'
-                }
-            })
+            updates['system.skills.aiRecognition'] = {
+                label: 'MCC.AIRecognition',
+                value: '+2'
+            }
         }
         if (!context.system.class.archaicAlignment) {
-            this.actor.update({
-                'system.class.archaicAlignment': {
-                    label: 'MCC.ArchaicAlignment',
-                    value: 'Clan of Cog'
-                }
-            })
+            updates['system.class.archaicAlignment'] = {
+                label: 'MCC.ArchaicAlignment',
+                value: 'Clan of Cog'
+            }
         }
         if (!context.system.skills.artifactCheck) {
-            this.actor.update({
-                'system.skills.artifactCheck': {
-                    label: 'MCC.ArtifactCheck',
-                    value: '+0'
-                }
-            })
+            updates['system.skills.artifactCheck'] = {
+                label: 'MCC.ArtifactCheck',
+                value: '+0'
+            }
         }
-        if (!context.system.skills.roverMissleAttack) {
-            this.actor.update({
-                'system.skills.roverMissileAttack': {
-                    label: 'Rover.RoverMissileAttack',
-                    value: '+1'
-                }
-            })
+        if (!context.system.skills.roverMissileAttack) {
+            updates['system.skills.roverMissileAttack'] = {
+                label: 'Rover.RoverMissileAttack',
+                value: '+1'
+            }
         }
         if (!context.system.skills.maxTechLevel) {
-            this.actor.update({
-                'system.skills.maxTechLevel': {
-                    label: 'MCC.MaxTechLevel',
-                    value: '0'
-                }
-            })
+            updates['system.skills.maxTechLevel'] = {
+                label: 'MCC.MaxTechLevel',
+                value: '0'
+            }
+        }
+
+        if (Object.keys(updates).length) {
+            this.actor.update(updates)
         }
         return context
     }

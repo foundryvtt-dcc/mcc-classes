@@ -58,61 +58,56 @@ class ActorSheetShaman extends DCCActorSheet {
     /** @override */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
+        const updates = {}
+
         if (context.system.details.sheetClass !== 'Shaman') {
-            this.actor.update({
-                'system.class.className': game.i18n.localize('MCC.Shaman'),
-                'system.config.showSkills' : true
-            })
+            updates['system.class.className'] = game.i18n.localize('MCC.Shaman')
+            updates['system.config.showSkills'] = true
+            updates['system.details.sheetClass'] = 'Shaman'
+            updates['system.details.critRange'] = 20
+            updates['system.class.spellCheckAbility'] = 'int'
         }
 
         // Add in shaman specific data if missing
         if (!context.system.class.aiPatron) {
-            this.actor.update({
-                'system.class.aiPatron': {
-                    label: 'Shaman.AIPatron',
-                    value: ' '
-                }
-            })
+            updates['system.class.aiPatron'] = {
+                label: 'Shaman.AIPatron',
+                value: ' '
+            }
         }
         if (!context.system.skills.aiRecognition) {
-            this.actor.update({
-                'system.skills.aiRecognition': {
-                    label: 'MCC.AIRecognition',
-                    value: '+2'
-                }
-            })
+            updates['system.skills.aiRecognition'] = {
+                label: 'MCC.AIRecognition',
+                value: '+2'
+            }
         }
         if (!context.system.class.archaicAlignment) {
-            this.actor.update({
-                'system.class.archaicAlignment': {
-                    label: 'MCC.ArchaicAlignment',
-                    value: 'Clan of Cog'
-                }
-            })
+            updates['system.class.archaicAlignment'] = {
+                label: 'MCC.ArchaicAlignment',
+                value: 'Clan of Cog'
+            }
         }
         if (!context.system.skills.artifactCheck) {
-            this.actor.update({
-                'system.skills.artifactCheck': {
-                    label: 'MCC.ArtifactCheck',
-                    value: '+0'
-                }
-            })
+            updates['system.skills.artifactCheck'] = {
+                label: 'MCC.ArtifactCheck',
+                value: '+0'
+            }
         }
         if (!context.system.class.spellCheck) {
-            this.actor.update({
-                'system.class.spellCheck': {
-                    label: 'MCC.ProgramCheck',
-                    value: '+0'
-                }
-            })
+            updates['system.class.spellCheck'] = {
+                label: 'MCC.ProgramCheck',
+                value: '+0'
+            }
         }
         if (!context.system.skills.maxTechLevel) {
-            this.actor.update({
-                'system.skills.maxTechLevel': {
-                    label: 'MCC.MaxTechLevel',
-                    value: '0'
-                }
-            })
+            updates['system.skills.maxTechLevel'] = {
+                label: 'MCC.MaxTechLevel',
+                value: '0'
+            }
+        }
+
+        if (Object.keys(updates).length) {
+            this.actor.update(updates)
         }
         return context
     }

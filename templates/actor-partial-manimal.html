@@ -1,7 +1,4 @@
 <section class="tab manimal {{tabs.manimal.cssClass}}" data-tab="{{tabs.manimal.id}}" data-group="{{tabs.manimal.group}}">
-    {{!-- Hidden inputs to reflect the sheet class and force standard crit range --}}
-    <input type="hidden" id="system.details.sheetClass" name="system.details.sheetClass" value="Manimal" data-dtype="String"/>
-    <input type="hidden" id="system.details.critRange" name="system.details.critRange" value="20" data-dtype="Number"/>
     <div class="grid-container">
         <div class="grid-col-span-12 dark-border">
             <div class="box-title">{{localize "Manimal.ManimalAbilities"}}</div>
@@ -31,8 +28,6 @@
                            name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
                            data-dtype="String"/>
                 </div>
-                <input type="hidden" id="system.class.spellCheckAbility" name="system.class.spellCheckAbility"
-                       value="">
                 <div class="grid-tpl-max-25" data-ability="">
                     <label class="spell-check rollable" for="system.class.spellCheck"
                            data-action="rollSpellCheck" data-drag="true" data-drag-action="spellCheck">

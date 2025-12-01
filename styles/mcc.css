@@ -1,27 +1,9 @@
-a[data-tab='healer']::before {
-    content: '\f3ed';
-}
-
-a[data-tab='manimal']::before {
-    content: '\f3ed';
-}
-
-a[data-tab='mutant']::before {
-    content: '\f3ed';
-}
-
-a[data-tab='plantient']::before {
-    content: '\f3ed';
-}
-
-a[data-tab='rover']::before {
-    content: '\f3ed';
-}
-
-a[data-tab='sentinel']::before {
-    content: '\f3ed';
-}
-
+a[data-tab='healer']::before,
+a[data-tab='manimal']::before,
+a[data-tab='mutant']::before,
+a[data-tab='plantient']::before,
+a[data-tab='rover']::before,
+a[data-tab='sentinel']::before,
 a[data-tab='shaman']::before {
     content: '\f3ed';
 }
