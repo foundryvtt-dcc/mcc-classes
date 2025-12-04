@@ -1,6 +1,62 @@
-/* global foundry */
+/* global foundry, Hooks */
 
 import * as HealerSheets from './actor-sheets-healer.js'
+
+const { SchemaField, StringField } = foundry.data.fields
+
+/* -------------------------------------------- */
+/*  Schema Extensions                           */
+/* -------------------------------------------- */
+/**
+ * Extend the DCC base actor schema with MCC-specific fields.
+ * This hook runs during DCC system initialization, before module init.
+ */
+Hooks.on('dcc.defineBaseActorSchema', (schema) => {
+  // Add sheetClass to details if not already present (may be added by other modules)
+  if (!schema.details.fields.sheetClass) {
+    schema.details.fields.sheetClass = new StringField({ initial: '' })
+  }
+})
+
+/**
+ * Extend the DCC Player schema with MCC-specific class fields.
+ * This hook runs during DCC system initialization, before module init.
+ */
+Hooks.on('dcc.definePlayerSchema', (schema) => {
+  // MCC Archaic Alignment (used by multiple MCC classes)
+  schema.class.fields.archaicAlignment = new SchemaField({
+    label: new StringField({ initial: 'MCC.ArchaicAlignment' }),
+    value: new StringField({ initial: '' })
+  })
+
+  // MCC custom skills - these use the same structure as DCC skills
+  // Skills are added dynamically in each class sheet, but defining the schema
+  // ensures proper validation and defaults
+
+  // Shared MCC skills
+  schema.skills.fields.aiRecognition = new SchemaField({
+    label: new StringField({ initial: 'MCC.AIRecognition' }),
+    value: new StringField({ initial: '+0' })
+  })
+  schema.skills.fields.artifactCheck = new SchemaField({
+    label: new StringField({ initial: 'MCC.ArtifactCheck' }),
+    value: new StringField({ initial: '+0' })
+  })
+  schema.skills.fields.maxTechLevel = new SchemaField({
+    label: new StringField({ initial: 'MCC.MaxTechLevel' }),
+    value: new StringField({ initial: '0' })
+  })
+
+  // Rover skills
+  schema.skills.fields.doorsAndSecurity = new SchemaField({
+    label: new StringField({ initial: 'Rover.DoorsAndSecurity' }),
+    value: new StringField({ initial: '+0' })
+  })
+  schema.skills.fields.roverMissileAttack = new SchemaField({
+    label: new StringField({ initial: 'Rover.RoverMissileAttack' }),
+    value: new StringField({ initial: '+0' })
+  })
+})
 import * as MutantSheets from './actor-sheets-mutant.js'
 import * as RoverSheets from './actor-sheets-rover.js'
 import * as SentinelSheets from './actor-sheets-sentinel.js'
