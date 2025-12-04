@@ -5,6 +5,6 @@ Expands the [Dungeon Crawl Classics system](https://github.com/cyface/foundryvtt
 Manifest URL: https://raw.githubusercontent.com/foundryvtt-dcc/mcc-classes/main/module.json
 
 ##### Maintainers
+* Tim L. White (@cyface)
 * Christian Ovsenik (@algnc)
 * Steve Barnett (@mooped)
-* Tim L. White (@cyface)
