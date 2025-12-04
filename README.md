@@ -1,4 +1,4 @@
-# MCC sheets for Dungeon Crawl Classics in Foundry VTT
+# Mutant Crawl Classics (MCC) class sheets for the Dungeon Crawl Classics (dcc) FoundryVTT system
 
 Expands the [Dungeon Crawl Classics system](https://github.com/cyface/foundryvtt-dcc/) for the [Foundry Virtual Tabletop](https://foundryvtt.com) to include MCC character sheets.
 
