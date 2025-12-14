@@ -59,7 +59,7 @@ class ActorSheetSentinel extends DCCActorSheet {
             updates['system.class.className'] = game.i18n.localize('MCC.Sentinel')
             updates['system.config.showSkills'] = true
             updates['system.details.sheetClass'] = 'Sentinel'
-            updates['system.details.critRange'] = 20
+            updates['system.details.critRange'] = '20'
         }
 
         // Add in Sentinel specific data if missing

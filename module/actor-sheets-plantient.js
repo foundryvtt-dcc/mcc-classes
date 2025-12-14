@@ -64,7 +64,7 @@ class ActorSheetPlantient extends DCCActorSheet {
             updates['system.class.className'] = game.i18n.localize('MCC.Plantient')
             updates['system.config.showSkills'] = true
             updates['system.details.sheetClass'] = 'Plantient'
-            updates['system.details.critRange'] = 20
+            updates['system.details.critRange'] = '20'
         }
 
         // Add in Plantient specific data if missing

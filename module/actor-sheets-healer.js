@@ -63,7 +63,7 @@ class ActorSheetHealer extends DCCActorSheet {
             updates['system.class.className'] = game.i18n.localize('MCC.Healer')
             updates['system.config.showSkills'] = true
             updates['system.details.sheetClass'] = 'Healer'
-            updates['system.details.critRange'] = 20
+            updates['system.details.critRange'] = '20'
             updates['system.class.spellCheckAbility'] = 'per'
         }
 
