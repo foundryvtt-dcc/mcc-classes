@@ -63,7 +63,7 @@ class ActorSheetRover extends DCCActorSheet {
             updates['system.class.className'] = game.i18n.localize('MCC.Rover')
             updates['system.config.showSkills'] = true
             updates['system.details.sheetClass'] = 'Rover'
-            updates['system.details.critRange'] = '20'
+            updates['system.details.critRange'] = 20
         }
 
         // Add in Rover specific data if missing

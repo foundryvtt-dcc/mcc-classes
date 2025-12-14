@@ -64,7 +64,7 @@ class ActorSheetMutant extends DCCActorSheet {
             updates['system.class.className'] = game.i18n.localize('MCC.Mutant')
             updates['system.config.showSkills'] = true
             updates['system.details.sheetClass'] = 'Mutant'
-            updates['system.details.critRange'] = '20'
+            updates['system.details.critRange'] = 20
             updates['system.class.spellCheckAbility'] = ''
         }
 

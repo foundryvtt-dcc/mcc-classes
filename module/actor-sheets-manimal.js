@@ -63,7 +63,7 @@ class ActorSheetManimal extends DCCActorSheet {
             updates['system.class.className'] = game.i18n.localize('MCC.Manimal')
             updates['system.config.showSkills'] = true
             updates['system.details.sheetClass'] = 'Manimal'
-            updates['system.details.critRange'] = '20'
+            updates['system.details.critRange'] = 20
         }
 
         // Add in Manimal specific data if missing
