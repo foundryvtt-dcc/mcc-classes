@@ -29,9 +29,25 @@ Hooks.on('dcc.definePlayerSchema', (schema) => {
     value: new StringField({ initial: '' })
   })
 
+  // MCC class-specific fields
+  schema.class.fields.manimalSubType = new SchemaField({
+    label: new StringField({ initial: 'MCC.ManimalSubType' }),
+    value: new StringField({ initial: '' })
+  })
+  schema.class.fields.plantientSubType = new SchemaField({
+    label: new StringField({ initial: 'MCC.PlantientSubType' }),
+    value: new StringField({ initial: '' })
+  })
+  schema.class.fields.mutantAppearance = new SchemaField({
+    label: new StringField({ initial: 'MCC.MutantAppearance' }),
+    value: new StringField({ initial: '' })
+  })
+  schema.class.fields.aiPatron = new SchemaField({
+    label: new StringField({ initial: 'Shaman.AIPatron' }),
+    value: new StringField({ initial: '' })
+  })
+
   // MCC custom skills - these use the same structure as DCC skills
-  // Skills are added dynamically in each class sheet, but defining the schema
-  // ensures proper validation and defaults
 
   // Shared MCC skills
   schema.skills.fields.aiRecognition = new SchemaField({
@@ -45,6 +61,24 @@ Hooks.on('dcc.definePlayerSchema', (schema) => {
   schema.skills.fields.maxTechLevel = new SchemaField({
     label: new StringField({ initial: 'MCC.MaxTechLevel' }),
     value: new StringField({ initial: '0' })
+  })
+
+  // Healer skills
+  schema.skills.fields.naturopathy = new SchemaField({
+    label: new StringField({ initial: 'Healer.Naturopathy' }),
+    value: new StringField({ initial: '' })
+  })
+
+  // Mutant skills
+  schema.skills.fields.mutantHorror = new SchemaField({
+    label: new StringField({ initial: 'Mutant.MutantHorror' }),
+    value: new StringField({ initial: '1d3' })
+  })
+
+  // Sentinel skills
+  schema.skills.fields.artifactDie = new SchemaField({
+    label: new StringField({ initial: 'Sentinel.ArtifactDie' }),
+    value: new StringField({ initial: '1d3' })
   })
 
   // Rover skills
