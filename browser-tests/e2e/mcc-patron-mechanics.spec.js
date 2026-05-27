@@ -24,17 +24,21 @@ test.describe('MCC Patron Mechanics E2E', () => {
   let consoleErrors = []
 
   test.beforeAll(async () => {
-    let serverUp
+    let response
     try {
-      const response = await fetch('http://localhost:30000/', { signal: AbortSignal.timeout(5000) })
-      serverUp = response.ok
+      response = await fetch('http://localhost:30000/', { signal: AbortSignal.timeout(5000) })
     } catch {
-      serverUp = false
-    }
-    if (!serverUp) {
       throw new Error(
         'Could not connect to Foundry VTT at http://localhost:30000.\n\n' +
-        'Start Foundry on the v14 world (dcc + mcc-classes + mcc-core-book enabled), then re-run: npm test'
+        'Start Foundry and launch the v14 world (dcc + mcc-classes + mcc-core-book enabled), then re-run: npm test'
+      )
+    }
+    // A launched world serves /join; the setup/auth screens mean no world is
+    // active, so there is nothing to log into.
+    if (/\/(setup|auth|license)/.test(response.url)) {
+      throw new Error(
+        `Foundry is at the setup screen (${response.url}) — no world is launched.\n\n` +
+        'Launch the v14 world (dcc + mcc-classes + mcc-core-book enabled), then re-run: npm test'
       )
     }
   })
