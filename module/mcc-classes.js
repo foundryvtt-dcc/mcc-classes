@@ -1,6 +1,13 @@
-/* global foundry, Hooks */
+/* global foundry, Hooks, game, CONFIG */
 
 import * as HealerSheets from './actor-sheets-healer.js'
+import { registerMccContentSettings } from './settings.js'
+import {
+  registerMccTableHooks,
+  seedMccTablePacksFromSettings,
+  reportMccCoreBookStatus
+} from './mcc-tables.mjs'
+import { registerPatronTaintHandler } from './patron-taint.mjs'
 
 const { SchemaField, StringField } = foundry.data.fields
 
@@ -118,6 +125,19 @@ Hooks.once('init', async function () {
         default: '0.0.0'
     })
 
+    // Register the content-table compendium overrides and wire the
+    // `mcc.register*Pack` listeners. The listeners MUST exist before
+    // `dcc.ready`, when mcc-core-book broadcasts its table packs — so this
+    // runs at `init`. With no book installed the registries stay empty and
+    // rolls resolve against world tables or a configured compendium instead.
+    registerMccContentSettings()
+    registerMccTableHooks()
+
+    // Patron Taint: roll a patron's 1d6 taint table on a natural 1 of an
+    // Invoke Patron AI check, via the DCC `dcc.afterSpellCheckResult` hook.
+    // Registered at init so the listener is live before any cast.
+    registerPatronTaintHandler()
+
     // Register sheet application classes
     Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, {
         types: ['Player'],
@@ -160,8 +180,27 @@ Hooks.once('init', async function () {
 /*  Ready Hook - Run Migrations                 */
 /* -------------------------------------------- */
 
+/* -------------------------------------------- */
+/*  dcc.ready — Seed Content Tables             */
+/* -------------------------------------------- */
+
+Hooks.once('dcc.ready', async function () {
+    // Seed each table registry from its world setting. Runs alongside the
+    // mcc-core-book broadcast (same hook); order between the two does not
+    // matter — both just `addPack` into the shared CONFIG.MCC.*Packs.
+    seedMccTablePacksFromSettings()
+})
+
+/* -------------------------------------------- */
+/*  Ready Hook - Run Migrations                 */
+/* -------------------------------------------- */
+
 Hooks.once('ready', async function () {
     // Run any necessary data migrations
     await runMigrations()
+
+    // Diagnostic: confirm the book → listener → registry wiring (or note its
+    // absence) so a misconfigured world is obvious in the console.
+    reportMccCoreBookStatus()
 })
 
