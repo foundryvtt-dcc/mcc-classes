@@ -8,6 +8,7 @@ import {
   reportMccCoreBookStatus
 } from './mcc-tables.mjs'
 import { registerPatronTaintHandler } from './patron-taint.mjs'
+import { registerGlowburnHandler } from './glowburn.mjs'
 
 const { SchemaField, StringField } = foundry.data.fields
 
@@ -137,6 +138,11 @@ Hooks.once('init', async function () {
     // Invoke Patron AI check, via the DCC `dcc.afterSpellCheckResult` hook.
     // Registered at init so the listener is live before any cast.
     registerPatronTaintHandler()
+
+    // Glowburn: when a shaman burns ability points (spellburn) while running a
+    // patron program, roll that patron's 1d4 manifestation table — keyed off
+    // the `spellburn` amount the same hook surfaces.
+    registerGlowburnHandler()
 
     // Register sheet application classes
     Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, {
