@@ -19,6 +19,11 @@ import { resolveMccTable } from './mcc-tables.mjs'
  * manifestation table — those items carry no patron flag, so they're correctly
  * skipped. `Glowburn: <PATRON>` resolves world-tables-first via
  * `resolveMccTable`, so a judge can supply their own without the mcc-core-book.
+ *
+ * Recovery of glowburned ability points (one point per day of non-use, per the
+ * book) is intentionally NOT automated — it's left to the judge, the same way
+ * DCC leaves spellburn recovery to play. This handler only fires the
+ * manifestation roll.
  */
 
 /**

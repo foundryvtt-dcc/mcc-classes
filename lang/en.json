@@ -1,4 +1,5 @@
 {
+  "DCC.RollModifierSpellburnTerm": "Glowburn",
   "Healer.ActorSheetHealer": "Healer",
   "Healer.ArtifactMedical":  "Healers using medical artifacts increase their die type by one.",
   "Healer.ArtifactsDesc": "Natural affinity for understanding the artifacts of the ancients",
