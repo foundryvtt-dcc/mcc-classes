@@ -22,7 +22,6 @@ class ActorSheetRover extends DCCActorSheet {
         sheet: {
             tabs: [
                 { id: 'rover', group: 'sheet', label: 'MCC.Rover' },
-                { id: 'spells', group: 'sheet', label: 'DCC.Spells' },
                 { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
             ],
             initial: 'character'
@@ -42,9 +41,6 @@ class ActorSheetRover extends DCCActorSheet {
         },
         rover: {
             template: 'modules/mcc-classes/templates/actor-partial-rover.html'
-        },
-        wizardSpells: {
-            template: 'systems/dcc/templates/actor-partial-wizard-spells.html'
         },
         skills: {
             template: 'systems/dcc/templates/actor-partial-skills.html'
@@ -85,11 +81,18 @@ class ActorSheetRover extends DCCActorSheet {
                 value: 'Clan of Cog'
             }
         }
+        // Artifact check = 1d20 + INT mod + class bonus − CM per book Ch.7. The
+        // `ability: 'int'` binding is what makes DCC's _resolveSkillCheck add the
+        // INT mod (actor.js:1540). New actors get the full default; existing
+        // actors get .ability patched in without clobbering custom values.
         if (!context.system.skills.artifactCheck) {
             updates['system.skills.artifactCheck'] = {
                 label: 'MCC.ArtifactCheck',
-                value: '+0'
+                value: '+0',
+                ability: 'int'
             }
+        } else if (context.system.skills.artifactCheck.ability !== 'int') {
+            updates['system.skills.artifactCheck.ability'] = 'int'
         }
         if (!context.system.skills.roverMissileAttack) {
             updates['system.skills.roverMissileAttack'] = {

@@ -67,12 +67,13 @@ class ActorSheetPlantient extends DCCActorSheet {
             updates['system.details.critRange'] = 20
         }
 
-        // Add in Plantient specific data if missing
-        if (!context.system.class.spellCheckAbility) {
-            updates['system.class.spellCheckAbility'] = {
-                label: 'Plantient.spellCheckAbility',
-                value: 'Int'
-            }
+        // Add in Plantient specific data if missing.
+        // spellCheckAbility is '' (scalar empty string) per book Ch.3: a mutation
+        // check is action die + class level only, with no ability mod. DCC's
+        // computeSpellCheck (systems/dcc/module/actor.js) suppresses the ability
+        // mod when this is falsy. Matches the Mutant sheet's pattern.
+        if (context.system.class.spellCheckAbility !== '') {
+            updates['system.class.spellCheckAbility'] = ''
         }
         if (!context.system.skills.aiRecognition) {
             updates['system.skills.aiRecognition'] = {
@@ -92,11 +93,18 @@ class ActorSheetPlantient extends DCCActorSheet {
                 value: ''
             }
         }
+        // Artifact check = 1d20 + INT mod + class bonus − CM per book Ch.7. The
+        // `ability: 'int'` binding is what makes DCC's _resolveSkillCheck add the
+        // INT mod (actor.js:1540). New actors get the full default; existing
+        // actors get .ability patched in without clobbering custom values.
         if (!context.system.skills.artifactCheck) {
             updates['system.skills.artifactCheck'] = {
                 label: 'MCC.ArtifactCheck',
-                value: '+0'
+                value: '+0',
+                ability: 'int'
             }
+        } else if (context.system.skills.artifactCheck.ability !== 'int') {
+            updates['system.skills.artifactCheck.ability'] = 'int'
         }
         if (!context.system.skills.maxTechLevel) {
             updates['system.skills.maxTechLevel'] = {
