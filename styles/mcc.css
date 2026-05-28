@@ -11,3 +11,33 @@ a[data-tab='shaman']::before {
 #system\.class\.archaicAlignment\.value {
     height: 25px;
 }
+
+/* --------------------------------------------------------------------------
+ * MCC typography
+ *
+ * The DCC system styles every heading through the `--system-heading-font`
+ * variable (default 'Duvall'). MCC sheets get the Mutant Crawl Classics print
+ * identity by overriding that variable, scoped to the 7 MCC class sheets so
+ * DCC sheets are untouched when both modules load:
+ *   - Titles / tabs / .heading-font  -> Destroy Earth Rough BB (book display)
+ *   - Sub-section headers (.box-title) -> Cooper Black (book secondary display)
+ *   - Body / data text -> Book Antiqua (already the DCC --system-data-font)
+ *
+ * Only Destroy Earth Rough BB is shipped here; Cooper Black and Book Antiqua
+ * are already provided by the DCC system's @font-face (fonts/Cooper.otf,
+ * Book-Antiqua.otf), so they are referenced rather than re-bundled.
+ * -------------------------------------------------------------------------- */
+
+@font-face {
+    font-family: 'Destroy Earth Rough BB';
+    src: url('fonts/DestroyEarthRoughBB.otf') format('opentype');
+    font-display: swap;
+}
+
+.dcc.sheet:is(.healer, .manimal, .mutant, .plantient, .rover, .sentinel, .shaman) {
+    --system-heading-font: 'Destroy Earth Rough BB', 'Cooper Black', serif;
+}
+
+.dcc.sheet:is(.healer, .manimal, .mutant, .plantient, .rover, .sentinel, .shaman) .box-title {
+    font-family: 'Cooper Black', serif;
+}

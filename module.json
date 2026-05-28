@@ -1,7 +1,7 @@
 {
   "id": "mcc-classes",
-  "title": "MCC Sheets",
-  "description": "Sheets for Mutant Crawl Classics in FoundryVTT!",
+  "title": "Mutant Crawl Classics (MCC) Class Character Sheets",
+  "description": "Character Sheets for Mutant Crawl Classics in FoundryVTT!",
   "version": "1.1.0",
   "compatibility": {
     "minimum": "14",
@@ -17,6 +17,9 @@
     },
     {
       "name": "Christian Ovsenik"
+    },
+    {
+      "name": "Tim L. White"
     }
   ],
   "relationships": {
