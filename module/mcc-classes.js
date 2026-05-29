@@ -55,6 +55,24 @@ Hooks.on('dcc.definePlayerSchema', (schema) => {
     value: new StringField({ initial: '' })
   })
 
+  // §9.2 relocations — these are class-metadata modifier dice / caps, NOT
+  // rollable skills, so they live on system.class. The Player data model only
+  // persists fields it has a registered slot for (system.skills /
+  // system.class are SchemaFields), so they MUST be declared here or the
+  // values silently vanish on save / level-up / import.
+  schema.class.fields.maxTechLevel = new SchemaField({ // §9.2b (was system.skills)
+    label: new StringField({ initial: 'MCC.MaxTechLevel' }),
+    value: new StringField({ initial: '0' })
+  })
+  schema.class.fields.artifactDie = new SchemaField({ // §9.2c — Sentinel (was system.skills)
+    label: new StringField({ initial: 'Sentinel.ArtifactDie' }),
+    value: new StringField({ initial: '1d3' })
+  })
+  schema.class.fields.mutantHorror = new SchemaField({ // §9.2a — Mutant display die (was system.skills)
+    label: new StringField({ initial: 'Mutant.MutantHorror' }),
+    value: new StringField({ initial: '1d3' })
+  })
+
   // MCC custom skills - these use the same structure as DCC skills
 
   // Shared MCC skills
@@ -62,13 +80,14 @@ Hooks.on('dcc.definePlayerSchema', (schema) => {
     label: new StringField({ initial: 'MCC.AIRecognition' }),
     value: new StringField({ initial: '+0' })
   })
+  // artifactCheck carries an `ability` slot (§9.1c): book Ch.7 makes the
+  // artifact check 1d20 + INT mod + class bonus, and DCC's _resolveSkillCheck
+  // only adds the ability mod when skill.ability is set. Without this slot the
+  // INT binding is dropped by the data model.
   schema.skills.fields.artifactCheck = new SchemaField({
     label: new StringField({ initial: 'MCC.ArtifactCheck' }),
+    ability: new StringField({ initial: 'int' }),
     value: new StringField({ initial: '+0' })
-  })
-  schema.skills.fields.maxTechLevel = new SchemaField({
-    label: new StringField({ initial: 'MCC.MaxTechLevel' }),
-    value: new StringField({ initial: '0' })
   })
 
   // Healer skills
@@ -77,26 +96,18 @@ Hooks.on('dcc.definePlayerSchema', (schema) => {
     value: new StringField({ initial: '' })
   })
 
-  // Mutant skills
-  schema.skills.fields.mutantHorror = new SchemaField({
-    label: new StringField({ initial: 'Mutant.MutantHorror' }),
-    value: new StringField({ initial: '1d3' })
-  })
-
-  // Sentinel skills
-  schema.skills.fields.artifactDie = new SchemaField({
-    label: new StringField({ initial: 'Sentinel.ArtifactDie' }),
-    value: new StringField({ initial: '1d3' })
-  })
-
   // Rover skills
   schema.skills.fields.doorsAndSecurity = new SchemaField({
     label: new StringField({ initial: 'Rover.DoorsAndSecurity' }),
     value: new StringField({ initial: '+0' })
   })
-  schema.skills.fields.roverMissileAttack = new SchemaField({
-    label: new StringField({ initial: 'Rover.RoverMissileAttack' }),
-    value: new StringField({ initial: '+0' })
+
+  // Plantient — Hide in Greenery is a percentile (roll-under) chance, not a
+  // d20 skill check (§9.2e). Stored as a bare number string; the custom
+  // rollHideInGreenery handler rolls 1d100 against it.
+  schema.skills.fields.hideInGreenery = new SchemaField({
+    label: new StringField({ initial: 'Plantient.HideInGreenery' }),
+    value: new StringField({ initial: '50' })
   })
 })
 import * as MutantSheets from './actor-sheets-mutant.js'
