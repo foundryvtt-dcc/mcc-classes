@@ -1,16 +1,21 @@
 /* global game, Roll, ChatMessage, ui, CONFIG */
 
 /**
- * MCC Healer character sheet overrides
+ * MCC Healer character sheet.
+ *
+ * Thin DCCSheet subclass — schema fields, parts/tabs, and first-open
+ * identity defaults are registered through the DCC extension API in
+ * `mcc-class-data.mjs`. This sheet keeps its DEFAULT_OPTIONS, the
+ * Naturopathy actions, and a slim `_prepareContext` for the §9.3a pool
+ * seeding + §9.2 migration.
  */
 
-import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
+import { DCCSheet } from '/systems/dcc/module/actor-sheets-dcc.js'
 
 /**
- * Extend the DCC actor sheet for MCC Healer
- * @extends {DCCActorSheet}
+ * @extends {DCCSheet}
  */
-class ActorSheetHealer extends DCCActorSheet {
+class ActorSheetHealer extends DCCSheet {
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
         classes: ['dcc', 'sheet', 'actor', 'pc', 'healer'],
@@ -18,72 +23,28 @@ class ActorSheetHealer extends DCCActorSheet {
             height: 635
         },
         // §9.3a: Naturopathy is a per-day healing pool, not a d20 skill check, so
-        // it gets its own handlers. ApplicationV2 deep-merges these with
-        // DCCActorSheet's actions, so the parent's rollSkillCheck etc. stay live.
+        // it gets its own handlers. ApplicationV2 deep-merges these with the base
+        // actions, so the parent's rollSkillCheck etc. stay live.
         actions: {
             rollNaturopathy: this.#rollNaturopathy,
             resetNaturopathy: this.#resetNaturopathy
         }
     }
 
+    /** @inheritDoc */
+    static CLASS_ID = 'healer'
+
     // §9.3a: Healer Naturopathy healing die by class level (book Table 2-3),
     // indexed L1..L10. Uses-per-day is the simpler "2× class level" formula
     // (book Ch.2 "2x per day per level"). Both are emitted canonically by
     // mcc-core-book's mcc-class-level-data on create / level-up / import; this
-    // table only reseeds legacy actors whose pool predates the structured shape
-    // (the old single-string `value` has no schema slot, so it can't be read
-    // back to migrate — level + this table fully reconstruct the canonical pool).
+    // table only reseeds legacy actors whose pool predates the structured shape.
     static NATUROPATHY_DICE = ['1d3', '1d4', '1d5', '1d6', '1d7', '1d8', '1d10', '1d12', '1d14', '1d16']
-
-    /** @inheritDoc */
-    static CLASS_TABS = {
-        sheet: {
-            tabs: [
-                { id: 'healer', group: 'sheet', label: 'MCC.Healer' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
-            ],
-            initial: 'character'
-        }
-    }
-
-    /** @inheritDoc */
-    static PARTS = {
-        tabs: {
-            template: 'systems/dcc/templates/actor-partial-tabs.html'
-        },
-        character: {
-            template: 'systems/dcc/templates/actor-partial-pc-common.html'
-        },
-        equipment: {
-            template: 'systems/dcc/templates/actor-partial-pc-equipment.html'
-        },
-        healer: {
-            template: 'modules/mcc-classes/templates/actor-partial-healer.html'
-        },
-        skills: {
-            template: 'systems/dcc/templates/actor-partial-skills.html'
-        },
-        notes: {
-            template: 'systems/dcc/templates/actor-partial-pc-notes.html'
-        }
-    }
 
     /** @override */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
         const updates = {}
-
-        if (context.system.details.sheetClass !== 'Healer') {
-            updates['system.class.className'] = game.i18n.localize('MCC.Healer')
-            updates['system.config.showSkills'] = true
-            updates['system.details.sheetClass'] = 'Healer'
-            updates['system.details.critRange'] = 20
-        }
-        // Healers have no caster mechanic per book Ch.2 — Naturopathy is a skill,
-        // not a spell — so we deliberately do NOT assign spellCheckAbility here.
-        // Existing actors created before §9.1b may still carry the vestigial
-        // 'per' value; it's cosmetic (Healers never roll a spell check) and
-        // gets cleared on any deliberate field reset.
 
         // §9.3a: seed the Naturopathy pool from class level whenever it's
         // unpopulated (usesPerDay falsy). This both initializes new Healers and
@@ -100,40 +61,12 @@ class ActorSheetHealer extends DCCActorSheet {
             updates['system.skills.naturopathy.usesPerDay'] = level * 2
             updates['system.skills.naturopathy.usesRemaining'] = level * 2
         }
-        if (!context.system.skills.aiRecognition) {
-            updates['system.skills.aiRecognition'] = {
-                label: 'MCC.AIRecognition',
-                value: '+2'
-            }
-        }
-        if (!context.system.class.archaicAlignment) {
-            updates['system.class.archaicAlignment'] = {
-                label: 'MCC.ArchaicAlignment',
-                value: 'Clan of Cog'
-            }
-        }
-        // Artifact check = 1d20 + INT mod + class bonus − CM per book Ch.7. The
-        // `ability: 'int'` binding is what makes DCC's _resolveSkillCheck add the
-        // INT mod (actor.js:1540). New actors get the full default; existing
-        // actors get .ability patched in without clobbering custom values.
-        if (!context.system.skills.artifactCheck) {
-            updates['system.skills.artifactCheck'] = {
-                label: 'MCC.ArtifactCheck',
-                value: '+0',
-                ability: 'int'
-            }
-        } else if (context.system.skills.artifactCheck.ability !== 'int') {
+        // §9.1c: ensure the artifact check carries the INT binding. Patch existing
+        // actors only.
+        if (context.system.skills.artifactCheck && context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may
-        // attempt), not a rollable check — it belongs in system.class, not
-        // system.skills. Migrate existing actors off the old skills location.
-        if (!context.system.class.maxTechLevel) {
-            updates['system.class.maxTechLevel'] = {
-                label: 'MCC.MaxTechLevel',
-                value: context.system.skills.maxTechLevel?.value ?? '0'
-            }
-        }
+        // §9.2b: migrate existing actors off the old system.skills.maxTechLevel.
         if (context.system.skills.maxTechLevel) {
             updates['system.skills.-=maxTechLevel'] = null
         }

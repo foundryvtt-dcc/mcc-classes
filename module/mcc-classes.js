@@ -1,140 +1,60 @@
-/* global foundry, Hooks, game, CONFIG */
+/* global foundry, Hooks, game */
 
 import * as HealerSheets from './actor-sheets-healer.js'
-import { registerMccContentSettings } from './settings.js'
-import {
-  registerMccTableHooks,
-  seedMccTablePacksFromSettings,
-  reportMccCoreBookStatus
-} from './mcc-tables.mjs'
-import { registerPatronTaintHandler } from './patron-taint.mjs'
-import { registerGlowburnHandler } from './glowburn.mjs'
-
-const { SchemaField, StringField, NumberField } = foundry.data.fields
-
-/* -------------------------------------------- */
-/*  Schema Extensions                           */
-/* -------------------------------------------- */
-/**
- * Extend the DCC base actor schema with MCC-specific fields.
- * This hook runs during DCC system initialization, before module init.
- */
-Hooks.on('dcc.defineBaseActorSchema', (schema) => {
-  // Add sheetClass to details if not already present (may be added by other modules)
-  if (!schema.details.fields.sheetClass) {
-    schema.details.fields.sheetClass = new StringField({ initial: '' })
-  }
-})
-
-/**
- * Extend the DCC Player schema with MCC-specific class fields.
- * This hook runs during DCC system initialization, before module init.
- */
-Hooks.on('dcc.definePlayerSchema', (schema) => {
-  // MCC Archaic Alignment (used by multiple MCC classes)
-  schema.class.fields.archaicAlignment = new SchemaField({
-    label: new StringField({ initial: 'MCC.ArchaicAlignment' }),
-    value: new StringField({ initial: '' })
-  })
-
-  // MCC class-specific fields
-  schema.class.fields.manimalSubType = new SchemaField({
-    label: new StringField({ initial: 'MCC.ManimalSubType' }),
-    value: new StringField({ initial: '' })
-  })
-  schema.class.fields.plantientSubType = new SchemaField({
-    label: new StringField({ initial: 'MCC.PlantientSubType' }),
-    value: new StringField({ initial: '' })
-  })
-  schema.class.fields.mutantAppearance = new SchemaField({
-    label: new StringField({ initial: 'MCC.MutantAppearance' }),
-    value: new StringField({ initial: '' })
-  })
-  schema.class.fields.aiPatron = new SchemaField({
-    label: new StringField({ initial: 'Shaman.AIPatron' }),
-    value: new StringField({ initial: '' })
-  })
-
-  // §9.2 relocations — these are class-metadata modifier dice / caps, NOT
-  // rollable skills, so they live on system.class. The Player data model only
-  // persists fields it has a registered slot for (system.skills /
-  // system.class are SchemaFields), so they MUST be declared here or the
-  // values silently vanish on save / level-up / import.
-  schema.class.fields.maxTechLevel = new SchemaField({ // §9.2b (was system.skills)
-    label: new StringField({ initial: 'MCC.MaxTechLevel' }),
-    value: new StringField({ initial: '0' })
-  })
-  schema.class.fields.artifactDie = new SchemaField({ // §9.2c — Sentinel (was system.skills)
-    label: new StringField({ initial: 'Sentinel.ArtifactDie' }),
-    value: new StringField({ initial: '1d3' })
-  })
-  schema.class.fields.mutantHorror = new SchemaField({ // §9.2a — Mutant display die (was system.skills)
-    label: new StringField({ initial: 'Mutant.MutantHorror' }),
-    value: new StringField({ initial: '1d3' })
-  })
-
-  // MCC custom skills - these use the same structure as DCC skills
-
-  // Shared MCC skills
-  schema.skills.fields.aiRecognition = new SchemaField({
-    label: new StringField({ initial: 'MCC.AIRecognition' }),
-    value: new StringField({ initial: '+0' })
-  })
-  // artifactCheck carries an `ability` slot (§9.1c): book Ch.7 makes the
-  // artifact check 1d20 + INT mod + class bonus, and DCC's _resolveSkillCheck
-  // only adds the ability mod when skill.ability is set. Without this slot the
-  // INT binding is dropped by the data model.
-  schema.skills.fields.artifactCheck = new SchemaField({
-    label: new StringField({ initial: 'MCC.ArtifactCheck' }),
-    ability: new StringField({ initial: 'int' }),
-    value: new StringField({ initial: '+0' })
-  })
-
-  // Healer skills — Naturopathy is a per-day natural-healing pool (§9.3a), not a
-  // d20 skill check. The book ("2x per day per level", Ch.2 / Table 2-3) gives a
-  // healing die that climbs with level (1d3 → 1d16) and a daily use count
-  // (2×level). Stored as a structured pool — `die` (healing roll), `usesPerDay`
-  // (the cap) and `usesRemaining` (decremented by rollNaturopathy, restored by
-  // the reset button) — rather than the old single "1d3 (x2)" string, so the
-  // values MUST have registered slots or the data model drops them on save.
-  schema.skills.fields.naturopathy = new SchemaField({
-    label: new StringField({ initial: 'Healer.Naturopathy' }),
-    die: new StringField({ initial: '1d3' }),
-    usesPerDay: new NumberField({ initial: 0, integer: true, min: 0 }),
-    usesRemaining: new NumberField({ initial: 0, integer: true, min: 0 })
-  })
-
-  // Rover skills
-  schema.skills.fields.doorsAndSecurity = new SchemaField({
-    label: new StringField({ initial: 'Rover.DoorsAndSecurity' }),
-    value: new StringField({ initial: '+0' })
-  })
-
-  // Plantient — Hide in Greenery is a percentile (roll-under) chance, not a
-  // d20 skill check (§9.2e). Stored as a bare number string; the custom
-  // rollHideInGreenery handler rolls 1d100 against it.
-  schema.skills.fields.hideInGreenery = new SchemaField({
-    label: new StringField({ initial: 'Plantient.HideInGreenery' }),
-    value: new StringField({ initial: '50' })
-  })
-})
 import * as MutantSheets from './actor-sheets-mutant.js'
 import * as RoverSheets from './actor-sheets-rover.js'
 import * as SentinelSheets from './actor-sheets-sentinel.js'
 import * as ShamanSheets from './actor-sheets-shaman.js'
 import * as ManimalSheets from './actor-sheets-manimal.js'
 import * as PlantientSheets from './actor-sheets-plantient.js'
+import { registerMccContentSettings } from './settings.js'
+import {
+    registerMccTableHooks,
+    seedMccTablePacksFromSettings,
+    reportMccCoreBookStatus
+} from './mcc-tables.mjs'
+import { registerPatronTaintHandler } from './patron-taint.mjs'
+import { registerGlowburnHandler } from './glowburn.mjs'
 import { runMigrations } from './migrations.js'
+import { defineSharedMccFields, registerMccClasses } from './mcc-class-data.mjs'
 
-const { Actors } = foundry.documents.collections
 const { loadTemplates } = foundry.applications.handlebars
+
+/* -------------------------------------------- */
+/*  Schema Extensions                           */
+/* -------------------------------------------- */
+/**
+ * Extend the DCC Player schema with the cross-cutting MCC fields shared
+ * across several classes (archaicAlignment / aiRecognition / artifactCheck
+ * / maxTechLevel). Per-class UNIQUE fields are contributed by each class's
+ * `registerClassMixin` registration instead — see `mcc-class-data.mjs`.
+ * This hook runs during DCC system initialization. (`sheetClass` now ships
+ * on the DCC base schema, so the old `dcc.defineBaseActorSchema` shim is
+ * gone.)
+ */
+Hooks.on('dcc.definePlayerSchema', defineSharedMccFields)
+
+/**
+ * Sheet registrations: each MCC class is a thin DCCSheet subclass. The
+ * `scope` matches the legacy `Actors.registerSheet` id so existing actors'
+ * stored `flags.core.sheetClass` values keep resolving.
+ */
+const MCC_SHEETS = [
+    { sheet: HealerSheets.ActorSheetHealer, scope: 'mcc-healer', label: 'Healer.ActorSheetHealer' },
+    { sheet: MutantSheets.ActorSheetMutant, scope: 'mcc-mutant', label: 'Mutant.ActorSheetMutant' },
+    { sheet: RoverSheets.ActorSheetRover, scope: 'mcc-rover', label: 'Rover.ActorSheetRover' },
+    { sheet: SentinelSheets.ActorSheetSentinel, scope: 'mcc-sentinel', label: 'Sentinel.ActorSheetSentinel' },
+    { sheet: ShamanSheets.ActorSheetShaman, scope: 'mcc-shaman', label: 'Shaman.ActorSheetShaman' },
+    { sheet: ManimalSheets.ActorSheetManimal, scope: 'mcc-manimal', label: 'Manimal.ActorSheetManimal' },
+    { sheet: PlantientSheets.ActorSheetPlantient, scope: 'mcc-plantient', label: 'Plantient.ActorSheetPlantient' }
+]
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
 Hooks.once('init', async function () {
-    console.log(`MCC | Initializing Mutant Crawl Classics System`)
+    console.log('MCC | Initializing Mutant Crawl Classics System')
 
     // Register module settings for migration tracking
     game.settings.register('mcc-classes', 'lastMigrationVersion', {
@@ -163,47 +83,24 @@ Hooks.once('init', async function () {
     // the `spellburn` amount the same hook surfaces.
     registerGlowburnHandler()
 
-    // Register sheet application classes
-    Actors.registerSheet('mcc-healer', HealerSheets.ActorSheetHealer, {
-        types: ['Player'],
-        label: 'Healer.ActorSheetHealer'
-    })
-    Actors.registerSheet('mcc-mutant', MutantSheets.ActorSheetMutant, {
-        types: ['Player'],
-        label: 'Mutant.ActorSheetMutant'
-    })
-    Actors.registerSheet('mcc-rover', RoverSheets.ActorSheetRover, {
-        types: ['Player'],
-        label: 'Rover.ActorSheetRover'
-    })
-    Actors.registerSheet('mcc-sentinel', SentinelSheets.ActorSheetSentinel, {
-        types: ['Player'],
-        label: 'Sentinel.ActorSheetSentinel'
-    })
-    Actors.registerSheet('mcc-shaman', ShamanSheets.ActorSheetShaman, {
-        types: ['Player'],
-        label: 'Shaman.ActorSheetShaman'
-    })
-    Actors.registerSheet('mcc-manimal', ManimalSheets.ActorSheetManimal, {
-        types: ['Player'],
-        label: 'Manimal.ActorSheetManimal'
-    })
-    Actors.registerSheet('mcc-plantient', PlantientSheets.ActorSheetPlantient, {
-        types: ['Player'],
-        label: 'Plantient.ActorSheetPlantient'
-    })
+    // Register every MCC class through the DCC extension API: per-class schema
+    // mixin + first-open identity defaults + sheet parts/tabs. `game.dcc` is
+    // created during the DCC system's `init` hook, which runs before this one.
+    registerMccClasses(game.dcc)
 
-    // Register shared template for MCC characters
+    // Register the per-class sheet stubs. The DCCSheet base composes
+    // parts/tabs from the `registerSheetPart` entries above by `CLASS_ID`.
+    for (const { sheet, scope, label } of MCC_SHEETS) {
+        game.dcc.registerActorSheet('Player', sheet, { scope, label })
+    }
+
+    // Register shared templates for MCC characters
     const templatePaths = [
         'modules/mcc-classes/templates/actor-partial-mutations.html',
         'modules/mcc-classes/templates/actor-partial-shaman-programs.html'
     ]
     loadTemplates(templatePaths)
 })
-
-/* -------------------------------------------- */
-/*  Ready Hook - Run Migrations                 */
-/* -------------------------------------------- */
 
 /* -------------------------------------------- */
 /*  dcc.ready — Seed Content Tables             */
@@ -228,4 +125,3 @@ Hooks.once('ready', async function () {
     // absence) so a misconfigured world is obvious in the console.
     reportMccCoreBookStatus()
 })
-
