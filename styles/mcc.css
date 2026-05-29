@@ -41,3 +41,20 @@ a[data-tab='shaman']::before {
 .dcc.sheet:is(.healer, .manimal, .mutant, .plantient, .rover, .sentinel, .shaman) .box-title {
     font-family: 'Cooper Black', serif;
 }
+
+/* --------------------------------------------------------------------------
+ * MCC logo on the Character (pc-common) tab
+ *
+ * DCC's actor-partial-pc-common.html renders a faint watermark logo as a plain
+ * <img src="systems/dcc/styles/images/dccrpg-logo.png" ...> with no class. CSS
+ * can't rewrite an <img>'s src, but `content: url(...)` replaces the *rendered*
+ * image (works in Chromium, which Foundry uses). Scoped to the 7 MCC class
+ * sheets and matched by src so DCC sheets keep the DCC logo. object-fit keeps
+ * the MCC logo's aspect ratio inside DCC's 110x60 box; the inline opacity: 0.35
+ * (the watermark look) is preserved — add `opacity: <n> !important` here for a
+ * bolder logo.
+ * -------------------------------------------------------------------------- */
+.dcc.sheet:is(.healer, .manimal, .mutant, .plantient, .rover, .sentinel, .shaman) img[src$="dccrpg-logo.png"] {
+    content: url('images/mcc-logo.webp');
+    object-fit: contain;
+}
