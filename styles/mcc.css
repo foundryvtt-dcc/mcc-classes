@@ -12,6 +12,19 @@ a[data-tab='shaman']::before {
     height: 25px;
 }
 
+/* §9.3a: Naturopathy daily-use cluster — remaining / per-day inputs and the
+ * manual reset button laid out inline on the Healer tab. */
+.naturopathy-uses {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.naturopathy-uses input[type='number'] {
+    width: 3em;
+    text-align: center;
+}
+
 /* --------------------------------------------------------------------------
  * MCC typography
  *

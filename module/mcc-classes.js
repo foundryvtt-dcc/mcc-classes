@@ -10,7 +10,7 @@ import {
 import { registerPatronTaintHandler } from './patron-taint.mjs'
 import { registerGlowburnHandler } from './glowburn.mjs'
 
-const { SchemaField, StringField } = foundry.data.fields
+const { SchemaField, StringField, NumberField } = foundry.data.fields
 
 /* -------------------------------------------- */
 /*  Schema Extensions                           */
@@ -90,10 +90,18 @@ Hooks.on('dcc.definePlayerSchema', (schema) => {
     value: new StringField({ initial: '+0' })
   })
 
-  // Healer skills
+  // Healer skills — Naturopathy is a per-day natural-healing pool (§9.3a), not a
+  // d20 skill check. The book ("2x per day per level", Ch.2 / Table 2-3) gives a
+  // healing die that climbs with level (1d3 → 1d16) and a daily use count
+  // (2×level). Stored as a structured pool — `die` (healing roll), `usesPerDay`
+  // (the cap) and `usesRemaining` (decremented by rollNaturopathy, restored by
+  // the reset button) — rather than the old single "1d3 (x2)" string, so the
+  // values MUST have registered slots or the data model drops them on save.
   schema.skills.fields.naturopathy = new SchemaField({
     label: new StringField({ initial: 'Healer.Naturopathy' }),
-    value: new StringField({ initial: '' })
+    die: new StringField({ initial: '1d3' }),
+    usesPerDay: new NumberField({ initial: 0, integer: true, min: 0 }),
+    usesRemaining: new NumberField({ initial: 0, integer: true, min: 0 })
   })
 
   // Rover skills

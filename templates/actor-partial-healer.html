@@ -4,12 +4,29 @@
             <div class="box-title">{{localize "Healer.HealerAbilities"}}</div>
             <div class="grid-tpl-two grid-row-gap-8 p-5">
                 <div class="grid-tpl-max-25" data-skill="naturopathy">
-                    <label class="skill-check rollable" for="system.skills.naturopathy.value"
-                           data-action="rollSkillCheck" data-drag="true" data-drag-action="skill">
+                    <label class="skill-check rollable" data-action="rollNaturopathy"
+                           title="{{localize 'Healer.NaturopathyRollHint'}}">
                         {{localize "Healer.Naturopathy"}}
                     </label>
-                    <input type="text" id="system.skills.naturopathy.value" name="system.skills.naturopathy.value"
-                           value="{{system.skills.naturopathy.value}}" data-dtype="String"/>
+                    <input type="text" id="system.skills.naturopathy.die" name="system.skills.naturopathy.die"
+                           value="{{system.skills.naturopathy.die}}" data-dtype="String"/>
+                </div>
+                <div class="grid-tpl-max-25">
+                    <label for="system.skills.naturopathy.usesRemaining">
+                        {{localize "Healer.NaturopathyUsesLabel"}}
+                    </label>
+                    <div class="naturopathy-uses">
+                        <input type="number" id="system.skills.naturopathy.usesRemaining"
+                               name="system.skills.naturopathy.usesRemaining"
+                               value="{{system.skills.naturopathy.usesRemaining}}" data-dtype="Number" min="0"
+                               title="{{localize 'Healer.NaturopathyRemaining'}}"/>
+                        <span>/</span>
+                        <input type="number" name="system.skills.naturopathy.usesPerDay"
+                               value="{{system.skills.naturopathy.usesPerDay}}" data-dtype="Number" min="0"
+                               title="{{localize 'Healer.NaturopathyPerDay'}}"/>
+                        <a class="rollable" data-action="resetNaturopathy"
+                           title="{{localize 'Healer.NaturopathyReset'}}"><i class="fas fa-rotate-left"></i></a>
+                    </div>
                 </div>
                 <div class="grid-tpl-max-25" data-skill="aiRecognition">
                     <label class="skill-check rollable" for="system.skills.aiRecognition.value"
