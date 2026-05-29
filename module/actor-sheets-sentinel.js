@@ -62,12 +62,19 @@ class ActorSheetSentinel extends DCCActorSheet {
             updates['system.details.critRange'] = 20
         }
 
-        // Add in Sentinel specific data if missing
-        if (!context.system.skills.artifactDie) {
-            updates['system.skills.artifactDie'] = {
+        // Add in Sentinel specific data if missing.
+        // §9.2c: artifactDie is a modifier die added to artifact checks and
+        // artifact-weapon attacks, not its own rollable skill — it lives in
+        // system.class (display-only on the tab). Migrate existing actors that
+        // still carry the old system.skills.artifactDie.
+        if (!context.system.class.artifactDie) {
+            updates['system.class.artifactDie'] = {
                 label: 'Sentinel.ArtifactDie',
-                value: '1d3'
+                value: context.system.skills.artifactDie?.value ?? '1d3'
             }
+        }
+        if (context.system.skills.artifactDie) {
+            updates['system.skills.-=artifactDie'] = null
         }
         if (!context.system.skills.aiRecognition) {
             updates['system.skills.aiRecognition'] = {
@@ -94,11 +101,17 @@ class ActorSheetSentinel extends DCCActorSheet {
         } else if (context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        if (!context.system.skills.maxTechLevel) {
-            updates['system.skills.maxTechLevel'] = {
+        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may
+        // attempt), not a rollable check — it belongs in system.class, not
+        // system.skills. Migrate existing actors off the old skills location.
+        if (!context.system.class.maxTechLevel) {
+            updates['system.class.maxTechLevel'] = {
                 label: 'MCC.MaxTechLevel',
-                value: '0'
+                value: context.system.skills.maxTechLevel?.value ?? '0'
             }
+        }
+        if (context.system.skills.maxTechLevel) {
+            updates['system.skills.-=maxTechLevel'] = null
         }
 
         if (Object.keys(updates).length) {

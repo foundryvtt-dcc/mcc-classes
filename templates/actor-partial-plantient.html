@@ -3,12 +3,12 @@
         <div class="grid-col-span-12 dark-border">
             <div class="box-title">{{localize "Plantient.PlantientAbilities"}}</div>
             <div class="grid-tpl-two grid-row-gap-8 p-5">
-                <div class="grid-tpl-max-25" data-skill="maxTechLevel">
-                    <label for="system.skills.maxTechLevel.value">
+                <div class="grid-tpl-max-25">
+                    <label for="system.class.maxTechLevel.value">
                         {{localize "MCC.MaxTechLevel"}}
                     </label>
-                    <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
-                           value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
+                    <input type="text" id="system.class.maxTechLevel.value" name="system.class.maxTechLevel.value"
+                           value="{{system.class.maxTechLevel.value}}" data-dtype="String"/>
                 </div>
                 <div class="grid-tpl-max-25" data-skill="artifactCheck">
                     <label class="skill-check rollable" for="system.skills.artifactCheck.value"
@@ -17,6 +17,15 @@
                     </label>
                     <input type="text" id="system.skills.artifactCheck.value"
                            name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
+                           data-dtype="String"/>
+                </div>
+                <div class="grid-tpl-max-25">
+                    <label class="skill-check rollable" for="system.skills.hideInGreenery.value"
+                           data-action="rollHideInGreenery">
+                        {{localize "Plantient.HideInGreenery"}}
+                    </label>
+                    <input type="text" id="system.skills.hideInGreenery.value"
+                           name="system.skills.hideInGreenery.value" value="{{system.skills.hideInGreenery.value}}"
                            data-dtype="String"/>
                 </div>
                 <div class="grid-tpl-max-25" data-ability="">

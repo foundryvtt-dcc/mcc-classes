@@ -94,17 +94,27 @@ class ActorSheetRover extends DCCActorSheet {
         } else if (context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        if (!context.system.skills.roverMissileAttack) {
-            updates['system.skills.roverMissileAttack'] = {
-                label: 'Rover.RoverMissileAttack',
-                value: '+1'
+        // §9.2d: removed the invented `roverMissileAttack` skill. The book's
+        // Rover ability list (Ch.1/Ch.2) has no missile-attack entry — the
+        // missile bonus is already the missile half of
+        // system.details.attackBonus ('+0/+1'), so this was a phantom skill
+        // redundant with the standard attack bonus. (The Plantient is the class
+        // with a book-defined natural missile attack, not the Rover.) Migrate it
+        // off existing actors.
+        if (context.system.skills.roverMissileAttack) {
+            updates['system.skills.-=roverMissileAttack'] = null
+        }
+        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may
+        // attempt), not a rollable check — it belongs in system.class, not
+        // system.skills. Migrate existing actors off the old skills location.
+        if (!context.system.class.maxTechLevel) {
+            updates['system.class.maxTechLevel'] = {
+                label: 'MCC.MaxTechLevel',
+                value: context.system.skills.maxTechLevel?.value ?? '0'
             }
         }
-        if (!context.system.skills.maxTechLevel) {
-            updates['system.skills.maxTechLevel'] = {
-                label: 'MCC.MaxTechLevel',
-                value: '0'
-            }
+        if (context.system.skills.maxTechLevel) {
+            updates['system.skills.-=maxTechLevel'] = null
         }
 
         if (Object.keys(updates).length) {

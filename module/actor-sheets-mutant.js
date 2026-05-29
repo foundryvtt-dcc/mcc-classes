@@ -68,12 +68,31 @@ class ActorSheetMutant extends DCCActorSheet {
             updates['system.class.spellCheckAbility'] = ''
         }
 
-        // Add in Mutant specific data if missing
-        if (!context.system.skills.mutantHorror) {
-            updates['system.skills.mutantHorror'] = {
+        // Add in Mutant specific data if missing.
+        // §9.2a: Mutant Horror is an additive initiative die, not a flat bonus.
+        // DCC recomputes system.attributes.init.value from agl.mod every prepare
+        // (actor.js computeInitiative) and parseInt()s it, so the die can't live
+        // there; instead we fold it into the init die formula (1d20+<die>), which
+        // computeInitiative never touches and the init roll evaluates intact. The
+        // bare die also lives in system.class.mutantHorror for a clean tab
+        // display. Migrate existing actors off the old system.skills.mutantHorror.
+        const horrorDie = context.system.class.mutantHorror?.value ??
+            context.system.skills.mutantHorror?.value ?? '1d3'
+        if (!context.system.class.mutantHorror) {
+            updates['system.class.mutantHorror'] = {
                 label: 'Mutant.MutantHorror',
-                value: '1d3'
+                value: context.system.skills.mutantHorror?.value ?? '1d3'
             }
+        }
+        if (context.system.skills.mutantHorror) {
+            updates['system.skills.-=mutantHorror'] = null
+        }
+        // Fold the horror die into the initiative die. Only set when init.die is
+        // unset or still the plain '1d20' default, so we never clobber a value the
+        // level-up flow wrote from level-data (e.g. '1d20+1d4+2' at higher levels).
+        const initDie = context.system.attributes?.init?.die
+        if (!initDie || initDie === '1d20') {
+            updates['system.attributes.init.die'] = `1d20+${horrorDie}`
         }
         if (!context.system.skills.aiRecognition) {
             updates['system.skills.aiRecognition'] = {
@@ -106,11 +125,17 @@ class ActorSheetMutant extends DCCActorSheet {
         } else if (context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        if (!context.system.skills.maxTechLevel) {
-            updates['system.skills.maxTechLevel'] = {
+        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may
+        // attempt), not a rollable check — it belongs in system.class, not
+        // system.skills. Migrate existing actors off the old skills location.
+        if (!context.system.class.maxTechLevel) {
+            updates['system.class.maxTechLevel'] = {
                 label: 'MCC.MaxTechLevel',
-                value: '0'
+                value: context.system.skills.maxTechLevel?.value ?? '0'
             }
+        }
+        if (context.system.skills.maxTechLevel) {
+            updates['system.skills.-=maxTechLevel'] = null
         }
 
         if (Object.keys(updates).length) {

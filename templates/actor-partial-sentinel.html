@@ -3,21 +3,20 @@
         <div class="grid-col-span-12 dark-border">
             <div class="box-title">{{localize "Sentinel.SentinelAbilities"}}</div>
             <div class="grid-tpl-two grid-row-gap-8 p-5">
-                <div class="grid-tpl-max-25" data-skill="maxTechLevel">
-                    <label for="system.skills.maxTechLevel.value">
+                <div class="grid-tpl-max-25">
+                    <label for="system.class.maxTechLevel.value">
                         {{localize "MCC.MaxTechLevel"}}
                     </label>
-                    <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
-                           value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
+                    <input type="text" id="system.class.maxTechLevel.value" name="system.class.maxTechLevel.value"
+                           value="{{system.class.maxTechLevel.value}}" data-dtype="String"/>
                 </div>
 
-                <div class="grid-tpl-max-25" data-skill="artifactDie">
-                    <label class="skill-check rollable" for="system.skills.artifactDie.value"
-                           data-action="rollSkillCheck" data-drag="true" data-drag-action="skill">
+                <div class="grid-tpl-max-25">
+                    <label for="system.class.artifactDie.value">
                         {{localize "Sentinel.ArtifactDie"}}
                     </label>
-                    <input type="text" id="system.skills.artifactDie.value" name="system.skills.artifactDie.value"
-                           value="{{system.skills.artifactDie.value}}" data-dtype="String"/>
+                    <input type="text" id="system.class.artifactDie.value" name="system.class.artifactDie.value"
+                           value="{{system.class.artifactDie.value}}" data-dtype="String"/>
                 </div>
                 <div class="grid-tpl-max-25" data-skill="aiRecognition">
                     <label class="skill-check rollable" for="system.skills.aiRecognition.value"

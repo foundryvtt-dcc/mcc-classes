@@ -3,10 +3,10 @@
         <div class="grid-col-span-12 dark-border">
             <div class="box-title">{{localize "Rover.RoverAbilities"}}</div>
             <div class="grid-tpl-two grid-row-gap-8 p-5">
-                <div class="grid-tpl-max-25" data-skill="maxTechLevel">
-                    <label for="system.skills.maxTechLevel.value">{{localize "MCC.MaxTechLevel"}}</label>
-                    <input type="text" id="system.skills.maxTechLevel.value" name="system.skills.maxTechLevel.value"
-                           value="{{system.skills.maxTechLevel.value}}" data-dtype="String"/>
+                <div class="grid-tpl-max-25">
+                    <label for="system.class.maxTechLevel.value">{{localize "MCC.MaxTechLevel"}}</label>
+                    <input type="text" id="system.class.maxTechLevel.value" name="system.class.maxTechLevel.value"
+                           value="{{system.class.maxTechLevel.value}}" data-dtype="String"/>
                 </div>
 
                 <div class="grid-tpl-max-25" data-skill="doorsAndSecurity">
@@ -29,14 +29,6 @@
                     <input type="text" id="system.skills.artifactCheck.value"
                            name="system.skills.artifactCheck.value" value="{{system.skills.artifactCheck.value}}"
                            data-dtype="String"/>
-                </div>
-                <div class="grid-tpl-max-25" data-skill="roverMissileAttack">
-                    <label class="skill-check rollable" for="system.skills.roverMissileAttack.value"
-                           data-action="rollSkillCheck" data-drag="true" data-drag-action="skill">
-                        {{localize "Rover.RoverMissileAttack"}}</label>
-                    <input type="text" id="system.skills.roverMissileAttack.value"
-                           name="system.skills.roverMissileAttack.value"
-                           value="{{system.skills.roverMissileAttack.value}}" data-dtype="String"/>
                 </div>
                 <div class="grid-tpl-max-auto grid-col-span-2" style="align-items: center;">
                     <label for="system.class.archaicAlignment.value">

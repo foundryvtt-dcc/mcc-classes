@@ -99,11 +99,17 @@ class ActorSheetHealer extends DCCActorSheet {
         } else if (context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        if (!context.system.skills.maxTechLevel) {
-            updates['system.skills.maxTechLevel'] = {
+        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may
+        // attempt), not a rollable check — it belongs in system.class, not
+        // system.skills. Migrate existing actors off the old skills location.
+        if (!context.system.class.maxTechLevel) {
+            updates['system.class.maxTechLevel'] = {
                 label: 'MCC.MaxTechLevel',
-                value: '0'
+                value: context.system.skills.maxTechLevel?.value ?? '0'
             }
+        }
+        if (context.system.skills.maxTechLevel) {
+            updates['system.skills.-=maxTechLevel'] = null
         }
 
         if (Object.keys(updates).length) {
