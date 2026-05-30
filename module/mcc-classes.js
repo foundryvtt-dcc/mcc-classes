@@ -1,4 +1,4 @@
-/* global foundry, Hooks, game */
+/* global foundry, Hooks, game, setTimeout */
 
 import * as HealerSheets from './actor-sheets-healer.js'
 import * as MutantSheets from './actor-sheets-mutant.js'
@@ -111,6 +111,14 @@ Hooks.once('dcc.ready', async function () {
     // mcc-core-book broadcast (same hook); order between the two does not
     // matter — both just `addPack` into the shared CONFIG.MCC.*Packs.
     seedMccTablePacksFromSettings()
+
+    // Diagnostic: confirm the book → listener → registry wiring. Deferred one
+    // macrotask so it runs AFTER the entire `dcc.ready` chain — including the
+    // mcc-core-book broadcast, which registers its packs on `dcc.ready` too and
+    // whose handler order relative to this one is not guaranteed. (Previously
+    // this ran on the bare `ready` hook, which races the DCC system's awaited
+    // `dcc.ready` emission and falsely reported "no table packs".)
+    setTimeout(reportMccCoreBookStatus, 0)
 })
 
 /* -------------------------------------------- */
@@ -120,8 +128,4 @@ Hooks.once('dcc.ready', async function () {
 Hooks.once('ready', async function () {
     // Run any necessary data migrations
     await runMigrations()
-
-    // Diagnostic: confirm the book → listener → registry wiring (or note its
-    // absence) so a misconfigured world is obvious in the console.
-    reportMccCoreBookStatus()
 })
