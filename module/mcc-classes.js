@@ -13,6 +13,7 @@ import {
     seedMccTablePacksFromSettings,
     reportMccCoreBookStatus
 } from './mcc-tables.mjs'
+import { enforceMccCritFumblePrecedence } from './crit-fumble-tables.mjs'
 import { registerPatronTaintHandler } from './patron-taint.mjs'
 import { registerGlowburnHandler } from './glowburn.mjs'
 import { runMigrations } from './migrations.js'
@@ -112,13 +113,22 @@ Hooks.once('dcc.ready', async function () {
     // matter — both just `addPack` into the shared CONFIG.MCC.*Packs.
     seedMccTablePacksFromSettings()
 
-    // Diagnostic: confirm the book → listener → registry wiring. Deferred one
-    // macrotask so it runs AFTER the entire `dcc.ready` chain — including the
-    // mcc-core-book broadcast, which registers its packs on `dcc.ready` too and
-    // whose handler order relative to this one is not guaranteed. (Previously
-    // this ran on the bare `ready` hook, which races the DCC system's awaited
-    // `dcc.ready` emission and falsely reported "no table packs".)
-    setTimeout(reportMccCoreBookStatus, 0)
+    // Deferred one macrotask so the rest runs AFTER the entire `dcc.ready`
+    // chain — including the mcc-core-book AND dcc-core-book broadcasts, which
+    // register their packs on `dcc.ready` too and whose handler order relative
+    // to this one is not guaranteed. (Previously this ran on the bare `ready`
+    // hook, which races the DCC system's awaited `dcc.ready` emission and
+    // falsely reported "no table packs".)
+    setTimeout(() => {
+        // Make MCC the authoritative crit/fumble source: promote the MCC crit
+        // pack ahead of dcc-core-book's and force CONFIG.DCC.fumbleTable to the
+        // MCC fumble table, so MCC's identically-named tables win the override.
+        // Must run after both books have broadcast — hence the same deferral.
+        enforceMccCritFumblePrecedence()
+
+        // Diagnostic: confirm the book → listener → registry wiring.
+        reportMccCoreBookStatus()
+    }, 0)
 })
 
 /* -------------------------------------------- */
