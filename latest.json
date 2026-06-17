@@ -1,8 +1,8 @@
 {
   "id": "mcc-classes",
-  "title": "MCC Sheets",
-  "description": "Sheets for Mutant Crawl Classics in FoundryVTT!",
-  "version": "1.1.0",
+  "title": "Mutant Crawl Classics (MCC) Class Character Sheets",
+  "description": "Character Sheets for Mutant Crawl Classics in FoundryVTT!",
+  "version": "1.1.1",
   "compatibility": {
     "minimum": "14",
     "verified": "14",
@@ -17,13 +17,20 @@
     },
     {
       "name": "Christian Ovsenik"
+    },
+    {
+      "name": "Tim L. White"
     }
   ],
   "relationships": {
     "systems": [
       {
         "id": "dcc",
-        "type": "system"
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.70.0",
+          "verified": "0.70.0"
+        }
       }
     ]
   },
@@ -51,7 +58,7 @@
     }
   ],
   "url": "https://github.com/foundryvtt-dcc/mcc-classes",
-  "manifest": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.0/module.json",
-  "download": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.0/mcc-classes.zip",
+  "manifest": "https://raw.githubusercontent.com/foundryvtt-dcc/mcc-classes/main/latest.json",
+  "download": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.1/mcc-classes.zip",
   "license": "LICENSE.txt"
 }

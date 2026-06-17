@@ -58,7 +58,7 @@
     }
   ],
   "url": "https://github.com/foundryvtt-dcc/mcc-classes",
-  "manifest": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.1/module.json",
+  "manifest": "https://raw.githubusercontent.com/foundryvtt-dcc/mcc-classes/main/latest.json",
   "download": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.1/mcc-classes.zip",
   "license": "LICENSE.txt"
 }

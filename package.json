@@ -1,6 +1,6 @@
 {
   "name": "mcc-classes",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "Sheets and class logic for Mutant Crawl Classics in FoundryVTT",
   "type": "module",
   "private": true,
