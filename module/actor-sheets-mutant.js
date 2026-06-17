@@ -1,14 +1,19 @@
+/* global game */
 /**
- * MCC Mutant character sheet overrides
+ * MCC Mutant character sheet.
+ *
+ * Thin DCCSheet subclass: schema fields, parts/tabs, and first-open
+ * identity defaults are registered through the DCC extension API in
+ * `mcc-class-data.mjs`. This sheet keeps only its DEFAULT_OPTIONS and a
+ * slim `_prepareContext` for the §9.2 data migrations.
  */
 
-import DCCActorSheet from '/systems/dcc/module/actor-sheet.js'
+import { DCCSheet } from '/systems/dcc/module/actor-sheets-dcc.js'
 
 /**
- * Extend the DCC actor sheet for MCC Mutant
- * @extends {DCCActorSheet}
+ * @extends {DCCSheet}
  */
-class ActorSheetMutant extends DCCActorSheet {
+class ActorSheetMutant extends DCCSheet {
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
         classes: ['dcc', 'sheet', 'actor', 'pc', 'mutant'],
@@ -19,56 +24,13 @@ class ActorSheetMutant extends DCCActorSheet {
     }
 
     /** @inheritDoc */
-    static CLASS_TABS = {
-        sheet: {
-            tabs: [
-                { id: 'mutant', group: 'sheet', label: 'MCC.Mutant' },
-                { id: 'spells', group: 'sheet', label: 'MCC.Mutations' },
-                { id: 'skills', group: 'sheet', label: 'DCC.Skills' }
-            ],
-            initial: 'character'
-        }
-    }
-
-    /** @inheritDoc */
-    static PARTS = {
-        tabs: {
-            template: 'systems/dcc/templates/actor-partial-tabs.html'
-        },
-        character: {
-            template: 'systems/dcc/templates/actor-partial-pc-common.html'
-        },
-        equipment: {
-            template: 'systems/dcc/templates/actor-partial-pc-equipment.html'
-        },
-        mutant: {
-            template: 'modules/mcc-classes/templates/actor-partial-mutant.html'
-        },
-        spells: {
-            template: 'modules/mcc-classes/templates/actor-partial-mutations.html'
-        },
-        skills: {
-            template: 'systems/dcc/templates/actor-partial-skills.html'
-        },
-        notes: {
-            template: 'systems/dcc/templates/actor-partial-pc-notes.html'
-        }
-    }
+    static CLASS_ID = 'mutant'
 
     /** @override */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
         const updates = {}
 
-        if (context.system.details.sheetClass !== 'Mutant') {
-            updates['system.class.className'] = game.i18n.localize('MCC.Mutant')
-            updates['system.config.showSkills'] = true
-            updates['system.details.sheetClass'] = 'Mutant'
-            updates['system.details.critRange'] = 20
-            updates['system.class.spellCheckAbility'] = ''
-        }
-
-        // Add in Mutant specific data if missing.
         // §9.2a: Mutant Horror is an additive initiative die, not a flat bonus.
         // DCC recomputes system.attributes.init.value from agl.mod every prepare
         // (actor.js computeInitiative) and parseInt()s it, so the die can't live
@@ -78,12 +40,6 @@ class ActorSheetMutant extends DCCActorSheet {
         // display. Migrate existing actors off the old system.skills.mutantHorror.
         const horrorDie = context.system.class.mutantHorror?.value ??
             context.system.skills.mutantHorror?.value ?? '1d3'
-        if (!context.system.class.mutantHorror) {
-            updates['system.class.mutantHorror'] = {
-                label: 'Mutant.MutantHorror',
-                value: context.system.skills.mutantHorror?.value ?? '1d3'
-            }
-        }
         if (context.system.skills.mutantHorror) {
             updates['system.skills.-=mutantHorror'] = null
         }
@@ -94,46 +50,15 @@ class ActorSheetMutant extends DCCActorSheet {
         if (!initDie || initDie === '1d20') {
             updates['system.attributes.init.die'] = `1d20+${horrorDie}`
         }
-        if (!context.system.skills.aiRecognition) {
-            updates['system.skills.aiRecognition'] = {
-                label: 'MCC.AIRecognition',
-                value: '0'
-            }
-        }
-        if (!context.system.class.archaicAlignment) {
-            updates['system.class.archaicAlignment'] = {
-                label: 'MCC.ArchaicAlignment',
-                value: 'Clan of Cog'
-            }
-        }
-        if (!context.system.class.mutantAppearance) {
-            updates['system.class.mutantAppearance'] = {
-                label: 'MCC.MutantAppearance',
-                value: ''
-            }
-        }
         // Artifact check = 1d20 + INT mod + class bonus − CM per book Ch.7. The
         // `ability: 'int'` binding is what makes DCC's _resolveSkillCheck add the
-        // INT mod (actor.js:1540). New actors get the full default; existing
-        // actors get .ability patched in without clobbering custom values.
-        if (!context.system.skills.artifactCheck) {
-            updates['system.skills.artifactCheck'] = {
-                label: 'MCC.ArtifactCheck',
-                value: '+0',
-                ability: 'int'
-            }
-        } else if (context.system.skills.artifactCheck.ability !== 'int') {
+        // INT mod (actor.js:1540). Patch existing actors without clobbering values.
+        if (context.system.skills.artifactCheck && context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may
-        // attempt), not a rollable check — it belongs in system.class, not
-        // system.skills. Migrate existing actors off the old skills location.
-        if (!context.system.class.maxTechLevel) {
-            updates['system.class.maxTechLevel'] = {
-                label: 'MCC.MaxTechLevel',
-                value: context.system.skills.maxTechLevel?.value ?? '0'
-            }
-        }
+        // §9.2b: maxTechLevel is a cap (which TL artifacts the class may attempt),
+        // not a rollable check — it lives in system.class. Migrate existing actors
+        // off the old skills location.
         if (context.system.skills.maxTechLevel) {
             updates['system.skills.-=maxTechLevel'] = null
         }

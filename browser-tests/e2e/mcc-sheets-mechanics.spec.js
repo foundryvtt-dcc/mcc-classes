@@ -136,6 +136,10 @@ test.describe('MCC Sheet Mechanics E2E (§9.2)', () => {
       })
       await actor.update({ 'system.skills.hideInGreenery': { label: 'Plantient.HideInGreenery', value: '50' } })
       await actor.sheet.render(true)
+      await new Promise(r => setTimeout(r, 600))
+      // The cell lives in the (non-initial) plantient tab — switch to it so the
+      // rollable is visible.
+      actor.sheet.changeTab('plantient', 'sheet')
     })
 
     // The sheet's Hide in Greenery cell carries data-action="rollHideInGreenery".
@@ -166,6 +170,72 @@ test.describe('MCC Sheet Mechanics E2E (§9.2)', () => {
 
     expect(out.found, `No Hide in Greenery card found. New messages:\n${JSON.stringify(out.newMessages, null, 2)}`).toBe(true)
     expect(out.hasOutcome, `Card should report Hidden!/Spotted! (flavor: ${out.flavor})`).toBe(true)
+  })
+
+  test('extension-API migration: all 7 MCC classes register through game.dcc, fields land via mixins, and the mutant sheet composes the expected tabs', async ({ page }) => {
+    const out = await page.evaluate(async () => {
+      const CLASS_IDS = ['mutant', 'manimal', 'plantient', 'rover', 'sentinel', 'shaman', 'healer']
+      const registries = {
+        mixins: Object.keys(CONFIG.DCC.classMixins || {}),
+        defaults: Object.keys(CONFIG.DCC.classDefaults || {}),
+        sheetParts: Object.keys(CONFIG.DCC.sheetParts || {})
+      }
+
+      // Schema fields contributed by the per-class mixins + shared hook.
+      const actor = await Actor.create({ name: 'MCC E2E Schema', type: 'Player' })
+      const s = actor.system
+      const fields = {
+        mutantHorror: s.class.mutantHorror?.value ?? null, // mutant mixin
+        artifactDie: s.class.artifactDie?.value ?? null, // sentinel mixin
+        aiPatron: !!s.class.aiPatron, // shaman mixin
+        manimalSubType: !!s.class.manimalSubType, // manimal mixin
+        plantientSubType: !!s.class.plantientSubType, // plantient mixin
+        doorsAndSecurity: !!s.skills.doorsAndSecurity, // rover mixin
+        hideInGreenery: s.skills.hideInGreenery?.value ?? null, // plantient mixin
+        naturopathyHasPool: typeof s.skills.naturopathy?.usesPerDay === 'number', // healer mixin
+        archaicAlignment: !!s.class.archaicAlignment, // shared hook
+        artifactCheckAbility: s.skills.artifactCheck?.ability ?? null // shared hook
+      }
+      await actor.delete()
+
+      // Mutant sheet composes its tabs from the registerSheetPart entry +
+      // first-open defaults via registerClassDefaults.
+      const mutant = await Actor.create({ name: 'MCC E2E Mutant Tabs', type: 'Player' })
+      await mutant.setFlag('core', 'sheetClass', 'mcc-mutant.ActorSheetMutant')
+      await mutant.sheet.render(true)
+      await new Promise(r => setTimeout(r, 1200))
+      const tabs = mutant.sheet._getTabsConfig('sheet').tabs.map(t => t.id)
+      const applied = { sheetClass: mutant.system.details.sheetClass, critRange: mutant.system.details.critRange }
+      await mutant.sheet.close()
+      await mutant.delete()
+
+      return { registries, fields, tabs, applied }
+    })
+
+    for (const id of ['mutant', 'manimal', 'plantient', 'rover', 'sentinel', 'shaman', 'healer']) {
+      expect(out.registries.mixins, `mixin ${id}`).toContain(id)
+      expect(out.registries.defaults, `defaults ${id}`).toContain(id)
+      expect(out.registries.sheetParts, `sheetPart ${id}`).toContain(id)
+    }
+    expect(out.fields.mutantHorror).toBe('1d3')
+    expect(out.fields.artifactDie).toBe('1d3')
+    expect(out.fields.aiPatron).toBe(true)
+    expect(out.fields.manimalSubType).toBe(true)
+    expect(out.fields.plantientSubType).toBe(true)
+    expect(out.fields.doorsAndSecurity).toBe(true)
+    expect(out.fields.hideInGreenery).toBe('50')
+    expect(out.fields.naturopathyHasPool).toBe(true)
+    expect(out.fields.archaicAlignment).toBe(true)
+    expect(out.fields.artifactCheckAbility).toBe('int')
+    expect(out.applied.sheetClass).toBe('Mutant')
+    expect(out.applied.critRange).toBe(20)
+    expect(out.tabs).toContain('mutant')
+    expect(out.tabs).toContain('spells')
+    expect(out.tabs).toContain('skills')
+    expect(out.tabs).toContain('effects')
+    expect(out.tabs).toContain('notes')
+    // skills auto-adds once via showSkills — must not double.
+    expect(out.tabs.filter(t => t === 'skills')).toHaveLength(1)
   })
 })
 
