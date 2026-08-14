@@ -2,7 +2,7 @@
   "id": "mcc-classes",
   "title": "Mutant Crawl Classics (MCC) Class Character Sheets",
   "description": "Character Sheets for Mutant Crawl Classics in FoundryVTT!",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "compatibility": {
     "minimum": "14",
     "verified": "14",
@@ -58,7 +58,7 @@
     }
   ],
   "url": "https://github.com/foundryvtt-dcc/mcc-classes",
-  "manifest": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.2/module.json",
-  "download": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.2/mcc-classes.zip",
+  "manifest": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.3/module.json",
+  "download": "https://github.com/foundryvtt-dcc/mcc-classes/releases/download/v1.1.3/mcc-classes.zip",
   "license": "LICENSE.txt"
 }
