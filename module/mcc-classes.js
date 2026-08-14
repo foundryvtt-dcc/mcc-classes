@@ -8,6 +8,7 @@ import * as ShamanSheets from './actor-sheets-shaman.js'
 import * as ManimalSheets from './actor-sheets-manimal.js'
 import * as PlantientSheets from './actor-sheets-plantient.js'
 import { registerMccContentSettings } from './settings.js'
+import { checkReleaseNotes } from './mcc-release-notes.js'
 import {
     registerMccTableHooks,
     seedMccTablePacksFromSettings,
@@ -36,6 +37,44 @@ const { loadTemplates } = foundry.applications.handlebars
 Hooks.on('dcc.definePlayerSchema', defineSharedMccFields)
 
 /**
+ * Trim the DCC Tools sidebar tab (rebranded "MCC Tools" — see the init hook
+ * below) for the MCC ruleset: Mutant Crawl Classics has no spell duel rules
+ * (spell duels are a DCC wizard mechanic), so drop that launcher. Fleeting
+ * Luck (already gated on the DCC world setting) and the GM's Request Roll
+ * tool remain. Registered at import time so the sidebar's first render
+ * (during `Game#initializeUI`, before `ready`) already reflects it; on DCC
+ * versions without the sidebar tab the hook simply never fires.
+ */
+Hooks.on('dcc.getSidebarTools', (tools) => {
+    delete tools.spellDuel
+})
+
+/**
+ * MCC relabels of DCC-namespace i18n keys, applied in every locale. Flat
+ * `DCC.*` overrides in lang/en.json would only win for English clients —
+ * the DCC system ships translated values of these keys (de/fr/es/it/pl/cn)
+ * and the active language's system translation would outrank the module's
+ * English fallback. Since this module is en-only, force each module-owned
+ * key's value over its system key once translations are loaded.
+ *
+ * - SidebarTab covers the tab tooltip, the in-tab heading, and the popout
+ *   window title (all three localize `DCC.SidebarTab`).
+ * - RollModifierSpellburnTerm relabels Spellburn "Glowburn" in the roll
+ *   modifier dialog.
+ */
+const DCC_I18N_OVERRIDES = {
+    'DCC.SidebarTab': 'MCC.SidebarTab',
+    'DCC.RollModifierSpellburnTerm': 'MCC.Glowburn'
+}
+
+Hooks.once('i18nInit', () => {
+    for (const [dccKey, mccKey] of Object.entries(DCC_I18N_OVERRIDES)) {
+        foundry.utils.setProperty(game.i18n.translations, dccKey,
+            game.i18n.localize(mccKey))
+    }
+})
+
+/**
  * Sheet registrations: each MCC class is a thin DCCSheet subclass. The
  * `scope` matches the legacy `Actors.registerSheet` id so existing actors'
  * stored `flags.core.sheetClass` values keep resolving.
@@ -56,6 +95,17 @@ const MCC_SHEETS = [
 
 Hooks.once('init', async function () {
     console.log('MCC | Initializing Mutant Crawl Classics System')
+
+    // Rebrand the DCC Tools sidebar tab for MCC. The system registered the
+    // tab in its own init hook (which runs before module init hooks), so its
+    // Sidebar.TABS entry exists here; swap the DCC wordmark tab-strip icon
+    // class for our "M" (styled in styles/mcc.css). The i18nInit hook above
+    // retitles the tab "MCC Tools". Guarded so older DCC versions without
+    // the sidebar tab are a no-op.
+    const dccSidebarTab = foundry.applications.sidebar.Sidebar.TABS.dcc
+    if (dccSidebarTab) {
+        dccSidebarTab.icon = 'mcc-sidebar-icon'
+    }
 
     // Register module settings for migration tracking
     game.settings.register('mcc-classes', 'lastMigrationVersion', {
@@ -112,6 +162,11 @@ Hooks.once('dcc.ready', async function () {
     // mcc-core-book broadcast (same hook); order between the two does not
     // matter — both just `addPack` into the shared CONFIG.MCC.*Packs.
     seedMccTablePacksFromSettings()
+
+    // Whisper the once-per-version release-notes/user-guide chat card.
+    // Fire-and-forget (like the system's checkReleaseNotes): the card is
+    // cosmetic and must not delay or abort the table seeding around it.
+    checkReleaseNotes()
 
     // Deferred one macrotask so the rest runs AFTER the entire `dcc.ready`
     // chain — including the mcc-core-book AND dcc-core-book broadcasts, which

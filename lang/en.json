@@ -1,5 +1,4 @@
 {
-  "DCC.RollModifierSpellburnTerm": "Glowburn",
   "Healer.ActorSheetHealer": "Healer",
   "Healer.ArtifactMedical":  "Healers using medical artifacts increase their die type by one.",
   "Healer.ArtifactsDesc": "Natural affinity for understanding the artifacts of the ancients",
@@ -28,6 +27,7 @@
   "MCC.ArchaicAlignment": "Archaic Alignment",
   "MCC.ArtifactCheck": "Artifact Check",
   "MCC.Artifacts": "Artifacts",
+  "MCC.Glowburn": "Glowburn",
   "MCC.Healer": "Healer",
   "MCC.Luck": "Luck",
   "MCC.Manimal": "Manimal",
@@ -58,6 +58,8 @@
   "MCC.Shaman": "Shaman",
   "MCC.ShamanPrograms": "Shaman Programs",
   "MCC.ShamanProgramsTabHelp": "Drag and drop program items into this list.",
+  "MCC.SidebarTab": "MCC Tools",
+  "MCC.Welcome.Title": "Mutant Crawl Classics",
   "Mutant.ActorSheetMutant": "Mutant",
   "Mutant.AIRecognition": "Mutants normally receive no inherent bonuses to AI recognition. Should a mutant have no visible or discernible mutations (judge’s discretion), the mutant’s AI recognition bonus may become a +1.",
   "Mutant.MutantAbilities": "Mutant Abilities",
