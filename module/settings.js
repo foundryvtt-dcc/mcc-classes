@@ -2,6 +2,12 @@
 
 import { MCC_TABLE_CATEGORIES } from './mcc-tables.mjs'
 
+export const globals = {
+  id: 'mcc-classes',
+  templatesPath: 'modules/mcc-classes/templates/',
+  userGuideUrl: 'https://foundryvtt-mutant-crawl-classics-user-guide.readthedocs.io/en/latest/'
+}
+
 /**
  * Register the MCC content-table compendium overrides — one per category
  * (mutations / AI programs / artifacts / glowburn).
