@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mutant Crawl Classics "M" tab-strip icon: letterform in the logo's
+     trade-dress style (chunky upright block letter, green fill, thick
+     yellow outline, thin dark-green outer edge) drawn by hand — the logo
+     art's letters overlap, so a clean crop isn't possible, and no bundled
+     font matches the lettering. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 132 172">
+  <path d="M0,0 L32,0 L50,40 L68,0 L100,0 L100,140 L70,140 L70,58 L55,92 L45,92 L30,58 L30,140 L0,140 Z"
+        fill="#3e9b3b" stroke="#1c6e1f" stroke-width="26" stroke-linejoin="round" paint-order="stroke"/>
+  <path d="M0,0 L32,0 L50,40 L68,0 L100,0 L100,140 L70,140 L70,58 L55,92 L45,92 L30,58 L30,140 L0,140 Z"
+        fill="#3e9b3b" stroke="#f5eb33" stroke-width="16" stroke-linejoin="round" paint-order="stroke"/>
+</svg>
