@@ -1,5 +1,4 @@
 {
-  "DCC.RollModifierSpellburnTerm": "Glowburn",
   "Healer.ActorSheetHealer": "Healer",
   "Healer.ArtifactMedical":  "Healers using medical artifacts increase their die type by one.",
   "Healer.ArtifactsDesc": "Natural affinity for understanding the artifacts of the ancients",
@@ -28,6 +27,7 @@
   "MCC.ArchaicAlignment": "Archaic Alignment",
   "MCC.ArtifactCheck": "Artifact Check",
   "MCC.Artifacts": "Artifacts",
+  "MCC.Glowburn": "Glowburn",
   "MCC.Healer": "Healer",
   "MCC.Luck": "Luck",
   "MCC.Manimal": "Manimal",

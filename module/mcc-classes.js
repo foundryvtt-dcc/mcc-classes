@@ -50,18 +50,28 @@ Hooks.on('dcc.getSidebarTools', (tools) => {
 })
 
 /**
- * Retitle the DCC Tools sidebar tab "MCC Tools" in every locale. A flat
- * `DCC.SidebarTab` override in lang/en.json would only win for English
- * clients — the DCC system ships translated values of that key (de/fr/es/
- * it/pl/cn) and the active language's system translation would outrank the
- * module's English fallback. Since this module is en-only, force the
- * module-owned key's value over the system key once translations are
- * loaded; this covers the tab tooltip, the in-tab heading, and the popout
- * window title (all three localize `DCC.SidebarTab`).
+ * MCC relabels of DCC-namespace i18n keys, applied in every locale. Flat
+ * `DCC.*` overrides in lang/en.json would only win for English clients —
+ * the DCC system ships translated values of these keys (de/fr/es/it/pl/cn)
+ * and the active language's system translation would outrank the module's
+ * English fallback. Since this module is en-only, force each module-owned
+ * key's value over its system key once translations are loaded.
+ *
+ * - SidebarTab covers the tab tooltip, the in-tab heading, and the popout
+ *   window title (all three localize `DCC.SidebarTab`).
+ * - RollModifierSpellburnTerm relabels Spellburn "Glowburn" in the roll
+ *   modifier dialog.
  */
+const DCC_I18N_OVERRIDES = {
+    'DCC.SidebarTab': 'MCC.SidebarTab',
+    'DCC.RollModifierSpellburnTerm': 'MCC.Glowburn'
+}
+
 Hooks.once('i18nInit', () => {
-    foundry.utils.setProperty(game.i18n.translations, 'DCC.SidebarTab',
-        game.i18n.localize('MCC.SidebarTab'))
+    for (const [dccKey, mccKey] of Object.entries(DCC_I18N_OVERRIDES)) {
+        foundry.utils.setProperty(game.i18n.translations, dccKey,
+            game.i18n.localize(mccKey))
+    }
 })
 
 /**
