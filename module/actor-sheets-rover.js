@@ -8,6 +8,7 @@
  */
 
 import { DCCSheet } from '/systems/dcc/module/actor-sheets-dcc.js'
+import { roverAttackBonusUpdates } from './rover-attack-bonus.mjs'
 
 /**
  * @extends {DCCSheet}
@@ -34,9 +35,8 @@ class ActorSheetRover extends DCCSheet {
         if (context.system.skills.artifactCheck && context.system.skills.artifactCheck.ability !== 'int') {
             updates['system.skills.artifactCheck.ability'] = 'int'
         }
-        // §9.2d: removed the invented `roverMissileAttack` skill — the missile
-        // bonus is already the missile half of system.details.attackBonus. Migrate
-        // it off existing actors.
+        // §9.2d: removed the invented `roverMissileAttack` skill — the class's
+        // missile bonus comes from level data. Migrate it off existing actors.
         if (context.system.skills.roverMissileAttack) {
             updates['system.skills.-=roverMissileAttack'] = null
         }
@@ -45,7 +45,9 @@ class ActorSheetRover extends DCCSheet {
             updates['system.skills.-=maxTechLevel'] = null
         }
 
-        if (Object.keys(updates).length) {
+        Object.assign(updates, roverAttackBonusUpdates(this.actor._source.system.details))
+
+        if (Object.keys(updates).length && this.actor.isOwner) {
             this.actor.update(updates)
         }
         return context
